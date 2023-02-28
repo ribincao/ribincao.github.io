@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="RibinCao">
+    
+    <title>
+        
+            vim |我的vim的基本配置 |
+        
+        Keep Learning
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":false,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Keep Learning
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">vim |我的vim的基本配置</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-02-28 12:54:31</span>
+        <span class="mobile">2023-02-28 12:54</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-02-28 13:06:38</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/vim/">vim</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>工作中无论是终端还是IDE都是习惯用vim进行代码编辑, 这边存一下vim的基本配置, 方便切换电脑的时候能快速把编辑环境配置好.</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;set termguicolors  &quot;</span> 打开 <span class="number">24</span> 位真彩色支持                     </span><br><span class="line"><span class="string">&quot;set colorcolumn=80  &quot;</span> 高亮第<span class="number">80</span>列                          </span><br><span class="line"><span class="string">&quot;set relativenumber                    &quot;</span> setting <span class="built_in">line</span> in relative <span class="keyword">mode</span></span><br><span class="line"><span class="comment">&quot;highlight CursorColumn cterm=NONE ctermbg=gray ctermfg=yellow guibg=NONE guifg=NONE </span></span><br><span class="line"><span class="comment">&quot;highlight CursorLine  cterm=NONE ctermbg=gray ctermfg=yellow guibg=NONE guifg=NONE </span></span><br><span class="line"><span class="comment">&quot;set colorcolumn=100                                 </span></span><br><span class="line"><span class="keyword">set</span> cursorcolumn   <span class="comment">&quot; 高亮显示当前列                        </span></span><br><span class="line"><span class="keyword">set</span> cursorline    <span class="comment">&quot; 高亮显示当前行                        </span></span><br><span class="line"><span class="keyword">set</span> ignorecase    <span class="comment">&quot; 搜索的时候忽略大小字字母                   </span></span><br><span class="line"><span class="keyword">set</span> smartcase     <span class="comment">&quot; 若搜索内容中有大写字母，则不再忽略大小写           </span></span><br><span class="line"><span class="keyword">set</span> exrc                         <span class="comment">&quot; exec command in init.vim </span></span><br><span class="line"><span class="keyword">set</span> secure                        <span class="comment">&quot; safely do command above  </span></span><br><span class="line"><span class="keyword">set</span> autochdir                       <span class="comment">&quot; auto change directory   </span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>                        <span class="comment">&quot; setting line       </span></span><br><span class="line"><span class="keyword">set</span> noexpandtab                      <span class="comment">&quot; use only &#x27;\t&#x27; as tab   </span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span>                       <span class="comment">&quot; show how many space for a &#x27;\t&#x27;</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">2</span>                     <span class="comment">&quot; use how many space for &gt;&gt; or &lt;&lt; key</span></span><br><span class="line"><span class="keyword">set</span> softtabstop=<span class="number">2</span>                     <span class="comment">&quot; use how many space when pressing tab</span></span><br><span class="line"><span class="keyword">set</span> autoindent                                    </span><br><span class="line"><span class="keyword">set</span> <span class="keyword">list</span>                         <span class="comment">&quot; show hiding char     </span></span><br><span class="line"><span class="keyword">set</span> listchars=<span class="keyword">tab</span>:\|\ ,trail:·              <span class="comment">&quot; define tab and space show</span></span><br><span class="line"><span class="keyword">set</span> scrolloff=<span class="number">4</span>                      <span class="comment">&quot; least amount line below and above the cursor</span></span><br><span class="line"><span class="keyword">set</span> ttimeoutlen=<span class="number">0</span>                     <span class="comment">&quot; set never wait for key  </span></span><br><span class="line"><span class="keyword">set</span> notimeout                                     </span><br><span class="line"><span class="keyword">set</span> viewoptions=<span class="built_in">cursor</span>,folds,slash,unix          <span class="comment">&quot; remember where to recover cursor</span></span><br><span class="line"><span class="keyword">set</span> wrap                         <span class="comment">&quot; auto line feed      </span></span><br><span class="line"><span class="keyword">set</span> tw=<span class="number">0</span>                         <span class="comment">&quot; text width for automatically wrapping</span></span><br><span class="line"><span class="keyword">set</span> indentexpr=                                                                                                          </span><br><span class="line"><span class="keyword">set</span> splitright                                    </span><br><span class="line"><span class="keyword">set</span> splitbelow                                    </span><br><span class="line"><span class="keyword">set</span> noshowmode                      <span class="comment">&quot; not showing current mode</span></span><br><span class="line"><span class="keyword">set</span> showcmd                        <span class="comment">&quot; show cmd inputing like key combine</span></span><br><span class="line"><span class="keyword">set</span> wildmenu                       <span class="comment">&quot; auto finish vim command  </span></span><br><span class="line"><span class="keyword">set</span> ignorecase                      <span class="comment">&quot; ignore case when searching</span></span><br><span class="line"><span class="keyword">set</span> smartcase                       <span class="comment">&quot; ignore case only on searching</span></span><br><span class="line"><span class="keyword">set</span> shortmess+=<span class="keyword">c</span>                     <span class="comment">&quot; don&#x27;t show useless msg  </span></span><br><span class="line"><span class="keyword">set</span> inccommand=<span class="keyword">split</span>                   <span class="comment">&quot; show substitution automatically</span></span><br><span class="line"><span class="keyword">set</span> completeopt=longest,noinsert,menuone,noselect,preview <span class="comment">&quot; complete opject with a menue</span></span><br><span class="line"><span class="keyword">set</span> ttyfast                        <span class="comment">&quot; make scrolling faster   </span></span><br><span class="line"><span class="keyword">set</span> visualbell                      <span class="comment">&quot; flash screen to notify error</span></span><br><span class="line"><span class="keyword">set</span> updatetime=<span class="number">100</span>                                  </span><br><span class="line"><span class="keyword">set</span> virtualedit=block                                 </span><br><span class="line"><span class="keyword">set</span> lazyredraw                                    </span><br><span class="line"><span class="keyword">set</span> re=<span class="number">0</span>                         <span class="comment">&quot;make increase speed    </span></span><br><span class="line"><span class="comment">&quot; set folding paragraph                                </span></span><br><span class="line"><span class="keyword">set</span> foldmethod=<span class="built_in">indent</span>                                 </span><br><span class="line"><span class="keyword">set</span> <span class="built_in">foldlevel</span>=<span class="number">99</span>                                   </span><br><span class="line"><span class="keyword">set</span> foldenable                                    </span><br><span class="line"><span class="keyword">set</span> formatoptions-=<span class="keyword">tc</span>                                 </span><br><span class="line"><span class="comment">&quot; keep undo or temp file                               </span></span><br><span class="line"><span class="keyword">set</span> hidden                                     </span><br></pre></td></tr></table></figure>
+
+<p>不过有时间的话一般都是配置neovim,我的neovim配置仓库是: <a class="link"   target="_blank" rel="noopener" href="https://github.com/ribincao/ribin-neovim.git" >https://github.com/ribincao/ribin-neovim.git<i class="fas fa-external-link-alt"></i></a></p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/vim/">#vim</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/02/28/kubernetes/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">kubernetes| fluent-bit日志采集系统配置</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">RibinCao</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -21,11 +21,11 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-TW","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
-    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"}
-    KEEP.language_code_block = {"copy":"復製代碼","copied":"已復製","fold":"折疊代碼塊","folded":"已折疊"}
-    KEEP.language_copy_copyright = {"copy":"復製版權信息","copied":"已復製","title":"原文標題","author":"原文作者","link":"原文鏈接"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":false,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
   </script>
 <meta name="generator" content="Hexo 6.3.0"></head>
 
@@ -46,66 +46,14 @@
 <main class="page-container">
 
     
-        
-<div class="first-screen-container flex-center fade-in-down-animation">
-    <div class="content flex-center">
-        
-            <div class="description hitokoto">
-                
-                    <div class="desc-item">Keep writing and Keep loving.</div>
-                
-            </div>
-        
-        
-        
-            <div class="s-icon-list">
-                
-                    
-                        
-                        <div class="tooltip s-icon-item "
-                             data-content="GitHub"
-                             data-name="github"
-                             
-                        >
-                            
-                                
-                                    <a target="_blank" href="https://github.com/ribincao">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                
-                            
-                        </div>
-                    
-                
-                    
-                        
-                        <div class="tooltip s-icon-item "
-                             data-content="Email"
-                             data-name="email"
-                             
-                        >
-                            
-                                <a href="mailto:ribincao@gamil.com">
-                                    <i class="fas fa-envelope"></i>
-                                </a>
-                            
-                        </div>
-                    
-                
-            </div>
-        
-    </div>
-</div>
-
-    
 
     <div class="page-main-content is-home">
 
         <div class="page-main-content-top">
             
-<header class="header-wrapper transparent-1">
+<header class="header-wrapper">
 
-    <div class="header-content has-first-screen">
+    <div class="header-content">
         <div class="left">
             
                 <a class="logo-image" href="/">
@@ -125,15 +73,7 @@
                             <a class="active"
                                href="/"
                             >
-                                首頁
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                歸檔
+                                HOME
                             </a>
                         </li>
                     
@@ -141,15 +81,7 @@
                             <a class=""
                                href="/tags"
                             >
-                                標籤
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                分類
+                                TAGS
                             </a>
                         </li>
                     
@@ -176,22 +108,12 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class="active"
-                       href="/">首頁</a>
+                       href="/">HOME</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">歸檔</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags">標籤</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories">分類</a>
+                       href="/tags">TAGS</a>
                 </li>
             
         </ul>
@@ -217,16 +139,15 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/02/28/hello-world/">
-                        hello-world
+                    <a href="/2023/02/28/vim/">
+                        vim |我的vim的基本配置
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        three-bodydon’t answer, don’t answer, don’t answer
-code-test1print(&quot;hello world.&quot;)
-
+                        工作中无论是终端还是IDE都是习惯用vim进行代码编辑, 这边存一下vim的基本配置, 方便切换电脑的时候能快速把编辑环境配置好.
+12345678910111213141516171819202122232425262728293031323334...
                     
                 </div>
 
@@ -234,7 +155,7 @@ code-test1print(&quot;hello world.&quot;)
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Feb 28 2023 11:27:31 GMT+0800">
+            <span class="home-article-date" data-updated="Tue Feb 28 2023 13:06:38 GMT+0800">
                 2023-02-28
             </span>
         </span>
@@ -246,7 +167,7 @@ code-test1print(&quot;hello world.&quot;)
                     
                         <li>
                             
-                            <a href="/tags/test/">test</a>&nbsp;
+                            <a href="/tags/vim/">vim</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -254,7 +175,98 @@ code-test1print(&quot;hello world.&quot;)
         
     </div>
 
-    <a class="read-more" href="/2023/02/28/hello-world/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/02/28/vim/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/02/28/kubernetes/">
+                        kubernetes| fluent-bit日志采集系统配置
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        排查问题的时候,loghub上的日志是混在一起的,我们希望日志能有一个标签去定位对应的pod,然后通过pod去检索出对应的日志方便我们查看上下文.这个时候就要去集群管理页面上去修改对应的fluent-bit配置就行,我们这里的集群管理用的是ranch...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Tue Feb 28 2023 12:51:34 GMT+0800">
+                2023-02-28
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/kubernetes/">kubernetes</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a class="read-more" href="/2023/02/28/kubernetes/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/02/28/python/">
+                        python| pip下载包太慢的问题
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        国内编写python项目需要通过pip去下载对应的依赖,有时候会很慢,可以通过pip配置来修改国内镜像源
+12pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/sim...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Tue Feb 28 2023 12:51:13 GMT+0800">
+                2023-02-28
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/python/">python</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a class="read-more" href="/2023/02/28/python/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -294,7 +306,7 @@ code-test1print(&quot;hello world.&quot;)
         </div>
         
         <div class="theme-info info-item">
-            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
         </div>
         
         
@@ -362,7 +374,7 @@ code-test1print(&quot;hello world.&quot;)
                 <input autocomplete="off"
                        autocorrect="off"
                        autocapitalize="off"
-                       placeholder="搜尋..."
+                       placeholder="Search..."
                        spellcheck="false"
                        type="search"
                        class="search-input"
