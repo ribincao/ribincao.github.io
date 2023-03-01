@@ -13,6 +13,25 @@
       </tags>
   </entry>
   <entry>
+    <title>python| pip下载包太慢的问题</title>
+    <url>/2023/02/28/python/</url>
+    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>国内编写python项目需要通过pip去下载对应的依赖,有时候会很慢,可以通过pip配置来修改国内镜像源</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">pip3 config set install.trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(一)基础组件的开发</title>
+    <url>/2023/03/01/%E4%B8%80-%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E7%9A%84%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<p>todo…</p>
+]]></content>
+      <categories>
+        <category>python从零到一搭建游戏服务器</category>
+      </categories>
+  </entry>
+  <entry>
     <title>kubernetes| fluent-bit日志采集系统配置</title>
     <url>/2023/02/28/kubernetes/</url>
     <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>排查问题的时候,loghub上的日志是混在一起的,我们希望日志能有一个标签去定位对应的pod,然后通过pod去检索出对应的日志方便我们查看上下文.<br>这个时候就要去集群管理页面上去修改对应的fluent-bit配置就行,我们这里的集群管理用的是rancher,登录rancher选择storage-&gt;ConfigMaps-&gt;fluent-bit-&gt;EditConfig.<br>修改配置如下:</p>
@@ -29,29 +48,6 @@
 ]]></content>
       <tags>
         <tag>kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>tool| 发现一个很不错的vscode插件工具plantUML</title>
-    <url>/2023/03/01/tool/</url>
-    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前每次写技术文档需要画图的时候都是通过飞书文档自带的工具或者processon去实现,实现的效果虽然勉强能看但是还是没有达到自己想要的效果,无意中在知乎上看到别人推荐,才是孤陋寡闻,在vscode里有对应的可视化插件plantUML和GraphvizPreview画出来的图是我想要的效果,需要用到对应的语言,准备这几天花点时间去琢磨一下.</p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>简单基本使用了一下,可以用下面的代码看看效果</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@startuml</span><br><span class="line">Client -&gt; Server: EnterRoom</span><br><span class="line">Server -&gt; DB: GetRoomInfo</span><br><span class="line">DB -&gt; Server: RoomInfo</span><br><span class="line">Server -&gt; Client: success</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
-
-<p>琢磨中…</p>
-]]></content>
-      <tags>
-        <tag>tool</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python| pip下载包太慢的问题</title>
-    <url>/2023/02/28/python/</url>
-    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>国内编写python项目需要通过pip去下载对应的依赖,有时候会很慢,可以通过pip配置来修改国内镜像源</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">pip3 config set install.trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -109,6 +105,19 @@
 ]]></content>
       <tags>
         <tag>unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>tool| 发现一个很不错的vscode插件工具plantUML</title>
+    <url>/2023/03/01/tool/</url>
+    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前每次写技术文档需要画图的时候都是通过飞书文档自带的工具或者processon去实现,实现的效果虽然勉强能看但是还是没有达到自己想要的效果,无意中在知乎上看到别人推荐,才是孤陋寡闻,在vscode里有对应的可视化插件plantUML和GraphvizPreview画出来的图是我想要的效果,需要用到对应的语言,准备这几天花点时间去琢磨一下.</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>简单基本使用了一下,可以用下面的代码看看效果</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@startuml</span><br><span class="line">Client -&gt; Server: EnterRoom</span><br><span class="line">Server -&gt; DB: GetRoomInfo</span><br><span class="line">DB -&gt; Server: RoomInfo</span><br><span class="line">Server -&gt; Client: success</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+
+<p>琢磨中…</p>
+]]></content>
+      <tags>
+        <tag>tool</tag>
       </tags>
   </entry>
 </search>
