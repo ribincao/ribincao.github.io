@@ -9,7 +9,7 @@
     
     <title>
         
-            kubernetes| fluent-bit日志采集系统配置 |
+            kubernetes| 查看pod日志 |
         
         Keep Learning
     </title>
@@ -138,7 +138,7 @@
         <div class="article-content-container">
 
             <div class="article-title">
-                <span class="title-hover-animation">kubernetes| fluent-bit日志采集系统配置</span>
+                <span class="title-hover-animation">kubernetes| 查看pod日志</span>
             </div>
 
             
@@ -158,13 +158,13 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2023-02-28 12:38:52</span>
-        <span class="mobile">2023-02-28 12:38</span>
+        <span class="pc">2023-03-01 15:30:53</span>
+        <span class="mobile">2023-03-01 15:30</span>
     </span>
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-03-01 12:51:29</span>
+        <span class="pc">2023-03-01 15:35:28</span>
     </span>
     
     
@@ -195,17 +195,10 @@
             <div class="article-content keep-markdown-body">
                 
 
-                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>排查问题的时候,loghub上的日志是混在一起的,我们希望日志能有一个标签去定位对应的pod,然后通过pod去检索出对应的日志方便我们查看上下文.<br>这个时候就要去集群管理页面上去修改对应的fluent-bit配置就行,我们这里的集群管理用的是rancher,登录rancher选择storage-&gt;ConfigMaps-&gt;fluent-bit-&gt;EditConfig.<br>修改配置如下:</p>
-<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>custom_parsers.conf</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[PARSER]</span><br><span class="line">    Name docker_no_time</span><br><span class="line">    Format json</span><br><span class="line">    Time_Keep Off</span><br><span class="line">    Time_Key time</span><br><span class="line">    Time_Format %Y-%m-%dT%H:%M:%S.%L</span><br><span class="line"></span><br><span class="line">[PARSER]</span><br><span class="line">    Name                container_firstline</span><br><span class="line">    Format              regex</span><br><span class="line">    Regex               (?&lt;log&gt;(?&lt;=&quot;log&quot;:&quot;)\S(?!\.).*?)(?&lt;!\\)&quot;.*(?&lt;stream&gt;(?&lt;=&quot;stream&quot;:&quot;).*?)&quot;.*(?&lt;time&gt;\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;T\d&#123;2&#125;:\d&#123;2&#125;:\d&#123;2&#125;\.\w*).*(?=&#125;)</span><br><span class="line">    Time_Key            time</span><br><span class="line">    Time_Format         %Y-%m-%dT%H:%M:%S.%LZ</span><br></pre></td></tr></table></figure>
-
-<p>fluent-bit.conf</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">[SERVICE]</span><br><span class="line">    Daemon Off</span><br><span class="line">    Flush 1</span><br><span class="line">    Log_Level info</span><br><span class="line">    Parsers_File parsers.conf</span><br><span class="line">    Parsers_File custom_parsers.conf</span><br><span class="line">    HTTP_Server On</span><br><span class="line">    HTTP_Listen 0.0.0.0</span><br><span class="line">    HTTP_Port 2020</span><br><span class="line">    Health_Check On</span><br><span class="line">    storage.path              /var/fluent-bit/state/flb-storage/</span><br><span class="line">    storage.sync              normal</span><br><span class="line">    storage.checksum          off</span><br><span class="line">    storage.backlog.mem_limit 10M</span><br><span class="line"></span><br><span class="line">[INPUT]</span><br><span class="line">    Name tail</span><br><span class="line">    Path xxxxxxxx.log  # 对应的日志文件</span><br><span class="line">    Tag kube.*</span><br><span class="line">    Docker_Mode         On</span><br><span class="line">    Docker_Mode_Flush   5</span><br><span class="line">    Docker_Mode_Parser  container_firstline</span><br><span class="line">    Parser              docker</span><br><span class="line">    DB                  /var/fluent-bit/state/flb_container.db</span><br><span class="line">    Mem_Buf_Limit       5MB</span><br><span class="line">    Skip_Long_Lines     On</span><br><span class="line">    Refresh_Interval    10</span><br><span class="line">    Rotate_Wait         30</span><br><span class="line">    storage.type        filesystem</span><br><span class="line"></span><br><span class="line">[FILTER]</span><br><span class="line">    Name             kubernetes</span><br><span class="line">    Match            kube.*   # 匹配模式改成kube.*</span><br><span class="line">    Kube_URL         https://kubernetes.default.svc:443</span><br><span class="line">    Kube_CA_File     /var/run/secrets/kubernetes.io/serviceaccount/ca.crt</span><br><span class="line">    Kube_Token_File  /var/run/secrets/kubernetes.io/serviceaccount/token</span><br><span class="line">    Labels false</span><br><span class="line">    Annotations false</span><br><span class="line"></span><br><span class="line">[Filter]</span><br><span class="line">    Name    nest</span><br><span class="line">    Match    kube.*</span><br><span class="line">    Operation    lift</span><br><span class="line">    Nested_under    kubernetes</span><br><span class="line">    Add_prefix    kubernetes_</span><br><span class="line"></span><br><span class="line">[Filter]</span><br><span class="line">    Name    modify</span><br><span class="line">    Match    kube.*</span><br><span class="line">    Remove    kubernetes_pod_id  # Remove可以移除掉你不关心的参数</span><br><span class="line">    Remove    kubernetes_namespace_name</span><br><span class="line">    Remove    kubernetes_container_hash</span><br><span class="line">    Remove    kubernetes_container_image</span><br><span class="line">    Remove    kubernetes_container_name</span><br><span class="line">    Remove    kubernetes_docker_id</span><br><span class="line"></span><br><span class="line">[OUTPUT]</span><br><span class="line">    Name kinesis_streams</span><br><span class="line">    Match             kube.*</span><br><span class="line">    Region us-west-1	    # aws区域</span><br><span class="line">    Stream LogHub-xxxxxxxx  # loghub配置流</span><br><span class="line">    Retry_Limit False</span><br><span class="line">    time_key time</span><br></pre></td></tr></table></figure>
-<p>重启一下fluent-bit就行了.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这里调试的过程中发现的一些需要注意的问题:</p>
-<ol>
-<li>match 要给成 kube.*</li>
-</ol>
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前在线上出现一个奇怪的问题,容器总是莫名奇妙的崩溃找不到原因.为了排查问题需要去查询日志,loghub上的日志时序看着很奇怪,不太方便查看上下文去排查.所以就想着去开一个pod动态看日志直到pod崩溃就比较方便了.</p>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>本地动态查看pod日志需要先切到对应的vpc,先查看pod信息获取podid以及对应的容器id</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o wide</span><br><span class="line"></span><br><span class="line">kubectl logs &lt;pod_id&gt; -c &lt;container_id&gt;</span><br><span class="line">kubectl logs --follow &lt;pod_id&gt; -c &lt;container_id&gt;</span><br></pre></td></tr></table></figure>
+<p>当然也可以加上<code>-n</code>命令去带上namespace</p>
 
             </div>
 
@@ -224,29 +217,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                               rel="prev"
-                               href="/2023/02/28/vim/"
-                            >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                                <span class="title flex-center">
-                                <span class="post-nav-title-item">vim| vim基本配置</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                                rel="next"
-                               href="/2023/02/28/python/"
+                               href="/2023/03/01/tool/"
                             >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">python| pip下载包太慢的问题</span>
+                                <span class="post-nav-title-item">tool| 发现一个很不错的vscode插件工具plantUML</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                                 <span class="right arrow-icon flex-center">
