@@ -9,7 +9,7 @@
     
     <title>
         
-            python| 实现单例模式的两种方式 |
+            tool| 火焰图的使用 |
         
         Ribin
     </title>
@@ -164,7 +164,7 @@
         <div class="article-content-container">
 
             <div class="article-title">
-                <span class="title-hover-animation">python| 实现单例模式的两种方式</span>
+                <span class="title-hover-animation">tool| 火焰图的使用</span>
             </div>
 
             
@@ -184,13 +184,13 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2023-03-02 10:36:35</span>
-        <span class="mobile">2023-03-02 10:36</span>
+        <span class="pc">2023-03-02 12:43:09</span>
+        <span class="mobile">2023-03-02 12:43</span>
     </span>
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-03-02 10:43:53</span>
+        <span class="pc">2023-03-02 12:45:19</span>
     </span>
     
     
@@ -200,11 +200,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/python/">python</a>&nbsp;
+                        <a href="/tags/tool/">tool</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                        | <a href="/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">性能分析</a>&nbsp;
                     </li>
                 
             </ul>
@@ -225,11 +225,29 @@
             <div class="article-content keep-markdown-body">
                 
 
-                <p>第一种是通过类的方式，修改<code>__new__</code>实现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    _instance = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__new__</span>(<span class="params">cls, *args, **kwargs</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(cls._instance, cls):</span><br><span class="line">            cls._instance = <span class="built_in">object</span>.__new__(cls)</span><br><span class="line">        <span class="keyword">return</span> cls._instance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">S</span>(<span class="title class_ inherited__">Singleton</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">        <span class="built_in">super</span>(S, self).__init__()</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">task</span>(<span class="params">s</span>):</span><br><span class="line">    obj = S(s)</span><br><span class="line">    <span class="built_in">print</span>(obj.name, <span class="built_in">id</span>(obj))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        Thread(target=task, args=(<span class="built_in">str</span>(i), )).start()</span><br></pre></td></tr></table></figure>
-<p>第二种是通过装饰器的方式实现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">singleton</span>(<span class="params">cls</span>):</span><br><span class="line">    _instance = <span class="built_in">dict</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">instance</span>(<span class="params">*arg, **kwargs</span>):</span><br><span class="line">        <span class="keyword">if</span> cls <span class="keyword">not</span> <span class="keyword">in</span> _instance:</span><br><span class="line">            _instance[cls] = cls(*arg, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> _instance[cls]</span><br><span class="line">    <span class="keyword">return</span> instance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@singleton</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">task</span>():</span><br><span class="line">    obj = Test()</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">id</span>(obj))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        Thread(target=task).start()</span><br></pre></td></tr></table></figure>
-
+                <p>参考链接: <a class="link"   target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2017/09/flame-graph.html" >https://www.ruanyifeng.com/blog/2017/09/flame-graph.html<i class="fas fa-external-link-alt"></i></a></p>
+<ul>
+<li>perf(performance)命令返回CPU正在执行的函数名及调用栈, 通常它的频率是99Hz(每秒统计99次)  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">record表示记录，-F 99表示每秒99次，-p 13204是进程号，-g表示记录调用栈，<span class="built_in">sleep</span> 30则是持续30秒</span></span><br><span class="line">sudo perf record -F 99 -p 13204 -g -- sleep 30</span><br></pre></td></tr></table></figure></li>
+<li>火焰图是基于 perf 结果产生的 SVG 图片，用来展示 CPU 的调用栈<ul>
+<li>y 轴表示调用栈，每一层都是一个函数。调用栈越深，火焰就越高，顶部就是正在执行的函数，下方都是它的父函数</li>
+<li>x 轴表示抽样数，如果一个函数在 x 轴占据的宽度越宽，就表示它被抽到的次数多，即执行的时间长。注意，x 轴不代表时间，而是所有的调用栈合并后，按字母顺序排列的</li>
+<li>火焰图就是看顶层的哪个函数占据的宽度最大。只要有”平顶”（plateaus），就表示该函数可能存在性能问题</li>
+<li>调用栈: 底层函数调用上层函数, 也就是说真正在执行的是上层函数, 顶部函数宽度越宽说明抽样调查的时候大部分都在执行它, 也就是说执行时间长一些</li>
+<li>局限情况<ul>
+<li>调用栈不完整: 当调用栈过深时，某些系统只返回前面的一部分（比如前10层）</li>
+<li>函数名缺失: 有些函数没有名字，编译器只用内存地址来表示（比如匿名函数）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>火焰图生成工具: <a class="link"   target="_blank" rel="noopener" href="https://github.com/brendangregg/FlameGraph" >https://github.com/brendangregg/FlameGraph<i class="fas fa-external-link-alt"></i></a>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">yum -y install perf.x86_64</span><br><span class="line">git clone https://github.com/brendangregg/FlameGraph.git</span><br><span class="line">export PATH=xxx/FlameGraph:$PATH</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或<span class="built_in">cp</span> -r xxx/FlameGraph/* ~/bin/</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">both user and kernel</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">perf record -F 99 -a -g -- <span class="built_in">sleep</span> 60</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">only pid = 12345</span></span><br><span class="line">sudo perf record -F 99 -p 12345 -g -- sleep 60</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">perf script &gt; out.perf</span></span><br><span class="line"></span><br><span class="line">perf script -i perf.data &amp;&gt; perf.unfold</span><br><span class="line">./stackcollapse-perf.pl perf.unfold &amp;&gt; perf.folded</span><br><span class="line">./flamegraph.pl perf.folded &gt; perf.svg</span><br></pre></td></tr></table></figure>
+<ul>
+<li>下载FlameGraph工具并添加环境变量 -&gt; perf record 生成记录 -&gt; perf script生成 unfold 文件 -&gt; stackcollapse-perf.pl生成 fold文件 -&gt; flamegraph.pl -&gt; 生成svg文件 -&gt; 浏览器打开perf.svg文件</li>
+</ul>
+</li>
+</ul>
+<p>一次测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/brendangregg/FlameGraph.git</span><br><span class="line">cd FlameGraph</span><br><span class="line"></span><br><span class="line">sudo perf record -F 99 -p 12345 -g -- sleep 60</span><br><span class="line">perf script -i perf.data &amp;&gt; perf.unfold</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这里一定要注意是 stackcollapse-perf.pl , 不是其他的</span></span><br><span class="line">./stackcollapse-perf.pl perf.unfold &amp;&gt; perf.folded</span><br><span class="line">./flamegraph.pl perf.folded &gt; perf.svg</span><br></pre></td></tr></table></figure>
 
             </div>
 
@@ -239,11 +257,11 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/python/">#python</a>&nbsp;
+                            <a href="/tags/tool/">#tool</a>&nbsp;
                         </li>
                     
                         <li class="tag-item">
-                            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">#设计模式</a>&nbsp;
+                            <a href="/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">#性能分析</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -255,13 +273,13 @@
                         <div class="article-prev">
                             <a class="prev"
                                rel="prev"
-                               href="/2023/03/02/bug-UnicodeDecodeError-%E2%80%98gbk%E2%80%98-codec-can%E2%80%98t-decode-byte-0xa4-in-position-48-illegal-multibyte-sequence/"
+                               href="/2023/03/02/python-floyd%E7%AE%97%E6%B3%95%E8%AE%A1%E7%AE%97%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"
                             >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                                 <span class="title flex-center">
-                                <span class="post-nav-title-item">bug| UnicodeDecodeError: ‘gbk‘ codec can‘t decode byte 0xa4 in position 48: illegal multibyte sequence</span>
+                                <span class="post-nav-title-item">python| floyd算法计算最短路径</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                             </a>
@@ -271,10 +289,10 @@
                         <div class="article-next">
                             <a class="next"
                                rel="next"
-                               href="/2023/03/02/python-LRU%E7%9A%84%E5%AE%9E%E7%8E%B0/"
+                               href="/2023/03/02/python-%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%8C%BA%E5%9D%97%E9%93%BEdemo/"
                             >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">python| LRU的实现</span>
+                                <span class="post-nav-title-item">python| 一个简单的区块链demo</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                                 <span class="right arrow-icon flex-center">
