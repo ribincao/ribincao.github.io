@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="RibinCao">
+    
+    <title>
+        
+            go| MIT-6.824 MapReduce实验 |
+        
+        Ribin
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.png","favicon":"/images/logo.png","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Ribin
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                系列
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                个人简介
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">系列</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">个人简介</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">go| MIT-6.824 MapReduce实验</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-02 10:39:20</span>
+        <span class="mobile">2023-03-02 10:39</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-02 10:44:46</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/golang/">golang</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h3 id="实验准备"><a href="#实验准备" class="headerlink" title="实验准备"></a>实验准备</h3><p>阅读论文《MapReduce: Simplified Data Processing on Large Cluster 》。<br>最好准备一个unix环境，本人是在自己的腾讯云服务器上进行的实验，使用的是ubuntu系统，安装好golang，将实验代码拉到本地并命名为6.824(可以自己起别的名字)：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git://g.csail.mit.edu/6.824-golabs-2018 6.824</span><br></pre></td></tr></table></figure>
+<h3 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h3><p>本实验是第一个实验lab-1，也就是<code>map_reduce</code>实验，所以这里主要用到的是<code>mapreduce</code>文件夹下的代码。<br>先从<code>test_test.go</code>文件看起，这个文件除了已经编写好的<code>MapFun</code>和<code>ReduceFun</code>函数外，主要是用来最后进行测试的，其中有<code>TestSequentialSingle</code>、<code>TestSequentialMany</code>、<code>TestParallelBasic</code>、<code>TestParallelCheck</code>、<code>TestOneFailure</code>和<code>TestManyFailures</code>六个测试函数，当编写完自己的代码后可以在<code>mapreduce</code>目录下通过如下命令进行测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go test -run TestSequentialSingle</span><br></pre></td></tr></table></figure>
+<p>或者使用如下命令对代码中以Test开头的函数全部进行测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go test</span><br></pre></td></tr></table></figure>
+<p>再来看<code>common_map.go</code>和<code>common_reduce.go</code>文件，这两个文件是这次实验的核心，也是本次实验需要编写的文件，如果顺利的话编写完这两个文件就可以测试<code>TestSequentialSingle</code>、<code>TestSequentialMany</code>检查是否成功<br>最后再来看一下<code>schedule.go</code>文件，这个是用来实现并发调度的核心的代码，也是本次实验需要编写的代码。</p>
+<h3 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h3><ol>
+<li><code>common_map.go</code>里的<code>doMap</code>函数增加代码如下<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Your code here (Part I).</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//	1. 读取文件</span></span><br><span class="line">file, errOpenFile := os.OpenFile(inFile, os.O_RDONLY, <span class="number">0644</span>)</span><br><span class="line"><span class="keyword">if</span> errOpenFile != <span class="literal">nil</span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;open file failure &quot;</span>, errOpenFile)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line">FileContent, errReadFile := ioutil.ReadAll(file)</span><br><span class="line"><span class="keyword">if</span> errReadFile != <span class="literal">nil</span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;Read file failure &quot;</span>, errReadFile)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	2. 进行 map 处理</span></span><br><span class="line">ReduceKeyValue := mapF(inFile, <span class="type">string</span>(FileContent))</span><br><span class="line"></span><br><span class="line"><span class="comment">//	3. 根据&lt;job_name, map_id, reduce_id&gt;生成中间文件</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>;i &lt; nReduce;i++ &#123;</span><br><span class="line">	ReduceName := reduceName(jobName, mapTask, i)</span><br><span class="line">	mapOutFile, errOutFile := os.OpenFile(ReduceName, os.O_CREATE|os.O_WRONLY|os.O_APPEND, <span class="number">0644</span>)</span><br><span class="line">	<span class="keyword">if</span> errOutFile != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(ReduceName, <span class="string">&quot;output file open failure &quot;</span>, errOutFile)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	encoder := json.NewEncoder(mapOutFile)</span><br><span class="line">	<span class="keyword">for</span> _, value := <span class="keyword">range</span> ReduceKeyValue &#123;</span><br><span class="line">		<span class="keyword">if</span> ihash(value.Key) % nReduce == i &#123;</span><br><span class="line">			err := encoder.Encode(&amp;value)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				fmt.Println(<span class="string">&quot;File write failure&quot;</span>, err)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	mapOutFile.Close()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>common_reduce.go</code>里的<code>doReduce</code>函数增加代码如下<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Your code here (Part I).</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//	1. 根据&lt;job_name, map_id, reduce_id&gt;依次读取中间文件塞到reduceData里</span></span><br><span class="line"><span class="keyword">var</span> reduceData []KeyValue</span><br><span class="line"><span class="keyword">var</span> ReduceInputFileName <span class="type">string</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>;i &lt; nMap;i++ &#123;</span><br><span class="line">	ReduceInputFileName = reduceName(jobName, i, reduceTask)</span><br><span class="line">	file, errOpenFile := os.Open(ReduceInputFileName)</span><br><span class="line">	<span class="keyword">if</span> errOpenFile != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Open reduce file failure &quot;</span>, errOpenFile)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	decoder := json.NewDecoder(file)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> v KeyValue</span><br><span class="line">		errDecode := decoder.Decode(&amp;v)</span><br><span class="line">		<span class="keyword">if</span> errDecode != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		reduceData = <span class="built_in">append</span>(reduceData, v)</span><br><span class="line">	&#125;</span><br><span class="line">	file.Close()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	2. 对 reduceData 进行排序</span></span><br><span class="line"><span class="keyword">var</span> sortReduceData keyValues = reduceData[:]</span><br><span class="line">sort.Sort(sortReduceData)</span><br><span class="line"></span><br><span class="line"><span class="comment">//	3. 把相同的 Key 对应的 value 放一起然后进行 reduce</span></span><br><span class="line">ReduceOutFile, errOutput := os.OpenFile(outFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, <span class="number">0644</span>)</span><br><span class="line"><span class="keyword">if</span> errOutput != <span class="literal">nil</span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;output file open failure &quot;</span>, errOutput)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> ReduceOutFile.Close()</span><br><span class="line">encoder := json.NewEncoder(ReduceOutFile)</span><br><span class="line"><span class="keyword">var</span> dataForPerKey []<span class="type">string</span></span><br><span class="line">key := sortReduceData[<span class="number">0</span>].Key</span><br><span class="line"><span class="keyword">for</span> _, value := <span class="keyword">range</span> sortReduceData &#123;</span><br><span class="line">	<span class="keyword">if</span> value.Key == key &#123;</span><br><span class="line">		dataForPerKey = <span class="built_in">append</span>(dataForPerKey, value.Value)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		out := reduceF(key, dataForPerKey)</span><br><span class="line">		encoder.Encode(KeyValue&#123;key, out&#125;)</span><br><span class="line"></span><br><span class="line">		key = value.Key</span><br><span class="line">		dataForPerKey = dataForPerKey[:<span class="number">0</span>]</span><br><span class="line">		dataForPerKey = <span class="built_in">append</span>(dataForPerKey, value.Key)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	最后避免漏网之鱼2333</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(dataForPerKey) &gt; <span class="number">0</span> &#123;</span><br><span class="line">	out := reduceF(key, dataForPerKey)</span><br><span class="line">	encoder.Encode(KeyValue&#123;key, out&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+完成这两步代码的编写后就可以进行如下两个串行执行的测试了，在终端输入如下命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go test -run TestSequentialSingle</span><br><span class="line">go test -run TestSequentialMany</span><br></pre></td></tr></table></figure>
+不出意外会出现如下结果<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">master: Starting Map/Reduce task test</span><br><span class="line">Merge: read mrtmp.test-res-0</span><br><span class="line">master: Map/Reduce task completed</span><br><span class="line">PASS</span><br><span class="line">ok      _/home/ribincao/Learn/6.824labs/src/mapreduce   1.653s</span><br></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">master: Starting Map/Reduce task test</span><br><span class="line">Merge: read mrtmp.test-res-0</span><br><span class="line">Merge: read mrtmp.test-res-1</span><br><span class="line">Merge: read mrtmp.test-res-2</span><br><span class="line">master: Map/Reduce task completed</span><br><span class="line">PASS</span><br><span class="line">ok      _/home/ribincao/Learn/6.824labs/src/mapreduce   2.260s</span><br></pre></td></tr></table></figure></li>
+<li>在<code>main</code>目录下的<code>wc.go</code>文件的函数<code>mapF</code>和<code>reduceF</code>中增加代码<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mapF</span><span class="params">(filename <span class="type">string</span>, contents <span class="type">string</span>)</span></span> []mapreduce.KeyValue &#123;</span><br><span class="line">	<span class="comment">// Your code here (Part II).</span></span><br><span class="line">	f := <span class="function"><span class="keyword">func</span> <span class="params">(c <span class="type">rune</span>)</span></span> <span class="type">bool</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> !unicode.IsLetter(c)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> temp = strings.FieldsFunc(contents,f)</span><br><span class="line">	<span class="keyword">var</span> ret []mapreduce.KeyValue</span><br><span class="line">	<span class="keyword">for</span> _,value := <span class="keyword">range</span> temp&#123;</span><br><span class="line">		ret = <span class="built_in">append</span>(ret, mapreduce.KeyValue&#123;Key:value,Value:<span class="string">&quot;1&quot;</span>&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">reduceF</span><span class="params">(key <span class="type">string</span>, values []<span class="type">string</span>)</span></span> <span class="type">string</span> &#123;</span><br><span class="line">	<span class="comment">// Your code here (Part II).</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(values) == <span class="number">0</span>&#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;values = 0&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> count <span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> ret <span class="type">string</span></span><br><span class="line">	<span class="keyword">for</span> _,v := <span class="keyword">range</span> values&#123;</span><br><span class="line">		Int,err := strconv.Atoi(v)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;v is not a numbet&quot;</span>,v)</span><br><span class="line">		&#125;</span><br><span class="line">		count += Int</span><br><span class="line">	&#125;</span><br><span class="line">	ret = strconv.Itoa(count)</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>schedule.go</code>里的<code>schedule</code>函数增加如下代码<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Your code here (Part III, Part IV).</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">var</span> threadMaster sync.WaitGroup</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>;i &lt; ntasks;i++ &#123;</span><br><span class="line">	<span class="comment">//	一个 master 并发分配任务给 worker </span></span><br><span class="line">	threadMaster.Add(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(inputFile <span class="type">string</span>, TaskNumber <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			<span class="comment">//	registerChan 相当于一个 worker 队列, worker 出队完成 map 或者 reduce 任务之后入队</span></span><br><span class="line">			rpcAdr := &lt;- registerChan</span><br><span class="line">			ok := call(rpcAdr, <span class="string">&quot;Worker.DoTask&quot;</span>, DoTaskArgs&#123;</span><br><span class="line">				JobName: jobName,</span><br><span class="line">				File:	inputFile,</span><br><span class="line">				Phase: phase,</span><br><span class="line">				TaskNumber: TaskNumber,</span><br><span class="line">				NumOtherPhase: n_other,</span><br><span class="line">			&#125;, <span class="literal">nil</span>)</span><br><span class="line">			<span class="keyword">if</span> ok &#123;</span><br><span class="line">				<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">					<span class="comment">//	完成了就通知当前 worker 可用</span></span><br><span class="line">					registerChan &lt;- rpcAdr</span><br><span class="line">				&#125;()</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		threadMaster.Done()</span><br><span class="line">	&#125;(mapFiles[i], i)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Printf(<span class="string">&quot;Schedule: %v done\n&quot;</span>, phase)</span><br><span class="line">threadMaster.Wait()</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>最后可以完整的测试一遍，终端运行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go test</span><br></pre></td></tr></table></figure>
+<p>成功的话会出现下面的结果(太多只截取部分内容)</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">/var/tmp/824-1001/mr31752-worker2: given reducePhase task #9 on file 824-mrinput-9.txt (nios: 20)</span><br><span class="line">/var/tmp/824-1001/mr31752-worker3: reducePhase task #8 done</span><br><span class="line">/var/tmp/824-1001/mr31752-worker2: reducePhase task #9 done</span><br><span class="line">Master: RPC /var/tmp/824-1001/mr31752-worker1 shutdown error</span><br><span class="line">Master: RPC /var/tmp/824-1001/mr31752-worker0 shutdown error</span><br><span class="line">Merge: read mrtmp.test-res-0</span><br><span class="line">Merge: read mrtmp.test-res-1</span><br><span class="line">Merge: read mrtmp.test-res-2</span><br><span class="line">Merge: read mrtmp.test-res-3</span><br><span class="line">Merge: read mrtmp.test-res-4</span><br><span class="line">Merge: read mrtmp.test-res-5</span><br><span class="line">Merge: read mrtmp.test-res-6</span><br><span class="line">Merge: read mrtmp.test-res-7</span><br><span class="line">Merge: read mrtmp.test-res-8</span><br><span class="line">Merge: read mrtmp.test-res-9</span><br><span class="line">/var/tmp/824-1001/mr31752-master: Map/Reduce task completed</span><br><span class="line">PASS</span><br><span class="line">ok      _/home/ribincao/Learn/6.824labs/src/mapreduce   11.113s</span><br></pre></td></tr></table></figure>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/golang/">#golang</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">#分布式</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/02/python-%E5%93%B2%E5%AD%A6%E5%AE%B6%E5%B0%B1%E9%A4%90%E9%97%AE%E9%A2%98/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">python| 哲学家就餐问题</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/02/bug-UnicodeDecodeError-%E2%80%98gbk%E2%80%98-codec-can%E2%80%98t-decode-byte-0xa4-in-position-48-illegal-multibyte-sequence/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">bug| UnicodeDecodeError: ‘gbk‘ codec can‘t decode byte 0xa4 in position 48: illegal multibyte sequence</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">RibinCao</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
