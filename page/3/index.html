@@ -46,58 +46,6 @@
 <main class="page-container">
 
     
-        
-<div class="first-screen-container flex-center fade-in-down-animation">
-    <div class="content flex-center">
-        
-            <div class="description hitokoto">
-                
-                    <div class="desc-item">Keep writing and Keep loving.</div>
-                
-            </div>
-        
-        
-        
-            <div class="s-icon-list">
-                
-                    
-                        
-                        <div class="tooltip s-icon-item "
-                             data-content="GitHub"
-                             data-name="github"
-                             
-                        >
-                            
-                                
-                                    <a target="_blank" href="https://github.com/ribincao">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                
-                            
-                        </div>
-                    
-                
-                    
-                        
-                        <div class="tooltip s-icon-item "
-                             data-content="Email"
-                             data-name="email"
-                             
-                        >
-                            
-                                <a href="mailto:njucaolibin.com">
-                                    <i class="fas fa-envelope"></i>
-                                </a>
-                            
-                        </div>
-                    
-                
-            </div>
-        
-    </div>
-</div>
-
-    
 
     <div class="page-main-content is-home">
 
@@ -105,7 +53,7 @@
             
 <header class="header-wrapper transparent-1">
 
-    <div class="header-content has-first-screen">
+    <div class="header-content">
         <div class="left">
             
                 <a class="logo-image" href="/">
@@ -217,18 +165,15 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/02/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/">
-                        设计模式基本原则
+                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+                        python| 实现单例模式的两种方式
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        DesignPatternByPython设计问题
-僵化性：很难对系统进行改动，因为每个改动都会迫使许多对系统其他部分的改动
-脆弱性：对系统的改动会导致系统中和改动的地方在概念无关的许多地方出现问题
-牢固性：使之成为一些可在其他系统中重用的组件
-粘滞...
+                        第一种是通过类的方式，修改__new__实现
+12345678910111213141516171819202122232425class Singleton(object):    _instance = None    def __new__(c...
                     
                 </div>
 
@@ -236,7 +181,7 @@
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 13:03:24 GMT+0800">
+            <span class="home-article-date" data-updated="Thu Mar 02 2023 12:51:59 GMT+0800">
                 2023-03-02
             </span>
         </span>
@@ -256,7 +201,7 @@
         
     </div>
 
-    <a class="read-more" href="/2023/03/02/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -266,14 +211,14 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-                        python| 实现简单工厂模式
+                    <a href="/2023/03/02/python-LRU%E7%9A%84%E5%AE%9E%E7%8E%B0/">
+                        python| LRU的实现
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        1234567891011121314151617181920212223242526272829303132333435363738394041from typing import Optionalclass Product:    def __i...
+                        前几天看到同事在写服务器框架的时候其中有一部分在用C#实现一个LRU算法，当时脑子一蒙忽然忘记LRU的具体实现原理，赶紧翻书回忆了一下LRU然后用python去实现了一个LRU来加深记忆。LRU(Least Recently Used)指的是最近最少...
                     
                 </div>
 
@@ -281,27 +226,32 @@
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 13:00:59 GMT+0800">
+            <span class="home-article-date" data-updated="Thu Mar 02 2023 10:43:05 GMT+0800">
                 2023-03-02
             </span>
         </span>
         
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
                 <ul>
                     
                         <li>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                            <a href="/tags/python/">python</a>&nbsp;
                         </li>
                     
+                        <li>
+                            | 
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>&nbsp;
+                        </li>
                     
                 </ul>
             </span>
         
-        
     </div>
 
-    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/03/02/python-LRU%E7%9A%84%E5%AE%9E%E7%8E%B0/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -311,14 +261,15 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">
-                        python| 实现发布-订阅模式
+                    <a href="/2023/03/01/%E4%B8%80-%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E7%9A%84%E5%BC%80%E5%8F%91/">
+                        (一)技术方案设计
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667...
+                        todo…
+
                     
                 </div>
 
@@ -326,7 +277,7 @@
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 13:00:12 GMT+0800">
+            <span class="home-article-date" data-updated="Thu Mar 02 2023 10:32:52 GMT+0800">
                 2023-03-02
             </span>
         </span>
@@ -336,7 +287,7 @@
                     
                         <li>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                            <a href="/categories/python%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%E6%90%AD%E5%BB%BA%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/">python从零到一搭建游戏服务器</a>&nbsp;
                         </li>
                     
                     
@@ -346,7 +297,7 @@
         
     </div>
 
-    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/03/01/%E4%B8%80-%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E7%9A%84%E5%BC%80%E5%8F%91/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -356,14 +307,15 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
-                        python| 实现代理模式
+                    <a href="/2023/03/01/kubernetes-%E6%9F%A5%E7%9C%8Bpod%E6%97%A5%E5%BF%97/">
+                        kubernetes| 查看pod日志
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        12345678910111213141516171819202122232425262728293031323334353637383940414243&quot;&quot;&quot;author: ribincaodesc: ProxyMod...
+                        背景之前在线上出现一个奇怪的问题,容器总是莫名奇妙的崩溃找不到原因.为了排查问题需要去查询日志,loghub上的日志时序看着很奇怪,不太方便查看上下文去排查.所以就想着去开一个pod动态看日志直到pod崩溃就比较方便了.
+方案本地动态查看pod日志需...
                     
                 </div>
 
@@ -371,27 +323,27 @@
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 12:59:26 GMT+0800">
-                2023-03-02
+            <span class="home-article-date" data-updated="Wed Mar 01 2023 15:43:11 GMT+0800">
+                2023-03-01
             </span>
         </span>
         
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
                 <ul>
                     
                         <li>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                            <a href="/tags/kubernetes/">kubernetes</a>&nbsp;
                         </li>
-                    
                     
                 </ul>
             </span>
         
-        
     </div>
 
-    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/03/01/kubernetes-%E6%9F%A5%E7%9C%8Bpod%E6%97%A5%E5%BF%97/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -401,14 +353,14 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">
-                        python| 实现观察者模式
+                    <a href="/2023/03/01/tool-umlPlant/">
+                        tool| 发现一个很不错的vscode插件工具plantUML
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253&quot;&quot;&quot;author: ri...
+                        背景之前每次写技术文档需要画图的时候都是通过飞书文档自带的工具或者processon去实现,实现的效果虽然勉强能看但是还是没有达到自己想要的效果,无意中在知乎上看到别人推荐,才是孤陋寡闻,在vscode里有对应的可视化插件plantUML和Graph...
                     
                 </div>
 
@@ -416,27 +368,27 @@
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 12:58:46 GMT+0800">
-                2023-03-02
+            <span class="home-article-date" data-updated="Wed Mar 01 2023 15:30:20 GMT+0800">
+                2023-03-01
             </span>
         </span>
         
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
                 <ul>
                     
                         <li>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                            <a href="/tags/tool/">tool</a>&nbsp;
                         </li>
-                    
                     
                 </ul>
             </span>
         
-        
     </div>
 
-    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/03/01/tool-umlPlant/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -446,14 +398,14 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0Mix-in%E6%A8%A1%E5%BC%8F/">
-                        python| 实现Mix-in模式
+                    <a href="/2023/03/01/unity-rotate/">
+                        unity| 实现物体的转动组合
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        123456789101112131415161718192021222324252627282930313233343536373839404142434445class Animal:        def __init__(self, name...
+                        背景策划需要实现一个道具旋转的功能,这个功能如果单纯在unity去实现本身并不是很难,比如有DOTween就可以,但是项目技术架构调整之后,物体的位置数据需要在服务端进行计算,然而服务端还有很多unity相关的基建没有提供支持,比如物理碰撞之类的.所...
                     
                 </div>
 
@@ -461,27 +413,27 @@
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 12:57:55 GMT+0800">
-                2023-03-02
+            <span class="home-article-date" data-updated="Wed Mar 01 2023 13:28:37 GMT+0800">
+                2023-03-01
             </span>
         </span>
         
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
                 <ul>
                     
                         <li>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                            <a href="/tags/unity/">unity</a>&nbsp;
                         </li>
-                    
                     
                 </ul>
             </span>
         
-        
     </div>
 
-    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0Mix-in%E6%A8%A1%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/03/01/unity-rotate/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -491,14 +443,14 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0Mediator%E6%A8%A1%E5%BC%8F/">
-                        python| 实现Mediator中介者模式
+                    <a href="/2023/02/28/vim-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">
+                        vim| vim基本配置
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        123456789101112131415161718192021222324252627282930&quot;&quot;&quot;author: ribincaodesc: MediatorModel Demo&quot;&quot;&quo...
+                        背景工作中无论是终端还是IDE都是习惯用vim进行代码编辑, 每次到新公司或者换电脑都得去配置一下, 虽然我基本不用插件,但是一些基本的配置改好之后界面会看着舒服很多.为了怕自己忘记一些基本的配置,这边存一下vim的基本配置, 方便切换电脑的时候能快...
                     
                 </div>
 
@@ -506,27 +458,27 @@
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 13:03:51 GMT+0800">
-                2023-03-02
+            <span class="home-article-date" data-updated="Wed Mar 01 2023 15:29:40 GMT+0800">
+                2023-03-01
             </span>
         </span>
         
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
                 <ul>
                     
                         <li>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                            <a href="/tags/vim/">vim</a>&nbsp;
                         </li>
-                    
                     
                 </ul>
             </span>
         
-        
     </div>
 
-    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0Mediator%E6%A8%A1%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/02/28/vim-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -536,14 +488,14 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-                        python| 实现工厂模式
+                    <a href="/2023/02/28/kubernetes/">
+                        kubernetes| fluent-bit日志采集系统配置
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        1234567891011121314151617181920212223242526272829303132from SimpleFactory import *class Factory:    def __init__(self):      ...
+                        背景排查问题的时候,loghub上的日志是混在一起的,我们希望日志能有一个标签去定位对应的pod,然后通过pod去检索出对应的日志方便我们查看上下文.这个时候就要去集群管理页面上去修改对应的fluent-bit配置就行,我们这里的集群管理用的是ran...
                     
                 </div>
 
@@ -551,27 +503,27 @@
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 12:56:20 GMT+0800">
-                2023-03-02
+            <span class="home-article-date" data-updated="Wed Mar 01 2023 12:51:29 GMT+0800">
+                2023-03-01
             </span>
         </span>
         
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
                 <ul>
                     
                         <li>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                            <a href="/tags/kubernetes/">kubernetes</a>&nbsp;
                         </li>
-                    
                     
                 </ul>
             </span>
         
-        
     </div>
 
-    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/02/28/kubernetes/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -581,14 +533,15 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0Facade%E6%A8%A1%E5%BC%8F/">
-                        python| 实现Facade装饰模式
+                    <a href="/2023/02/28/python-pip%E6%9B%B4%E6%96%B0%E5%8C%85%E5%A4%AA%E6%85%A2/">
+                        python| pip下载包太慢的问题
                     </a>
                 </h3>
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&quot;&quot;&quot;author: ribi...
+                        背景国内编写python项目需要通过pip去下载对应的依赖,有时候会很慢,可以通过pip配置来修改国内镜像源
+配置12pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn...
                     
                 </div>
 
@@ -596,72 +549,27 @@
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 13:04:14 GMT+0800">
-                2023-03-02
+            <span class="home-article-date" data-updated="Wed Mar 01 2023 12:50:58 GMT+0800">
+                2023-03-01
             </span>
         </span>
         
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
                 <ul>
                     
                         <li>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                            <a href="/tags/python/">python</a>&nbsp;
                         </li>
-                    
                     
                 </ul>
             </span>
         
-        
     </div>
 
-    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0Facade%E6%A8%A1%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">
-                        python| 实现命令模式
-                    </a>
-                </h3>
-
-                <div class="home-article-content keep-markdown-body">
-                    
-                        1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162&quot;&quo...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span>
-            <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Thu Mar 02 2023 12:54:39 GMT+0800">
-                2023-03-02
-            </span>
-        </span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a class="read-more" href="/2023/03/02/python-%E5%AE%9E%E7%8E%B0%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/02/28/python-pip%E6%9B%B4%E6%96%B0%E5%8C%85%E5%A4%AA%E6%85%A2/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -671,11 +579,11 @@
     <div class="home-paginator">
         <div class="paginator">
     
-
-    
-        <a class="next btn"
+        <a class="prev btn"
            href="/page/2/"
-        >下一页</a>
+        >上一页</a>
+    
+
     
 </div>
 
