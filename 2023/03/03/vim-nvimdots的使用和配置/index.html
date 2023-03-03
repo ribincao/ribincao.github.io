@@ -9,7 +9,7 @@
     
     <title>
         
-            标签: vim |
+            vim| nvimdots的使用和配置 |
         
         Ribin
     </title>
@@ -80,7 +80,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/tags"
                             >
                                 标签
@@ -130,7 +130,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/tags">标签</a>
                 </li>
             
@@ -160,49 +160,121 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;vim
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2023</span>
-                <span class="archive-year-post-count">[2]</span>
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">vim| nvimdots的使用和配置</span>
             </div>
-            <ul class="article-list">
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-03 13:37:02</span>
+        <span class="mobile">2023-03-03 13:37</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-03 13:43:15</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
                 
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/03/03/vim-nvimdots%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/"
-                        >vim| nvimdots的使用和配置</a>
-                        <span class="article-date">03-03</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/02/28/vim-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/"
-                        >vim| vim基本配置</a>
-                        <span class="article-date">02-28</span>
+                    <li>
+                        <a href="/tags/vim/">vim</a>&nbsp;
                     </li>
                 
             </ul>
-        </section>
+        </span>
+    
+
+    
+    
+    
     
 </div>
 
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>nvimdots的github仓库地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/ayamir/nvimdots" >https://github.com/ayamir/nvimdots<i class="fas fa-external-link-alt"></i></a></p>
+<p>按照说明的命令安装,因为我是macos,所以执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if command -v curl &gt;/dev/null 2&gt;&amp;1; then</span><br><span class="line">    bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)&quot;</span><br><span class="line">else</span><br><span class="line">    bash -c &quot;$(wget -O- https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>安装成功后，我想修改终端的颜色配置，找了半天发现在~&#x2F;.config&#x2F;nvim&#x2F;lua&#x2F;core&#x2F;settings.lua文件里进行修改,我按照自己喜欢的风格暂时修改了colorscheme为edge风格,background为light,后面有时间再重新配置一下颜色</p>
+<p>我发现它默认是设置里相对行号的,我不太习惯这种风格找了一下配置，只要在~&#x2F;.config&#x2F;nvim&#x2F;lua&#x2F;core&#x2F;option.lua里修改relativenumber为false就行了,其他的基本配置也在这里面,摸索一下</p>
+<p>简单的配置之后效果如图</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/nvimdots.png"
+                     
+                >
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/vim/">#vim</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/02/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">设计模式基本原则</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
         </div>
-    </div>
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    
-
-    
-</div>
-
+        
     </div>
 </div>
 
@@ -239,6 +311,19 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -338,6 +423,10 @@
 
 
 <div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
     
 </div>
 
