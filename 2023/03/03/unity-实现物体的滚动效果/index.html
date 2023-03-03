@@ -9,7 +9,7 @@
     
     <title>
         
-            shell| 一些好用的命令工具 |
+            unity| 实现物体的滚动效果 |
         
         Ribin
     </title>
@@ -164,7 +164,7 @@
         <div class="article-content-container">
 
             <div class="article-title">
-                <span class="title-hover-animation">shell| 一些好用的命令工具</span>
+                <span class="title-hover-animation">unity| 实现物体的滚动效果</span>
             </div>
 
             
@@ -184,13 +184,13 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2023-03-03 14:34:28</span>
-        <span class="mobile">2023-03-03 14:34</span>
+        <span class="pc">2023-03-03 16:33:33</span>
+        <span class="mobile">2023-03-03 16:33</span>
     </span>
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-03-03 14:48:02</span>
+        <span class="pc">2023-03-03 16:41:33</span>
     </span>
     
     
@@ -200,7 +200,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/shell/">shell</a>&nbsp;
+                        <a href="/tags/unity/">unity</a>&nbsp;
                     </li>
                 
             </ul>
@@ -221,56 +221,10 @@
             <div class="article-content keep-markdown-body">
                 
 
-                <p>常年在macOS上开发已经习惯了用命令行了,所以有时间也会去倒腾一些有意思的命令替代工具,最近就发现了一些不错的替代命令,可以去github上搜一搜很多有意思的轮子</p>
-<ul>
-<li>替代ls的命令exa</li>
-</ul>
-<img  
-                     lazyload
-                     alt="image"
-                     data-src="/images/exa.png"
-                     
-                >
-
-<ul>
-<li>替代du的命令dust</li>
-</ul>
-<img  
-                     lazyload
-                     alt="image"
-                     data-src="/images/du.png"
-                     
-                >
-
-<ul>
-<li>替代df的命令duf</li>
-</ul>
-<img  
-                     lazyload
-                     alt="image"
-                     data-src="/images/df.png"
-                     
-                >
-
-<ul>
-<li>替代grep的命令rg</li>
-</ul>
-<img  
-                     lazyload
-                     alt="image"
-                     data-src="/images/cmdrg.png"
-                     
-                >
-
-<ul>
-<li>替代cat的命令bat</li>
-</ul>
-<img  
-                     lazyload
-                     alt="image"
-                     data-src="/images/bat.png"
-                     
-                >
+                <p>最近接到一个需求需要实现一个给圆柱体推力让它滚动的效果,目前遇到的问题是运动逻辑是在服务器实现,而服务器的引擎方面的基建还差很多,没办法像unity那样实现比较逼真.<br>所以我就用unity去实现一个简单滚动效果的demo,unity开启一个3D的新工程,创建一个圆柱体,然后把旋转角的Z轴设置为90度让它躺下,position坐标设置为原点(0, 0, 0),给圆柱体添加刚体rigibody组件,然后绑定如下脚本</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestRotate</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">public</span> <span class="built_in">float</span> force;</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        force = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">MovePosition</span>(<span class="params">Transform transform, Vector3 delta</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> pos = <span class="keyword">new</span> Vector3(transform.position.x + delta.x, transform.position.y + delta.y, transform.position.z + delta.z);</span><br><span class="line">        transform.position = pos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">MoveRotate</span>(<span class="params">Transform transform, Vector3 axis, <span class="built_in">float</span> angel</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        transform.Rotate(axis, angel, Space.Self);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">RotateDemo</span>(<span class="params">Transform transform, <span class="built_in">int</span> type</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (type == <span class="number">0</span>) <span class="comment">// 前滚</span></span><br><span class="line">        &#123;</span><br><span class="line">            MoveRotate(transform, <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>), -force / <span class="number">1000</span>);</span><br><span class="line">            MovePosition(transform, <span class="keyword">new</span> Vector3(<span class="number">0f</span>, <span class="number">0f</span>, force / <span class="number">10000</span>));</span><br><span class="line">            force -= <span class="number">1f</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">// 后滚</span></span><br><span class="line">        &#123;</span><br><span class="line">            MoveRotate(transform, <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>), -force / <span class="number">1000</span>);</span><br><span class="line">            MovePosition(transform, <span class="keyword">new</span> Vector3(<span class="number">0f</span>, <span class="number">0f</span>, force / <span class="number">10000</span>));</span><br><span class="line">            force += <span class="number">1f</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ListenKey</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetKey(KeyCode.O))</span><br><span class="line">        &#123;</span><br><span class="line">            force = <span class="number">-1000</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (Input.GetKey(KeyCode.P))</span><br><span class="line">        &#123;</span><br><span class="line">            force = <span class="number">1000</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ListenKey();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (force == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (force &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            RotateDemo(transform, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        RotateDemo(transform, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>按下P键和O键可以给物体一个正向&#x2F;反向的推力让它滚动,如果需要滚动效果更真实一点的话需要计算好滚动的角度和位置移动偏差的关系.</p>
+<p>如果在读武器需要沿着地面进行滚动的话,要么需要服务器支持给物体添加刚体效果,或者手动给物体持续施加一个向下的拉力达到重力效果.</p>
 
             </div>
 
@@ -280,7 +234,7 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/shell/">#shell</a>&nbsp;
+                            <a href="/tags/unity/">#unity</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -289,29 +243,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                               rel="prev"
-                               href="/2023/03/03/unity-%E5%AE%9E%E7%8E%B0%E7%89%A9%E4%BD%93%E7%9A%84%E6%BB%9A%E5%8A%A8%E6%95%88%E6%9E%9C/"
-                            >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                                <span class="title flex-center">
-                                <span class="post-nav-title-item">unity| 实现物体的滚动效果</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                                rel="next"
-                               href="/2023/03/03/vim-nvimdots%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/"
+                               href="/2023/03/03/shell-%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/"
                             >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">vim| nvimdots的使用和配置</span>
+                                <span class="post-nav-title-item">shell| 一些好用的命令工具</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                                 <span class="right arrow-icon flex-center">
