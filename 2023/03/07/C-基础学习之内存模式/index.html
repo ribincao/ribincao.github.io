@@ -9,7 +9,7 @@
     
     <title>
         
-            标签 |
+            C++| 基础学习之内存模式 |
         
         Ribin
     </title>
@@ -80,7 +80,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/tags"
                             >
                                 标签
@@ -130,7 +130,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/tags">标签</a>
                 </li>
             
@@ -159,15 +159,127 @@
             <div class="main-content">
 
                 
-                    
-    <div class="fade-in-down-animation">
-        <div class="tagcloud-container">
-            <div class="tagcloud-content">
-                <a href="/tags/C/" style="font-size: 1.4rem;">C++</a> <a href="/tags/RPC/" style="font-size: 1rem;">RPC</a> <a href="/tags/bug/" style="font-size: 1rem;">bug</a> <a href="/tags/golang/" style="font-size: 1rem;">golang</a> <a href="/tags/kubernetes/" style="font-size: 1.2rem;">kubernetes</a> <a href="/tags/latex/" style="font-size: 1rem;">latex</a> <a href="/tags/mysql/" style="font-size: 1.2rem;">mysql</a> <a href="/tags/python/" style="font-size: 1.6rem;">python</a> <a href="/tags/unity/" style="font-size: 1.2rem;">unity</a> <a href="/tags/vim/" style="font-size: 1.2rem;">vim</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1rem;">分布式</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 1rem;">区块链</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1rem;">学习笔记</a> <a href="/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/" style="font-size: 1rem;">性能分析</a> <a href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" style="font-size: 1rem;">性能调优</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1rem;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1rem;">数据结构</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.2rem;">算法</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 1rem;">网络编程</a>
-            </div>
-        </div>
-    </div>
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
+            <div class="article-title">
+                <span class="title-hover-animation">C++| 基础学习之内存模式</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-07 14:39:33</span>
+        <span class="mobile">2023-03-07 14:39</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-07 14:40:10</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C/">C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    C++内存分配:</span></span><br><span class="line"><span class="comment">        1.分区</span></span><br><span class="line"><span class="comment">            - 静态区(静态内存): static 变量和函数、全局变量</span></span><br><span class="line"><span class="comment">            - 栈区: 函数、非 static 局部变量, 由程序自动创建、自动释放</span></span><br><span class="line"><span class="comment">            - 堆(动态内存、内存池): new 和 delete</span></span><br><span class="line"><span class="comment">            - 文字常量区: 常量字符串就是放在这里的, 程序结束后由系统释放</span></span><br><span class="line"><span class="comment">            - 程序代码区: 可执行代码</span></span><br><span class="line"><span class="comment">        2.缓冲区</span></span><br><span class="line"><span class="comment">            - 全缓冲区: 当填满标准I/O缓存后才进行实际I/O操作</span></span><br><span class="line"><span class="comment">            - 行缓冲区: 当在输入和输出中遇到换行符时，执行真正的I/O操作</span></span><br><span class="line"><span class="comment">            - 不带缓冲: 不进行缓冲，标准出错情况stderr是典型代表，这使得出错信息可以直接尽快地显示出来</span></span><br><span class="line"><span class="comment">            - 缓冲区刷新: 在内存空间中预留了一定的存储空间用来缓冲输入或输出的数据, 可以减少磁盘的读写次数</span></span><br><span class="line"><span class="comment">                - 缓冲区满时</span></span><br><span class="line"><span class="comment">                - 执行flush语句</span></span><br><span class="line"><span class="comment">                - 执行endl语句</span></span><br><span class="line"><span class="comment">                - 关闭文件</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    程序执行过程:</span></span><br><span class="line"><span class="comment">        1.预处理: 条件编译，头文件包含，宏替换的处理，生成.i文件</span></span><br><span class="line"><span class="comment">            - cpp Memory.c Memory.i</span></span><br><span class="line"><span class="comment">        2.编译:将预处理后的文件转换成汇编语言，生成.s文件</span></span><br><span class="line"><span class="comment">            - gcc -Og -S Memory.c</span></span><br><span class="line"><span class="comment">        3.汇编: 目标代码(机器代码)生成.o的文件</span></span><br><span class="line"><span class="comment">            - gcc -Og -c Memory.c</span></span><br><span class="line"><span class="comment">        4.链接:连接目标代码,生成可执行程序</span></span><br><span class="line"><span class="comment">            - gcc -Og -o Memory.c</span></span><br><span class="line"><span class="comment">        - 注: 反编译 objdump -d hello.o</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> pi;       <span class="comment">//     全局变量，全局区/静态区</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> a)</span></span>; <span class="comment">//    程序代码区</span></span><br><span class="line"><span class="function"><span class="type">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="type">int</span> a;<span class="comment">//      栈区</span></span><br><span class="line">       <span class="type">static</span> <span class="type">int</span> b;<span class="comment">//      静态变量，全局区/静态区</span></span><br><span class="line">       <span class="type">char</span> *c, *d = <span class="string">&quot;hello&quot;</span>;<span class="comment">//    指针本身位于栈 | 指向字符串&quot;hello&quot;位于文字常量区</span></span><br><span class="line">       <span class="type">int</span> *e = <span class="keyword">new</span> <span class="type">char</span>[<span class="number">10</span>];<span class="comment">//    指针指向的内容位于堆区</span></span><br><span class="line">       <span class="built_in">exit</span>(<span class="number">0</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/C/">#C++</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%87%8D%E8%BD%BD/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之重载</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之函数指针</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
 
 
                 
@@ -202,6 +314,19 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -301,6 +426,10 @@
 
 
 <div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
     
 </div>
 

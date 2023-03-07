@@ -9,7 +9,7 @@
     
     <title>
         
-            标签 |
+            学习笔记| 数据密集型系统设计 |
         
         Ribin
     </title>
@@ -80,7 +80,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/tags"
                             >
                                 标签
@@ -130,7 +130,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/tags">标签</a>
                 </li>
             
@@ -159,15 +159,228 @@
             <div class="main-content">
 
                 
-                    
-    <div class="fade-in-down-animation">
-        <div class="tagcloud-container">
-            <div class="tagcloud-content">
-                <a href="/tags/C/" style="font-size: 1.4rem;">C++</a> <a href="/tags/RPC/" style="font-size: 1rem;">RPC</a> <a href="/tags/bug/" style="font-size: 1rem;">bug</a> <a href="/tags/golang/" style="font-size: 1rem;">golang</a> <a href="/tags/kubernetes/" style="font-size: 1.2rem;">kubernetes</a> <a href="/tags/latex/" style="font-size: 1rem;">latex</a> <a href="/tags/mysql/" style="font-size: 1.2rem;">mysql</a> <a href="/tags/python/" style="font-size: 1.6rem;">python</a> <a href="/tags/unity/" style="font-size: 1.2rem;">unity</a> <a href="/tags/vim/" style="font-size: 1.2rem;">vim</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1rem;">分布式</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 1rem;">区块链</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1rem;">学习笔记</a> <a href="/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/" style="font-size: 1rem;">性能分析</a> <a href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" style="font-size: 1rem;">性能调优</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1rem;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1rem;">数据结构</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.2rem;">算法</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 1rem;">网络编程</a>
-            </div>
-        </div>
-    </div>
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
+            <div class="article-title">
+                <span class="title-hover-animation">学习笔记| 数据密集型系统设计</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-07 13:07:31</span>
+        <span class="mobile">2023-03-07 13:07</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-07 13:08:09</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 单台机器 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<ol>
+<li>可靠性:<ul>
+<li>硬件故障</li>
+<li>软件错误</li>
+<li>人为失误</li>
+</ul>
+</li>
+<li>可扩展性<ul>
+<li>描述负载 tweet例子 扇出数 读写负载</li>
+<li>描述性能 负载增加系统资源不变会如何?负载增加维持性能需要多少资源?<ul>
+<li>批处理系统(hadoop): 关注吞吐量</li>
+<li>在线系统: 关注服务的响应时间 延迟是指请求花费在处理上的时间 响应时间是客户端看到的</li>
+</ul>
+</li>
+<li>如何应对负载增加: 垂直扩展和水平扩展</li>
+</ul>
+</li>
+<li>可维护性<ul>
+<li>软件系统三个设计原则: 可运维性\简单性\可演化性(易于改变)</li>
+</ul>
+</li>
+</ol>
+<p>数据模型与查询语言<br>大多数应用程序是通过一层一层叠加数据模型来构建的,每一层面临的关键问题是如何将其用下一层来表示<br>    - 无模式(读时模式):数据的结构是隐式的,只有在读取时才解释,了类似于动态类型检查<br>    - 写时模式:数据的结构是显式,数据库确保写入时都必须遵循,类似于静态类型检查</p>
+<ol>
+<li>关系模型</li>
+<li>文档模型</li>
+<li>网络模型</li>
+<li>层次模型</li>
+<li>图数据模型</li>
+</ol>
+<p>数据查询语言:</p>
+<ul>
+<li>命令式:指定了特定的执行顺序</li>
+<li>声明式:对并行更友好</li>
+<li>MapReduce查询</li>
+</ul>
+<p>日志<br>索引: 增加写的复杂度,降低读的效率,平衡</p>
+<ul>
+<li>哈希索引: 文件格式 | 删除记录(墓碑) | 崩溃恢复(快照) | 部分写入的记录 | 并发控制(一个线程写,多个线程读)</li>
+<li>LSM-Tree</li>
+<li>B-Tree</li>
+</ul>
+<p>内存数据库可以更快的原因:避免使用写磁盘的格式对内存数据结构编码的开销</p>
+<p>存储引擎两大类:</p>
+<ol>
+<li>OLTP在线事务处理: 通常使用索引中的某些键查找少量记录,根据用户的输入插入或更新记录(比如博客的评论)<ul>
+<li>日志结构流派: 只允许追加式更新文件和删除过时文件, 随机写入转为顺序写入</li>
+<li>原地更新流派: 将磁盘视为可以覆盖的一组固定大小的页,比如B-Tree</li>
+</ul>
+</li>
+<li>OLAP在线分析处理: 查询需要扫描大量记录,每个记录只读取少数几列并计算汇总统计信息(比如计数\求和或平均值)</li>
+</ol>
+<p>数据编码: json xml csv<br>二进制编码: protobuf thrift avro<br>考虑兼容性问题:兼容性是执行编码的一个进程和执行解码的另一个进程之间的关系<br>进程间数据流动:</p>
+<ul>
+<li>通过数据库:归档存储</li>
+<li>通过服务调用:  RPC  |  WEB(REST|SOAP)</li>
+<li>通过异步消息传递: 消息队列  异步  削峰|异步|解耦</li>
+</ul>
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 分布式系统 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>目的: 扩展性(单台机器处理上限) 容错和高可用性(机器冗余) 延迟考虑(就近部署数据中心)<br>架构: </p>
+<ul>
+<li>垂直扩展: 共享内存架构(有限的容错能力)  共享磁盘架构(多适用于数据仓库,通常由于资源竞争以及锁的开销限制进一步的扩展能力)</li>
+<li>水平扩展: 无共享结构.<br>数据分布机制:</li>
+<li>复制</li>
+<li>分区</li>
+</ul>
+<p>数据复制:</p>
+<ul>
+<li>主从复制<ul>
+<li>复制机制: 同步复制(一致,可能会阻塞) 异步复制(吞吐量高,可能不一致,复制滞后问题) 半同步(保证至少有几个节点拥有最新的副本)</li>
+<li>增加新的从节点: 主节点生成快照发给从节点,从节点追赶</li>
+<li>处理节点失效: 从节点失效-追赶式恢复, 主节点失效-节点切换(心跳确认是否失效|选举|新主节点生效|脑裂)</li>
+<li>复制实现:<ul>
+<li>基于语句的复制</li>
+<li>基于预写日志(WAL)传输</li>
+<li>基于行的逻辑日志复制</li>
+<li>基于触发器的复制</li>
+</ul>
+</li>
+<li>复制滞后问题: 最终一致性(如果停止写数据库,经过一段时间滞后,从节点最终会赶上并与主节点保持一致)<ul>
+<li>读自己的写:用户发起写请求然后在滞后的副本上读数据(比如评论),需要写后读一致性<ul>
+<li>如果用户访问可能会被修改的内容,从主节点读取,否则在从节点读取.比如总是从主节点读取用户自己的首页配置文件,在从节点读取其他用户的配置文件</li>
+<li>跟踪最近更新时间,比如更新后一分钟之内在主节点读取</li>
+<li>客户端可以记住最近更新的时间戳并附带在读请求中</li>
+<li>如果副本分布在多数据中心,必须先把请求路由到主节点所在的数据中心</li>
+</ul>
+</li>
+<li>单调读:用户读到了最新内容之后又读到了过期的内容,好像时间被回拨,需要单调读一致性<ul>
+<li>确保用户总是从固定的同一副本执行读取,可以通过用户ID的哈希方法去路由</li>
+</ul>
+</li>
+<li>前缀一致读:分区数据经过多副本复制后出现了不同程度的滞后,导致观察者先看到果后看到因<ul>
+<li>确保任何具有因果顺序关系的写入都交给一个分区来完成</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多主节点复制</li>
+<li>无主节点复制</li>
+</ul>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">#学习笔记</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/07/mysql-%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">mysql| 索引失效的几种情况</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/07/python-%E8%A3%85%E9%A5%B0%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">python| 装饰器的使用</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
 
 
                 
@@ -202,6 +415,19 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -301,6 +527,10 @@
 
 
 <div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
     
 </div>
 

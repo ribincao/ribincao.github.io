@@ -9,7 +9,7 @@
     
     <title>
         
-            标签 |
+            C++| 基础学习之多态 |
         
         Ribin
     </title>
@@ -80,7 +80,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/tags"
                             >
                                 标签
@@ -130,7 +130,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/tags">标签</a>
                 </li>
             
@@ -159,15 +159,112 @@
             <div class="main-content">
 
                 
-                    
-    <div class="fade-in-down-animation">
-        <div class="tagcloud-container">
-            <div class="tagcloud-content">
-                <a href="/tags/C/" style="font-size: 1.4rem;">C++</a> <a href="/tags/RPC/" style="font-size: 1rem;">RPC</a> <a href="/tags/bug/" style="font-size: 1rem;">bug</a> <a href="/tags/golang/" style="font-size: 1rem;">golang</a> <a href="/tags/kubernetes/" style="font-size: 1.2rem;">kubernetes</a> <a href="/tags/latex/" style="font-size: 1rem;">latex</a> <a href="/tags/mysql/" style="font-size: 1.2rem;">mysql</a> <a href="/tags/python/" style="font-size: 1.6rem;">python</a> <a href="/tags/unity/" style="font-size: 1.2rem;">unity</a> <a href="/tags/vim/" style="font-size: 1.2rem;">vim</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1rem;">分布式</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 1rem;">区块链</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1rem;">学习笔记</a> <a href="/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/" style="font-size: 1rem;">性能分析</a> <a href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" style="font-size: 1rem;">性能调优</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1rem;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1rem;">数据结构</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.2rem;">算法</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 1rem;">网络编程</a>
-            </div>
-        </div>
-    </div>
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
+            <div class="article-title">
+                <span class="title-hover-animation">C++| 基础学习之多态</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-07 14:42:01</span>
+        <span class="mobile">2023-03-07 14:42</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-07 14:42:32</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C/">C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">// virtual void fun() = 0;</span></span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Say</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Father say Hi&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">Hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Father say Hello&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span>: <span class="keyword">public</span> Father &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">Say</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Son say Hi&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">Hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Son say Hello&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SayHi</span><span class="params">(Father &amp;p)</span> </span>&#123;</span><br><span class="line">    p.<span class="built_in">Say</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SayHello</span><span class="params">(Father &amp;p)</span> </span>&#123;</span><br><span class="line">    p.<span class="built_in">Hello</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    虚函数:</span></span><br><span class="line"><span class="comment">      1.实现: 存在虚函数的类都有一个一维的虚函数表叫做虚表，类的对象有一个指向虚表开始的虚指针(_vptr, 在构造函数里初始化);虚表是和类对应的，虚表指针是和对象对应的</span></span><br><span class="line"><span class="comment">      2.纯虚函数: 虚函数再加上 = 0, 存在纯虚函数的类为抽象类(接口类)，不能实例化, 子类必须重写纯虚函数</span></span><br><span class="line"><span class="comment">    多态:</span></span><br><span class="line"><span class="comment">      1.作用: 一个接口多种实现</span></span><br><span class="line"><span class="comment">      2.实现:</span></span><br><span class="line"><span class="comment">        - 虚函数-&gt;动态绑定-&gt;运行时多态。通过基类的指针或者引用，在运行时动态调用实际绑定对象函数的行为</span></span><br><span class="line"><span class="comment">        - 重载-&gt;编译时多态</span></span><br><span class="line"><span class="comment">      3.类型</span></span><br><span class="line"><span class="comment">        - 类的多态性</span></span><br><span class="line"><span class="comment">        - 函数的多态性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Son son;</span><br><span class="line">    Father father;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">SayHello</span>(son);</span><br><span class="line">    <span class="built_in">SayHello</span>(father);</span><br><span class="line">    <span class="comment">//  实现多态</span></span><br><span class="line">    <span class="built_in">SayHi</span>(son);</span><br><span class="line">    <span class="built_in">SayHi</span>(father);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/C/">#C++</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%87%8D%E8%BD%BD/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之重载</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
 
 
                 
@@ -202,6 +299,19 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -301,6 +411,10 @@
 
 
 <div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
     
 </div>
 

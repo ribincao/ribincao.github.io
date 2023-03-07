@@ -9,7 +9,7 @@
     
     <title>
         
-            标签 |
+            C++| 基础学习之构造函数 |
         
         Ribin
     </title>
@@ -80,7 +80,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/tags"
                             >
                                 标签
@@ -130,7 +130,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/tags">标签</a>
                 </li>
             
@@ -159,15 +159,127 @@
             <div class="main-content">
 
                 
-                    
-    <div class="fade-in-down-animation">
-        <div class="tagcloud-container">
-            <div class="tagcloud-content">
-                <a href="/tags/C/" style="font-size: 1.4rem;">C++</a> <a href="/tags/RPC/" style="font-size: 1rem;">RPC</a> <a href="/tags/bug/" style="font-size: 1rem;">bug</a> <a href="/tags/golang/" style="font-size: 1rem;">golang</a> <a href="/tags/kubernetes/" style="font-size: 1.2rem;">kubernetes</a> <a href="/tags/latex/" style="font-size: 1rem;">latex</a> <a href="/tags/mysql/" style="font-size: 1.2rem;">mysql</a> <a href="/tags/python/" style="font-size: 1.6rem;">python</a> <a href="/tags/unity/" style="font-size: 1.2rem;">unity</a> <a href="/tags/vim/" style="font-size: 1.2rem;">vim</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1rem;">分布式</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 1rem;">区块链</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1rem;">学习笔记</a> <a href="/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/" style="font-size: 1rem;">性能分析</a> <a href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" style="font-size: 1rem;">性能调优</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1rem;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1rem;">数据结构</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.2rem;">算法</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 1rem;">网络编程</a>
-            </div>
-        </div>
-    </div>
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
+            <div class="article-title">
+                <span class="title-hover-animation">C++| 基础学习之构造函数</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-07 14:27:59</span>
+        <span class="mobile">2023-03-07 14:27</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-07 14:28:36</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C/">C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BaseClass</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">//  使用初始化列表形式</span></span><br><span class="line">        <span class="built_in">BaseClass</span>(string s = <span class="string">&quot;ribincao&quot;</span>, <span class="type">int</span> n = <span class="number">26</span>) : <span class="built_in">name</span>(s), <span class="built_in">age</span>(n) &#123; &#125;</span><br><span class="line">        <span class="comment">//  使用有普通函数的形式</span></span><br><span class="line">        <span class="built_in">BaseClass</span>(string s) &#123;</span><br><span class="line">            name = s;</span><br><span class="line">            age = <span class="number">18</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//  拷贝构造函数</span></span><br><span class="line">        <span class="built_in">BaseClass</span>(<span class="type">const</span> BaseClass &amp;v) &#123;</span><br><span class="line">            name = v.name;</span><br><span class="line">            age = v.age;</span><br><span class="line">        &#125;</span><br><span class="line">        string name;</span><br><span class="line">        <span class="type">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    构造函数总结:</span></span><br><span class="line"><span class="comment">      1.概念: 类对象被创建时，编译系统为对象分配内存空间，并自动调用该构造函数-&gt;由构造函数完成成员的初始化工作</span></span><br><span class="line"><span class="comment">      2.作用: 初始化对象的数据成员</span></span><br><span class="line"><span class="comment">      3.类型</span></span><br><span class="line"><span class="comment">        - 默认构造函数: 分为有用的和无用的，无用的默认构造函数就是一个空函数什么操作也不做, 有用的默认构造函数是可以初始化成员的函数</span></span><br><span class="line"><span class="comment">        - 拷贝构造函数: 参数是本类型的一个引用变量(指针), 可实现类型转换</span></span><br><span class="line"><span class="comment">      4.注意: 默认构造函数不要出现歧义, 不要让编译器出现不知道使用哪一个构造函数的情况</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    BaseClass v1;</span><br><span class="line">    <span class="function">BaseClass <span class="title">v2</span><span class="params">(<span class="string">&quot;jack&quot;</span>, <span class="number">21</span>)</span></span>;</span><br><span class="line">    <span class="function">BaseClass <span class="title">v3</span><span class="params">(v1)</span></span>;</span><br><span class="line">    <span class="comment">// BaseClass v4(&quot;bob&quot;); 出现歧义, 编译器不知道使用哪一个构造函数去初始化</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[v1] name: &quot;</span> &lt;&lt; v1.name &lt;&lt; <span class="string">&quot;, age: &quot;</span> &lt;&lt; v1.age &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[v2] name: &quot;</span> &lt;&lt; v2.name &lt;&lt; <span class="string">&quot;, age: &quot;</span> &lt;&lt; v2.age &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[v3] name: &quot;</span> &lt;&lt; v3.name &lt;&lt; <span class="string">&quot;, age: &quot;</span> &lt;&lt; v3.age &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/C/">#C++</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%BB%A7%E6%89%BF/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之继承</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/07/mysql-%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">mysql| 索引失效的几种情况</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
 
 
                 
@@ -202,6 +314,19 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -301,6 +426,10 @@
 
 
 <div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
     
 </div>
 
