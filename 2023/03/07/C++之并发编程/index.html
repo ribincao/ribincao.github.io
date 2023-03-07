@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="RibinCao">
+    
+    <title>
+        
+            C++| 基础学习之并发编程 |
+        
+        Ribin
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.png","favicon":"/images/logo.png","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Ribin
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                系列
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                个人简历
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">系列</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">个人简历</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">C++| 基础学习之并发编程</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-07 14:39:33</span>
+        <span class="mobile">2023-03-07 14:39</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-07 14:59:24</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C/">C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h1 id="C-并发编程"><a href="#C-并发编程" class="headerlink" title="C++并发编程"></a>C++并发编程</h1><h2 id="进程-x2F-线程-x2F-协程"><a href="#进程-x2F-线程-x2F-协程" class="headerlink" title="进程&#x2F;线程&#x2F;协程"></a>进程&#x2F;线程&#x2F;协程</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>进程是一个具有一定独立功能的程序在一个数据集上的一次动态执行的过程，是操作系统进行资源分配和调度的一个独立单位，是应用程序运行的载体。进程是一种抽象的概念，从来没有统一的标准定义。</p>
+<p>进程一般由程序、数据集合和进程控制块三部分组成。</p>
+<ul>
+<li>程序用于描述进程要完成的功能，是控制进程执行的指令集；</li>
+<li>数据集合是程序在执行时所需要的数据和工作区；</li>
+<li>程序控制块(Program Control Block，简称PCB)，包含进程的描述信息和控制信息，是进程存在的唯一标志。</li>
+</ul>
+<p>进程具有的特征：</p>
+<ul>
+<li>动态性：进程是程序的一次执行过程，是临时的，有生命期的，是动态产生，动态消亡的；</li>
+<li>并发性：任何进程都可以同其他进程一起并发执行；</li>
+<li>独立性：进程是系统进行资源分配和调度的一个独立单位；</li>
+<li>结构性：进程由程序、数据和进程控制块三部分组成。</li>
+</ul>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>线程是程序执行中一个单一的顺序控制流程，是程序执行流的最小单元，是处理器调度和分派的基本单位。一个进程可以有一个或多个线程，各个线程之间共享程序的内存空间(也就是所在进程的内存空间)。一个标准的线程由线程ID、当前指令指针(PC)、寄存器和堆栈组成。而进程由内存空间(代码、数据、进程空间、打开的文件)和一个或多个线程组成。</p>
+<p>同一进程间的线程究竟共享哪些资源呢，而又各自独享哪些资源呢？共享的资源有</p>
+<ul>
+<li>堆  由于堆是在进程空间中开辟出来的，所以它是理所当然地被共享的；因此new出来的都是共享的（16位平台上分全局堆和局部堆，局部堆是独享的）</li>
+<li>全局变量 它是与具体某一函数无关的，所以也与特定线程无关；因此也是共享的</li>
+<li>静态变量 虽然对于局部变量来说，它在代码中是“放”在某一函数中的，但是其存放位置和全局变量一样，存于堆中开辟的.bss和.data段，是共享的</li>
+<li>文件等公用资源  这个是共享的，使用这些公共资源的线程必须同步。Win32 提供了几种同步资源的方式，包括信号、临界区、事件和互斥体。</li>
+</ul>
+<p>独享的资源有</p>
+<ul>
+<li>栈。栈是独享的</li>
+<li>寄存器。这个可能会误解，因为电脑的寄存器是物理的，每个线程去取值难道不一样吗？其实线程里存放的是副本，包括程序计数器PC</li>
+</ul>
+<p>线程共享的环境包括：进程代码段、进程的公有数据(利用这些共享的数据，线程很容易的实现相互之间的通讯)、进程打开的文件描述符、信号的处理器、进程的当前目录和进程用户ID与进程组ID。进程拥有这许多共性的同时，还拥有自己的个性。有了这些个性，线程才能实现并发性。这些个性包括：</p>
+<ul>
+<li>线程ID。每个线程都有自己的线程ID，这个ID在本进程中是唯一的。进程用此来标识线程。</li>
+<li>寄存器组的值。由于线程间是并发运行的，每个线程有自己不同的运行线索，当从一个线程切换到另一个线程上 时，必须将原有的线程的寄存器集合的状态保存，以便将来该线程在被重新切换到时能得以恢复。</li>
+<li>线程的堆栈。堆栈是保证线程独立运行所必须的。线程函数可以调用函数，而被调用函数中又是可以层层嵌套的，所以线程必须拥有自己的函数堆栈， 使得函数调用可以正常执行，不受其他线程的影响。</li>
+<li>错误返回码。由于同一个进程中有很多个线程在同时运行，可能某个线程进行系统调用后设置了errno值，而在该 线程还没有处理这个错误，另外一个线程就在此时被调度器投入运行，这样错误值就有可能被修改。所以，不同的线程应该拥有自己的错误返回码变量。</li>
+<li>线程的信号屏蔽码。由于每个线程所感兴趣的信号不同，所以线程的信号屏蔽码应该由线程自己管理。但所有的线程都 共享同样的信号处理器。</li>
+<li>线程的优先级。由于线程需要像进程那样能够被调度，那么就必须要有可供调度使用的参数，这个参数就是线程的 优先级。</li>
+</ul>
+<h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><p>协程，英文Coroutines，是一种基于线程之上，但又比线程更加轻量级的存在，这种由程序员自己写程序来管理的轻量级线程叫做『用户空间线程』，具有对内核来说不可见的特性。因为是自主开辟的异步任务，所以很多人也更喜欢叫它们纤程（Fiber），或者绿色线程（GreenThread）。正如一个进程可以拥有多个线程一样，一个线程也可以拥有多个协程。</p>
+<p>协程的特点</p>
+<ul>
+<li>线程的切换由操作系统负责调度，协程由用户自己进行调度，因此减少了上下文切换，提高了效率。</li>
+<li>线程的默认Stack大小是1M，而协程更轻量，接近1K。因此可以在相同的内存中开启更多的协程。</li>
+<li>由于在同一个线程上，因此可以避免竞争关系而使用锁。</li>
+<li>适用于被阻塞的，且需要大量并发的场景。但不适用于大量计算的多线程，遇到此种情况，更好实用线程去解决。</li>
+</ul>
+<p>协程的原理</p>
+<p>当出现IO阻塞的时候，由协程的调度器进行调度，通过将数据流立刻yield掉（主动让出），并且记录当前栈上的数据，阻塞完后立刻再通过线程恢复栈，并把阻塞的结果放到这个线程上去跑，这样看上去好像跟写同步代码没有任何差别，这整个流程可以称为coroutine，而跑在由<code>coroutine</code>负责调度的线程称为<code>Fiber</code>。比如Golang里的 go关键字其实就是负责开启一个<code>Fiber</code>，让<code>func</code>逻辑跑在上面。</p>
+<p>由于协程的暂停完全由程序控制，发生在用户态上；而线程的阻塞状态是由操作系统内核来进行切换，发生在内核态上。<br>因此，协程的开销远远小于线程的开销，也就没有了ContextSwitch上的开销。</p>
+<p>协程和线程的比较</p>
+<table>
+<thead>
+<tr>
+<th>比较项</th>
+<th align="center">线程</th>
+<th align="center">协程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>占用资源</td>
+<td align="center">初始单位为1MB,固定不可变</td>
+<td align="center">初始一般为 2KB，可随需要而增大</td>
+</tr>
+<tr>
+<td>调度所属</td>
+<td align="center">由 OS 的内核完成</td>
+<td align="center">由用户完成</td>
+</tr>
+<tr>
+<td>切换开销</td>
+<td align="center">涉及模式切换(从用户态切换到内核态)、16个寄存器、PC、SP…等寄存器的刷新等</td>
+<td align="center">只有三个寄存器的值修改 - PC &#x2F; SP &#x2F; DX.</td>
+</tr>
+<tr>
+<td>性能问题</td>
+<td align="center">资源占用太高，频繁创建销毁会带来严重的性能问题</td>
+<td align="center">资源占用小,不会带来严重的性能问题</td>
+</tr>
+<tr>
+<td>数据同步</td>
+<td align="center">需要用锁等机制确保数据的一直性和可见性</td>
+<td align="center">不需要多线程的锁机制，因为只有一个线程，也不存在同时写变量冲突，在协程中控制共享资源不加锁，只需要判断状态就好了，所以执行效率比多线程高很多。</td>
+</tr>
+</tbody></table>
+<h2 id="多进程编程"><a href="#多进程编程" class="headerlink" title="多进程编程"></a>多进程编程</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// #include &lt;sys/types.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">pid_t</span> pid;</span><br><span class="line">	<span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	pid = fork();</span><br><span class="line">	<span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;child: x = &quot;</span> &lt;&lt; ++x &lt;&lt; std::endl;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;parent: x = &quot;</span> &lt;&lt; --x &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多线程编程"><a href="#多线程编程" class="headerlink" title="多线程编程"></a>多线程编程</h2><table>
+<thead>
+<tr>
+<th align="center">线程调用</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">pthead_create</td>
+<td align="center">创建一个线程</td>
+</tr>
+<tr>
+<td align="center">pthead_exit</td>
+<td align="center">结束调用的线程</td>
+</tr>
+<tr>
+<td align="center">pthead_join</td>
+<td align="center">等待一个特定线程退出</td>
+</tr>
+<tr>
+<td align="center">pthead_yield</td>
+<td align="center">释放CPU来运行另外一个线程</td>
+</tr>
+<tr>
+<td align="center">pthead_attr_init</td>
+<td align="center">创建并初始化一个线程的属性结构</td>
+</tr>
+<tr>
+<td align="center">pthead_attr_destroy</td>
+<td align="center">删除一个线程的属性结构</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NUMBER_OF_THREAD 10</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> *<span class="title">print_hello_world</span><span class="params">(<span class="type">void</span> *tid)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Hello world. Greetings from thread &quot;</span> &lt;&lt; (<span class="type">long</span>)tid &lt;&lt; std::endl;</span><br><span class="line">	<span class="built_in">pthread_exit</span>(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">pthread_t</span> threads[NUMBER_OF_THREAD];</span><br><span class="line">	<span class="type">long</span> status, i;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; NUMBER_OF_THREAD;i++)&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;Main here.Creating thread &quot;</span> &lt;&lt; i &lt;&lt; std::endl;</span><br><span class="line">		status = <span class="built_in">pthread_create</span>(&amp;threads[i], <span class="literal">NULL</span>, print_hello_world, (<span class="type">void</span> *)i);</span><br><span class="line">		<span class="keyword">if</span>(status != <span class="number">0</span>)&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot; Oops. pthread_create returned error code &quot;</span> &lt;&lt; status &lt;&lt; std::endl;</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><p>进程间通信(IPC, Inter-Process Communication)指的是两个或多进程之间说话。<br>进程之间的说话不像我们人与人之间面对面说话只要通过空气介质把声音传过去就可以听见, 它更像我们上课的时候传纸条一样需要把想说的信息按照某种方式(字节流或者消息体)放到一个约定好的地方(内核缓冲区或者内存)然后通过某个中间人(内核)或者对方直接自己去拿。</p>
+<p>IPC技术主要有四种:</p>
+<ol>
+<li>消息传递: 管道、FIFO、消息队列</li>
+<li>同步: 互斥锁、条件变量、读写锁、文件锁、记录锁、信号量</li>
+<li>共享内存: 匿名共享内存、有名共享内存</li>
+<li>过程调用: 门、RPC</li>
+</ol>
+<h3 id="IPC对象"><a href="#IPC对象" class="headerlink" title="IPC对象"></a>IPC对象</h3><p>IPC对象有两种 Posix IPC 和 System V IPC, 他们的区别主要涉及到消息队列、共享内存和信号量</p>
+<h4 id="Posix-IPC"><a href="#Posix-IPC" class="headerlink" title="Posix IPC"></a>Posix IPC</h4><p>Posix IPC指的是: Posix消息队列、Posix信号量和Posix共享内存的合称, 这三种类型的Posix IPC都使用Posix IPC名称进行标识, 比如它们调用对应的open函数去打开IPC创建和打开IPC对象的时候会传入这个名字</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mqueue.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">mqd_t</span> <span class="title">mq_open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *name, <span class="type">int</span> oflag, ...)</span></span>;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;semaphore.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">sem_t</span> <span class="title">sem_open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *name, <span class="type">int</span> oflag, ...)</span></span>;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">shm_open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *name, <span class="type">int</span> oflag, <span class="type">mode_t</span> mode)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>这里不具体讨论这些函数, 只说一下这里的oflag几种常见情况:</p>
+<ul>
+<li>无特殊标志: 如果对象不存在返回ENOENT错误, 如果对象存在则引用存在的IPC对象</li>
+<li>O_CREATE: 如果对象不存在则创建新的IPC对象, 如果对象存在则引用存在的IPC对象</li>
+<li>O_CREATE | O_EXCL: 如果对象不存在则创建新的IPC对象, 如果对象存在则返回错误EEXIST</li>
+</ul>
+<p>它们的关系如下图</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/PosixIPC.svg"
+                      width="400"
+                >
+
+<h4 id="System-V-IPC"><a href="#System-V-IPC" class="headerlink" title="System V IPC"></a>System V IPC</h4><p>System V IPC指的是: System V消息队列、System V信号量和System V共享内存的合称, 与Posix IPC对象不同的是System V IPC使用key_t值作为IPC对象的名字。<br>头文件sys&#x2F;types.h中将key_t定义为一个整数, 它通常是一个至少32位的整数, 这些整数值通常是由ftok函数赋予</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/ipc.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">key_t</span> <span class="title">ftok</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> id)</span></span>;</span><br><span class="line"><span class="comment">//  把 pathname 导出的信息与 id 的低序 8 位组合成一个 IPC key</span></span><br></pre></td></tr></table></figure>
+
+<p>ftok的典型实现是调用stat函数然后组合stat.std_dev、stat.std_ino和id的低8位:</p>
+<ol>
+<li>stat.std_dev: pathname所在的文件系统的信息</li>
+<li>stat.std_ino: 该文件在本文件系统内的索引结点</li>
+<li>id的低序8位</li>
+</ol>
+<p>在System V IPC中创建或打开IPC对象的方式和函数和Posix IPC不一样, 在通过getxxx函数创建或者打开IPC对象的时候可以指定key位IPC_PRIVATE来保证创建一个新的、唯一的IPC对象, 创建成功会返回一个identifier整数描述符来标识这个IPC对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">msgget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">int</span> oflag)</span></span>;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/sem.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">semget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">int</span> nsems, <span class="type">int</span> oflag)</span></span>;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">shmget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">size_t</span> size, <span class="type">int</span> oflag)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h3><p>消息传递通常需要总共四次复制, 而且这四次复制都是在内核和某个进程之间进行的开销很大。<br>消息传递的方式有管道、FIFO、消息队列<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/SystemV.svg"
+                      width="400"
+                ></p>
+<h4 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h4><p>管道是一种平时经常会用到的IPC方式, 它的原理就是父进程在内核缓冲区创建一个伪文件并给这个文件指定一个读描述符和一个写描述符,当调用fork创建了子进程的时候,子进程会拷贝这两个描述符,然后父进程关闭读描述符,子进程关闭写描述符就可以实现父进程往管道里写东西,子进程往管道里取东西,他是一种先进先出的队列结构。<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/pipe.svg"
+                      width="400"
+                ><br>管道的创建可以通过unistd.h头文件里的pipe函数实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">pipe</span><span class="params">(<span class="type">int</span> fd[<span class="number">2</span>])</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    params:</span></span><br><span class="line"><span class="comment">        - fd[2]: 两个文件描述符 fd[0]--读, fd[1]--写</span></span><br><span class="line"><span class="comment">    return:</span></span><br><span class="line"><span class="comment">        - 成功返回 0</span></span><br><span class="line"><span class="comment">        - 出错返回 -1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>在平时的工作中我们经常会用到管道, 比如下面的命令执行过程就是:shell创建一个子进程执行ps命令, ps所在进程创建一个管道然后fork一个子进程执行grep命令, ps所在进程就是通过管道将输出结果作为输入通过管道传给grep命令所在进程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep 80</span><br></pre></td></tr></table></figure>
+
+<p>总结一下管道的特点:</p>
+<ol>
+<li>半双工通信, 只能单向通信, 不过可以通过创建两个管道实现双向通信</li>
+<li>管道位于内核缓冲区, 没有路径名, 只能在具有亲缘关系的进程之间使用</li>
+<li>管道数据采用后进后出的队列进行传输, 传输的是字节流没有消息边界</li>
+<li>管道是进程持续的, 当一个管道最后一次关闭, 仍在管道上的数据将被丢失</li>
+</ol>
+<h4 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h4><p>为了解决管道只能在亲缘进程之间传递的问题, FIFO(有名管道)使用了一个关联管道的路径名来实现非亲缘进程之间的通信, 它的原理就是进程A把数据写到一个FIFO文件里然后进程B到这个文件里去拿数据</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/fifo.svg"
+                      width="400"
+                >FIFO的创建通过mkfifo函数实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mkfifo</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    params:</span></span><br><span class="line"><span class="comment">        pathname: 路径名</span></span><br><span class="line"><span class="comment">        mode: 隐含指定了 O_CREATE | O_EXCL, 也就是要么创建一个新的FIFO, 要么返回 EEXIST 错误</span></span><br><span class="line"><span class="comment">    return:</span></span><br><span class="line"><span class="comment">        - 成功返回 0</span></span><br><span class="line"><span class="comment">        - 失败返回 -1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我么可以做一个小实验来直观的感受一下FIFO, 打开终端输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfifo fifo.test                # 创建一个名为 fifo.test 的有名管道</span><br><span class="line">echo &quot;Hello FIFO&quot; &gt;&gt; fifo.test  # 往管道里写 Hello FIFO</span><br></pre></td></tr></table></figure>
+
+<p>另外再打开一个终端输入如下命令会显示我们刚才输入的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat fifo.test</span><br></pre></td></tr></table></figure>
+
+<p>总结一下有名管道FIFO的特点:</p>
+<ol>
+<li>和管道一样是半双工通信, 也可以通过两个管道去实现双向通信</li>
+<li>管道位于内核缓冲区, 有关联的路径名可以实现非亲缘进程之间的通信</li>
+<li>和管道一样, 数据采用后进后出的队列进行传输, 传输的是字节流没有消息边界</li>
+<li>FIFO是进程持续的, 当一个FIFO最后一次关闭, 仍在FIFO上的数据将被丢失</li>
+</ol>
+<h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p>管道是一种简单方便的通信方式, 但是它们存在一个问题: 没有消息边界, 没有消息类型。<br>消息队列是一个驻留在内核的消息链表, 有足够写权限的线&#x2F;进程可以往队列中放置消息, 有足够读权限的线&#x2F;进程可以从队列中取走消息。<br>在某个进程往一个队列写入消息之前并不需要另外某个进程在该队列上等待消息的到达, 而对管道来说除非读出者已存在, 否则先有写入者是没有意义的。<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/mq.svg"
+                      width="400"
+                ></p>
+<p>消息队列的相关函数如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  Posix IPC</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mqueue.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">mqd_t</span> <span class="title">mq_open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *name, <span class="type">int</span> oflag, <span class="type">mode_t</span> mode, strct mq_attr *addr)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mq_close</span><span class="params">(<span class="type">mqd_t</span> mqdes)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mq_unlink</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *name)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mq_getattr</span><span class="params">(<span class="type">mqd_t</span> mqdes, <span class="keyword">struct</span> mq_attr *attr)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mq_setattr</span><span class="params">(<span class="type">mqd_t</span> mqdes, <span class="keyword">struct</span> mq_attr *attr, <span class="keyword">struct</span> mq_attr *oattr)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mq_send</span><span class="params">(<span class="type">mqd_t</span> mqdes, <span class="type">const</span> <span class="type">char</span> *ptr, <span class="type">size_t</span> len, <span class="type">unsigned</span> <span class="type">int</span> prio)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mq_receive</span><span class="params">(<span class="type">mqd_t</span> mqdes, <span class="type">const</span> <span class="type">char</span> *ptr, <span class="type">size_t</span> len, <span class="type">unsigned</span> <span class="type">int</span> *priop)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mq_notify</span><span class="params">(<span class="type">mqd_t</span> mqdes, <span class="type">const</span> <span class="keyword">struct</span> sigevent *notification)</span></span>;</span><br><span class="line"><span class="comment">//  System V IPC</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">msgget</span><span class="params">(<span class="type">key_t</span> key,  <span class="type">int</span> oflag)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">msgsnd</span><span class="params">(<span class="type">int</span> msqid,  <span class="type">const</span> <span class="type">void</span> *ptr,  <span class="type">size_t</span> length,  <span class="type">int</span> flag)</span></span>;</span><br><span class="line"><span class="function"><span class="type">ssize_t</span> <span class="title">msgrcv</span><span class="params">(<span class="type">int</span> msqid,  <span class="type">void</span>* ptr,  <span class="type">size_t</span> length,  <span class="type">long</span> type,  <span class="type">int</span> flag)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">msgctl</span><span class="params">(<span class="type">int</span> msqid,  in cmd,  <span class="keyword">struct</span> msqid_ds* buff)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>总结一下消息队列的特点:</p>
+<ol>
+<li>消息队列采用的是链表的数据结构, 传输的是带有类型的消息体</li>
+<li>消息队列是内核持续的</li>
+</ol>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>共享内存, 顾名思义就是允许两个不相关的进程访问同一个逻辑内存, 由于数据存放在内存不用穿过内核所以共享内存是速度最快的IPC方式。<br>不同进程之间共享的内存通常为同一段物理内存, 进程可以将同一段物理内存映射到他们自己的地址空间中,所有的进程都可以访问共享内存中的地址, 如果某个进程向共享内存写入数据，所做的改动将立即影响到可以访问同一段共享内存的任何其他进程。</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/sharemem.svg"
+                      width="400"
+                >
+
+<p>相比较消息传递的四次复制, 共享内存只有两次复制: 一次从输入文件到共享内存区, 另一次从共享内存区复制到输出文件。</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/共享内存.svg"
+                      width="400"
+                >
+
+<p>我们可以通过命令<code>ipcs -m</code>查看系统的共享存储区, 也可以使用<code>ipcrm -m [shmid]</code>删除对应的共享存储区</p>
+<p>共享内存的相关函数如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  Posix IPC</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="function">coid *<span class="title">mmap</span><span class="params">(<span class="type">void</span> *addr, <span class="type">size_t</span> len, <span class="type">int</span> prot, <span class="type">int</span> flags, <span class="type">int</span> fd, <span class="type">off_t</span> offset)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">munmap</span><span class="params">(coid *addr, <span class="type">size_t</span> len)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">msync</span><span class="params">(<span class="type">void</span> *addr, <span class="type">size_t</span> len, <span class="type">int</span> flags)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">shm_open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *name, <span class="type">int</span> oflag, <span class="type">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">shm_unlink</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *name)</span></span>;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">ftruncate</span><span class="params">(<span class="type">int</span> fd, <span class="type">off_t</span> length)</span></span>;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">fstat</span><span class="params">(<span class="type">int</span> fd, <span class="keyword">struct</span> stat *buf)</span></span>;</span><br><span class="line"><span class="comment">//  System V IPC</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">shmget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">size_t</span> size, <span class="type">int</span> oflag)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> *<span class="title">shmat</span><span class="params">(<span class="type">int</span> shmid, <span class="type">const</span> <span class="type">void</span> *shmaddr, <span class="type">int</span> flag)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">shmdt</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *shmaddr)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">shmctl</span><span class="params">(<span class="type">int</span> shmid, <span class="type">int</span> cmd, <span class="keyword">struct</span> shmid_ds *buff)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>共享内存并未提供同步机制，也就是说，在第一个进程结束对共享内存的写操作之前，并无自动机制可以阻止第二个进程开始对它进行读取，所以我们通常需要用其他的机制来同步对共享内存的访问，例如信号量</p>
+</blockquote>
+<h3 id="过程调用"><a href="#过程调用" class="headerlink" title="过程调用"></a>过程调用</h3><h4 id="门"><a href="#门" class="headerlink" title="门"></a>门</h4><h4 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h4><h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p>进程状态：</p>
+<ul>
+<li>就绪态</li>
+<li>运行态</li>
+<li>阻塞态</li>
+</ul>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/Jack-Blog/p/12038716.html" >https://www.cnblogs.com/Jack-Blog/p/12038716.html<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>死锁条件：</p>
+<ul>
+<li>互斥：每个资源要么已经分配给了一个进程，要么就是可用的。</li>
+<li>占有和等待：已经得到了某个资源的进程可以再请求新的资源。</li>
+<li>不可抢占：已经分配给一个进程的资源不能强制性地被抢占，它只能被占有它的进程显式地释放。</li>
+<li>环路等待：有两个或者两个以上的进程组成一条环路，该环路中的每个进程都在等待下一个进程所占有的资源。</li>
+</ul>
+<p>解决方法：</p>
+<ul>
+<li>鸵鸟策略</li>
+<li>死锁检测与死锁恢复：不试图阻止死锁，而是当检测到死锁发生时，采取措施进行恢复<ol>
+<li>每种类型一个资源的死锁检测</li>
+<li>每种类型多个资源的死锁检测</li>
+<li>死锁恢复<ul>
+<li>利用抢占恢复</li>
+<li>利用回滚恢复</li>
+<li>通过杀死进程恢复</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>死锁预防：在程序运行之前预防发生死锁。<ul>
+<li>破坏互斥条件。例如假脱机打印机技术允许若干个进程同时输出，唯一真正请求物理打印机的进程是打印机守护进程。</li>
+<li>破坏占有和等待条件：一种实现方式是规定所有进程在开始执行前请求所需要的全部资源。</li>
+<li>破坏不可抢占条件</li>
+<li>破坏环路等待：给资源统一编号，进程只能按编号顺序来请求资源。</li>
+</ul>
+</li>
+<li>死锁避免</li>
+</ul>
+<h2 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h2>
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/C/">#C++</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%87%8D%E8%BD%BD/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之重载</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/07/C++%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之数据结构与算法</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">RibinCao</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

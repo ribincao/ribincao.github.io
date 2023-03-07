@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="RibinCao">
+    
+    <title>
+        
+            C++| 基础学习之数据结构与算法 |
+        
+        Ribin
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.png","favicon":"/images/logo.png","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Ribin
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                系列
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                个人简历
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">系列</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">个人简历</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">C++| 基础学习之数据结构与算法</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-07 14:39:33</span>
+        <span class="mobile">2023-03-07 14:39</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-07 14:59:52</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C/">C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h1 id="五-C-之数据结构"><a href="#五-C-之数据结构" class="headerlink" title="[五]C++之数据结构"></a>[五]C++之数据结构</h1><p>数据结构的本质就是数据组织的形式，它服务于我们的需求，依赖于数据之间的关系：</p>
+<ul>
+<li>一对一：线性表组织</li>
+<li>一对多：树组织</li>
+<li>多对多：图组织</li>
+</ul>
+<p>数据在内存层面的具体实现本质上就两种：</p>
+<ul>
+<li>顺序存储：数据在一段连续的内存上顺序存储，特点是支持快速的随机访问，查找效率比较高</li>
+<li>链式存储：数据分散的存储通过指针关联，特点是插入和删除效率比较高</li>
+</ul>
+<p>无论数据结构多么复杂，它所暴露出来的操作无非以下三种：</p>
+<ul>
+<li>初始化</li>
+<li>增 ｜ 删 ｜ 改 ｜ 查中的一个或者多个，增删改查的方式不同决定了数据结构的特性，比如<ul>
+<li>栈：后进(增)先出(查&#x2F;删)</li>
+<li>队列：先进(增)先出(查&#x2F;删)</li>
+</ul>
+</li>
+<li>其他操作，本质上都是为了实现增删改查后能保持数据结构的特性不变，比如<ul>
+<li>树的自旋</li>
+<li>堆的重新排序</li>
+</ul>
+</li>
+</ul>
+<h2 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h2><p>按照数据具体实现的方式，线性表主要分两大类：顺序表、链表。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h4><p>由于顺序表是在一段内存上顺序的存储数据，所以需要提前申请一定大小的物理空间。为了方便顺序表的使用，顺序表除了需要存储数据往往还需要实时记录：(1)容量(capacity，物理空间的大小)；(2)大小(size，已经使用的内存大小)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Table</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">//	初始化</span></span><br><span class="line">  <span class="built_in">Table</span>(<span class="type">int</span> cap = <span class="number">1</span>) : <span class="built_in">c</span>(cap) &#123;</span><br><span class="line">    nums = (T*)<span class="built_in">malloc</span>(c);</span><br><span class="line">    <span class="keyword">if</span>(!nums)</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;Init failed.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//	增/改</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">setNum</span><span class="params">(T num, <span class="type">int</span> index)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(index &gt;= c)&#123;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;Index out of memory, please set index &lt; &quot;</span> &lt;&lt; c &lt;&lt; <span class="string">&quot;.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(index &lt; <span class="number">0</span>)&#123;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;Please set index &gt;= 0.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      nums[index] = num;</span><br><span class="line">      s++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//	删</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">deleteNumByIndex</span><span class="params">(<span class="type">int</span> index)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == <span class="number">0</span>)&#123;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;Sorry, no num can be deleted.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(index &gt;= s)&#123;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;Index out of boder, please set index &lt; &quot;</span> &lt;&lt; s &lt;&lt; <span class="string">&quot;.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(index &lt; <span class="number">0</span>)&#123;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;Please set index &gt;= 0.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i = index; i &lt; (s - <span class="number">1</span>);i++)&#123;</span><br><span class="line">        nums[i] = nums[i + <span class="number">1</span>];</span><br><span class="line">      &#125;</span><br><span class="line">      s--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//	查</span></span><br><span class="line">  T <span class="keyword">operator</span>[](<span class="type">int</span> index)&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == <span class="number">0</span>)&#123;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;Sorry, no nums &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(index &lt; <span class="number">0</span> || index &gt;= s)&#123;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;Please set: 0 &lt; index &lt; &quot;</span> &lt;&lt; s &lt;&lt; std::endl;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> nums[index];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</span><br><span class="line">  	<span class="keyword">return</span> s;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">capacity</span><span class="params">()</span></span>&#123;</span><br><span class="line">  	<span class="keyword">return</span> c;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">empty</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> s == <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ~<span class="built_in">Table</span>()&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums)</span><br><span class="line">      <span class="built_in">free</span>(nums);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  T* nums;</span><br><span class="line">  <span class="type">int</span> c;		<span class="comment">//	容量</span></span><br><span class="line">  <span class="type">int</span> s = <span class="number">0</span>;<span class="comment">//	长度</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Table&lt;<span class="type">int</span>&gt; table = <span class="built_in">Table</span>&lt;<span class="type">int</span>&gt;(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是顺序表的简单实现，实际按照顺序表能否动态的增加容量也可以分为定长顺序存储和动态顺序存储，动态存储需要考虑扩容策略的问题，一般都是容量不足的时候会扩大两倍的容量来使得摊销成本最低。</p>
+<p>####链表</p>
+<p>链表与顺序表不同，它是使用链式方式来实现线性表。要想实现链式的存储，一般需要一个节点node来存放数据以及一个指向下一个节点的指针</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Node</span>() &#123;</span><br><span class="line">        next = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//  初始化表实现, 可以方便在结点前面添加新结点</span></span><br><span class="line">    <span class="built_in">Node</span>(<span class="type">int</span> num, Node* ptr = <span class="number">0</span>) : <span class="built_in">val</span>(num), <span class="built_in">next</span>(ptr) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    Node* next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IntList</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//	初始化</span></span><br><span class="line">    <span class="built_in">IntList</span>() &#123;</span><br><span class="line">        head = tail = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">IntList</span>()&#123;</span><br><span class="line">        <span class="keyword">for</span>(Node* ptr; !<span class="built_in">isEmpty</span>(); ) &#123;</span><br><span class="line">            ptr = head -&gt; next;</span><br><span class="line">            <span class="keyword">delete</span> head;</span><br><span class="line">            head = ptr;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> head == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//	增</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">addToHead</span><span class="params">(<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">        head = <span class="keyword">new</span> <span class="built_in">Node</span>(num, head);</span><br><span class="line">        <span class="keyword">if</span> (tail == <span class="number">0</span>)</span><br><span class="line">            tail = head;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">addToTail</span><span class="params">(<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tail != <span class="number">0</span>) &#123;</span><br><span class="line">            tail -&gt; next = <span class="keyword">new</span> <span class="built_in">Node</span>(num);</span><br><span class="line">            tail = tail-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> head = tail = <span class="keyword">new</span> <span class="built_in">Node</span>(num);</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="comment">//	删</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">deleteFromHead</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> res = head-&gt;val;</span><br><span class="line">        Node* tmp = head;</span><br><span class="line">        <span class="keyword">if</span>(head == tail) &#123;</span><br><span class="line">            head = tail = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> head = head-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> tmp;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">deleteFromTail</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> res = tail-&gt;val;</span><br><span class="line">        <span class="keyword">if</span>(head == tail) &#123;</span><br><span class="line">            <span class="keyword">delete</span> head;</span><br><span class="line">            head = tail = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            Node* tmp;</span><br><span class="line">            <span class="keyword">for</span>(tmp = head; tmp -&gt; next != tail; tmp = tmp -&gt; next);</span><br><span class="line">            <span class="keyword">delete</span> tail;</span><br><span class="line">            tail = tmp;</span><br><span class="line">            tail -&gt; next = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">deleteNode</span><span class="params">(<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (head == tail &amp;&amp; head-&gt;val == num) &#123;</span><br><span class="line">                <span class="keyword">delete</span> head;</span><br><span class="line">                head = tail = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (head-&gt;val == num) &#123;</span><br><span class="line">                Node* tmp = head;</span><br><span class="line">                head = head -&gt; next;</span><br><span class="line">                <span class="keyword">delete</span> tmp;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                Node *pre;</span><br><span class="line">                <span class="keyword">for</span>(pre = head; pre -&gt; next != <span class="number">0</span> &amp;&amp; (pre -&gt; next -&gt; val) != num; pre = pre -&gt; next);</span><br><span class="line">                <span class="keyword">if</span> (pre -&gt; next != <span class="number">0</span>) &#123;</span><br><span class="line">                    pre-&gt;next = pre -&gt; next -&gt; next;</span><br><span class="line">                    <span class="keyword">if</span>(pre -&gt; next == tail) &#123;</span><br><span class="line">                        tail = pre;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">delete</span> pre -&gt; next;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="comment">//	查</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isInList</span><span class="params">(<span class="type">int</span> num)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        Node *tmp;</span><br><span class="line">        <span class="keyword">for</span>(tmp = head; tmp != <span class="number">0</span> &amp;&amp; tmp-&gt;val != num; tmp = tmp-&gt;next);</span><br><span class="line">        <span class="keyword">return</span> tmp != <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Node *head, *tail;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    IntList lt = <span class="built_in">IntList</span>(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是链式存储简单的实现线性表，这里的链表是单向的，然而链表也可以是双向的、循环的，但其本质都是通过指针将不同的节点关联起来</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h4><p>上面我们了解到可以通过顺序存储和链式存储的方式去实现一个线性表，我们只要修改线性表的增删改查方式就可以构造不同特性的数据结构。栈和队列就是线性表的一种，也就是说我们同样可以用顺序存储和链式存储的方式去构建栈和队列，前提是了解他们的特性</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">特点</th>
+<th align="center">算法应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">栈</td>
+<td align="center">后进先出</td>
+<td align="center">括号匹配、运算、结合回溯算法实现深度遍历搜索、前序遍历等</td>
+</tr>
+<tr>
+<td align="center">队列</td>
+<td align="center">先进先出</td>
+<td align="center">树的层次遍历、广度优先搜索等</td>
+</tr>
+</tbody></table>
+<p>栈和队列是两个比较典型的数据结构，实际需求中会根据需要对他们做一些变种，比如单调栈、优先队列等。</p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>字符串可以理解为字符线性表，所以它也可以通过顺序存储和链式存储的方式去实现。字符串常常被应用于模式匹配</p>
+<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><p>树的存储结构特点是描述数据之间一对多的关系，树也可以通过顺序存储和链式存储两种形式来实现，不过大部分都是通过链式存储，顺序存储的话通常是通过位置索引。我们接下来说到的二叉树或者多叉树都是指有序树，也就是说数据都是按照顺序存储的，比如任一结点都大于它的左子树且小于或等于它的右子树所有的值</p>
+<h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><table>
+<thead>
+<tr>
+<th align="center">树</th>
+<th align="center">特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">二叉树</td>
+<td align="center">每个结点最多有两个结点点</td>
+</tr>
+<tr>
+<td align="center">完全二叉树</td>
+<td align="center">一个高度为h的树,除最后一层以外都是满的并且剩余结点尽可能保存在最左的位置</td>
+</tr>
+<tr>
+<td align="center">满二叉树</td>
+<td align="center">任一结点的子结点数要么是0要么是2</td>
+</tr>
+<tr>
+<td align="center">堆</td>
+<td align="center">树中任一结点值都是其子树的最大&#x2F;小值</td>
+</tr>
+</tbody></table>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/BinaryTree.png"
+                      width="400"
+                >
+
+<p>二叉树的实现有两种形式：</p>
+<ul>
+<li>链式存储：通过给节点设置两个指针去指向子节点</li>
+<li>顺序存储：按照层次遍历的方式将数据顺序存储在数组里，对于度小于2的的非叶子节点需要进行填充。任意位置k的子节点位置为2k+1和2k+2</li>
+</ul>
+<p>对于二叉树的增删改查会涉及到的操作有：</p>
+<ul>
+<li>增&#x2F;改：对于堆结构来说会涉及到重新构造</li>
+<li>删：删除叶子结点，删除有一个子节点的节点，删除两个子节点的节点：左子树的最大值或者右子树的最小值代替删除的节点。对于堆结构来说删除的是根元素，会涉及到重新构造</li>
+<li>查：涉及到树的遍历，也就是将树结构转换成线性表的过程，树的遍历有四种，其实现的本质也无外乎两种<ul>
+<li>深度优先搜索：可使用栈结构或者递归算法实现<ul>
+<li>先序遍历：根-&gt;左-&gt;右</li>
+<li>中序遍历：左-&gt;根-&gt;右</li>
+<li>后序遍历：左-&gt;右-&gt;根</li>
+</ul>
+</li>
+<li>广度优先搜索：可使用队列结构实现<ul>
+<li>层次遍历：逐层遍历</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>多叉树指的是结点的子树可以大于二，其他操作和二叉树本质上一样</p>
+</blockquote>
+<h3 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h3><p>普通的二叉树最坏情况下会形成线性表的结构，这样就导致普通二叉树的搜索效率降低，平衡树就是为了解决这个问题而提出的一种树存储结构。平衡树指的是任意结点的左子树和右子树的深度最多相差1的树，这样在</p>
+<table>
+<thead>
+<tr>
+<th align="center">树</th>
+<th align="center">特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">堆</td>
+<td align="center">树中任一结点值都是其子树的最大&#x2F;小值</td>
+</tr>
+<tr>
+<td align="center">AVL树</td>
+<td align="center">二叉平衡搜索树</td>
+</tr>
+<tr>
+<td align="center">B树</td>
+<td align="center">多叉平衡搜索树</td>
+</tr>
+<tr>
+<td align="center">B+树</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">红黑树</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>平衡树为了保持自身的特性，在增删改查的时候相对于普通树会多一些操作</p>
+<ul>
+<li>平衡操作<ul>
+<li>中序遍历后二分法</li>
+<li>旋转(dsw)：通过某一方向一直旋转变成主链，然后从根开始遍历每隔两个节点进行反方向旋转<ul>
+<li>右旋(子节点代替父节点，子节点原先的右子树变成父节点的左子)</li>
+<li>左旋(子节点代替父节点，子节点原先的左子树变成父节点的右子树)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h3><h4 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h4><h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><p>图描述的是数据之间多对多的关系，图存储结构涉及到的概念有</p>
+<ul>
+<li>边</li>
+<li>权</li>
+<li>有向&#x2F;无向图</li>
+<li>网：带权的图</li>
+<li>连通图</li>
+</ul>
+<p>图的实现按照顺序存储和链式存储可以分为：</p>
+<ul>
+<li>顺序存储<ul>
+<li>数组：需要使用两个数组，一个数组存放图中顶点本身的数据（一维数组），另外一个数组用于存储各顶点之间的关系（二维数组）</li>
+</ul>
+</li>
+<li>链式存储<ul>
+<li>邻接表：给图中的各个顶点独自建立一个链表，用节点存储该顶点，用链表中其他节点存储各自的临界点</li>
+</ul>
+</li>
+</ul>
+<p>图存储结构涉及到的操作有：</p>
+<ul>
+<li>增</li>
+<li>删</li>
+<li>改</li>
+<li>查：查的过程就是将树存储结构转换为线性表的过程，本质和树结构一样<ul>
+<li>深度优先搜索</li>
+<li>广度优先搜索</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用-2"><a href="#应用-2" class="headerlink" title="应用"></a>应用</h3><h4 id="路径搜索"><a href="#路径搜索" class="headerlink" title="路径搜索"></a>路径搜索</h4><p>狄杰斯拉特</p>
+<p>floyd</p>
+<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>原理</p>
+<ul>
+<li>原问题的结构与子问题的结构相同,只是规模不同</li>
+<li>父问题的输入依赖于子问题的输出(存在递推公式)</li>
+<li>子问题有基本情况(最小规模的输出存在)</li>
+</ul>
+<p>设计步骤</p>
+<ul>
+<li>对于基本情况的测试</li>
+<li>递归情况</li>
+</ul>
+<p>特点</p>
+<ul>
+<li>简化问题,但是空间复杂度较高</li>
+<li>可能存在重复计算导致时间复杂度较高需要优化</li>
+</ul>
+<h3 id="分治策略"><a href="#分治策略" class="headerlink" title="分治策略"></a>分治策略</h3><p>原理</p>
+<ul>
+<li>原问题的结构与子问题的结构相同,只是规模不同</li>
+<li>子问题直接相互独立</li>
+<li>子问题有基本情况</li>
+</ul>
+<p>设计步骤</p>
+<ul>
+<li>分解 — 将原题划分为一些子问题</li>
+<li>解决 — 递归的求解子问题<ul>
+<li>代入法 — 猜测解的形式,用数学归纳法求出常数并证明其正确性</li>
+<li>递归树法 — 用递归树生成好的猜测</li>
+<li>主问题法 —</li>
+</ul>
+</li>
+<li>合并 — 将子问题的解组合成原问题的解</li>
+</ul>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>原理</p>
+<ul>
+<li>最优子结构 — 问题的最优解由相关子问题的最优解组合而成,这些子问题可以独立求解</li>
+<li>子问题重叠 — 不同的子问题有公共的子子问题,对每个子子问题只求解一次并存于表格中</li>
+<li>无权最短路径 — 对于有向图的的两个定点u和v,找到从u到v变数最少的路径</li>
+</ul>
+<p>设计步骤</p>
+<ul>
+<li>刻画一个最优解的结构特征</li>
+<li>递归的定义最优解的值</li>
+<li>计算最优解的值<ul>
+<li>带备忘录的自顶向下(从原问题-&gt;子问题)</li>
+<li>自底向上(从子问题-&gt;原问题)</li>
+</ul>
+</li>
+<li>利用计算出的信息构造一个最优解</li>
+</ul>
+<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><p>原理</p>
+<ul>
+<li>用递归完成的穷举法</li>
+<li>一种通用的解题方法</li>
+<li>利用深度优先搜索探索解空间树</li>
+</ul>
+<p>设计步骤</p>
+<ul>
+<li>描述解的形式定义一个解空间</li>
+<li>根据解空间构造状态空间树</li>
+<li>构造约束函数杀死节点(视情况而定)</li>
+</ul>
+<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p>原理</p>
+<ul>
+<li>每一步都作出当时看起来最佳的选择(局部最优)</li>
+<li>并不一定保证得到最优解,但很多情况能得到最优解</li>
+<li>启发式策略</li>
+</ul>
+<p>设计步骤</p>
+<ul>
+<li>建立数学模型来描述问题</li>
+<li>把求解的问题分解成若干个子问题</li>
+<li>对每一个子问题求解,得出子问题的局部最优解</li>
+<li>把子问题的局部最优解合并成原问题的一个最优解</li>
+</ul>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/C/">#C++</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/07/C++%E4%B9%8B%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之并发编程</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/07/C++%E4%B9%8B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之网络编程</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">RibinCao</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

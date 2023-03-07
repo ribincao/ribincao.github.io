@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="RibinCao">
+    
+    <title>
+        
+            C++| 基础学习之程序编译过程 |
+        
+        Ribin
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.png","favicon":"/images/logo.png","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Ribin
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                系列
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                个人简历
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">系列</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">个人简历</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">C++| 基础学习之程序编译过程</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-07 14:39:33</span>
+        <span class="mobile">2023-03-07 14:39</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-07 15:07:48</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C/">C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h2 id="一-C-程序的编译过程"><a href="#一-C-程序的编译过程" class="headerlink" title="[一]C++程序的编译过程"></a>[一]C++程序的编译过程</h2><p>任何一种计算机语言都要从某种人们容易理解的形式（源代码）翻译成计算机能执行的形式（机器代码），通常翻译器分类：解释器（interpreter）和编译器（compiler）</p>
+<ul>
+<li>解释器：将源代码转化成一些动作（它可由多组机器指令组成）并立即执行这些动作。比如python解释器先把程序转化成某种中间语言，然后由执行速度更快的解释器来执行。使用解释器的好处是从写代码到执行代码的转换几乎能立即完成，并且源代码总是现存的，所以一旦出现错误，解释器能够很容易地指出；而使用解释器的局限性是解释器必须驻留内存以执行程序，这样一来即使最快的解释器其速度也会变得让人难以接受</li>
+<li>编译器：直接把源代码转化成汇编语言或机器指令，最终结果是一个或多个机器代码的文件</li>
+</ul>
+<p>C++使用的是编译器，而C++程序的编译过程主要包括：预处理-&gt;编译-&gt;汇编-&gt;链接</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/Compile.png"
+                     
+                >
+
+<h2 id="一、预处理"><a href="#一、预处理" class="headerlink" title="一、预处理"></a>一、预处理</h2><p>预处理主要工作是：条件编译、头文件包含、宏替换的处理和删除注释等，最终会生成编译单元.i文件，预处理语句一般以<code>#</code>开头。可以通过如下命令查看预处理后的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -E hello.cpp -o hello.i</span><br></pre></td></tr></table></figure>
+
+<h3 id="头文件包含"><a href="#头文件包含" class="headerlink" title="头文件包含"></a>头文件包含</h3><p>头文件包含的预处理语句是<code>#include</code>，用一句话解释就是：替换，把预处理语句指向的内容替换到语句指定的地方。通过一个实验会更直观一点，我们创建一个hello.cpp文件，然后通过一个预处理语句导入一个Hello.h的自定义头文件，而这个自定义头文件的内容只有一个<code>&#125;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	hello.cpp</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Hello.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	Hello.h</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们用命令对这个cpp文件进行预处理</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -E hello.cpp -o hello.i</span><br></pre></td></tr></table></figure>
+
+<p>打开hello.i查看会发现<code>#include &quot;Hello.h&quot;</code>命令只是单纯的把<code>&#125;</code>替换到hello.cpp文件里</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	hello.i</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;./Hello.h&quot;</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"># <span class="number">5</span> <span class="string">&quot;hello.cpp&quot;</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="宏替换"><a href="#宏替换" class="headerlink" title="宏替换"></a>宏替换</h3><p>宏替换语句也是一个常用的语句，它的命令是<code>#define</code>，它的本质也还是替换：将指定的变量替换为一个值，通常用来定义一个常量，比如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NAME <span class="string">&quot;Ribin&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">float</span> a = PI;</span><br><span class="line">  <span class="type">char</span>[] s = NAME;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>预处理后的文件如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="type">float</span> a = <span class="number">3.14</span>;</span><br><span class="line"><span class="type">char</span>[] s = <span class="string">&quot;Ribin&quot;</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>宏定义和const的区别：</p>
+<ul>
+<li>define 定义的只是个常数不带类型，const 定义的常数是变量并且带类型</li>
+<li>define是在编译的预处理阶段起作用，而const是在编译、运行的时候起作用</li>
+<li>define只是简单的替换没有类型检查，而const有对应的数据类型需要进行判断</li>
+<li>define占用代码段空间，const占用数据段空间</li>
+<li>define是不能进行调试的，因为在预编译阶段就已经替换掉了，const常量可以进行调试的</li>
+<li>define可以通过#undef取消某个符号的定义，再重新定义，const不能重定义</li>
+<li>define可以用来防止头文件重复引用，而const不能</li>
+</ul>
+<h3 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h3><p>条件编译的预处理命令有：<code>#ifdef</code>、<code>#ifndef</code>、<code>#endif</code>、<code>#else</code>等。它的用法类似于基本的条件语句，主要是进行条件判断来简化代码，常用来做版本控制和防止头文件重复引用问题，比如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> INT_LINKED_LIST</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INT_LINKED_LIST</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>预处理语句还有很多，比如<code>#progma</code>，这里只讨论预处理阶段的工作，不具体到每个预处理语句的介绍</p>
+</blockquote>
+<h2 id="二、编译"><a href="#二、编译" class="headerlink" title="二、编译"></a>二、编译</h2><p>编译阶段的主要工作是：将预处理后的文件转换成汇编语言，生成.s文件，编译的命令是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -S hello.i -o hello.s	#	.i -&gt; .s</span><br></pre></td></tr></table></figure>
+
+<p>编译一般分两个阶段的工作：</p>
+<ol>
+<li>第一遍编译：<ul>
+<li>语法分析</li>
+<li>静态类型检查（检查函数是否正确使用，在编译阶段进行，运行时的类型检查称为动态类型检查）。程序可由多个文件构成，一个文件中的函数很可能要访问另一些文件中的函数和数据，编译器为了确保函数和数据被正确地使用从而需要告知编译器外部函数和数据的名称以及它们的模样，这一过程称为声明</li>
+</ul>
+</li>
+<li>全局优化器</li>
+<li>第二遍编译：由代码生成器遍历语法分析树把树的每个节点转化成汇编语言或者机器代码</li>
+</ol>
+<h2 id="三、汇编"><a href="#三、汇编" class="headerlink" title="三、汇编"></a>三、汇编</h2><p>汇编阶段的主要工作是：生成目标代码(机器代码).o或者.obj的目标模块(可重定位目标文件)，可重定位目标文件由各种不同的代码和数据节（section）组成，每一节都是一个连续的字节序列，地址从0开始。汇编的命令是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -c hello.cpp	#	.cpp -&gt; .s</span><br></pre></td></tr></table></figure>
+
+<h3 id="目标文件"><a href="#目标文件" class="headerlink" title="目标文件"></a>目标文件</h3><p>目标文件有三种：</p>
+<ol>
+<li>可重定位目标文件。包含二进制代码和数据，其形式可以在编译时与其他可重定位目标文件合并起来创建一个可执行目标文件</li>
+<li>可执行目标文件。包含二进制代码和数据，其形式可以被直接复制到内存并执行</li>
+<li>共享目标文件。一种特殊类型的可重定位目标文件，可以在加载或者运行时被动态地加载进内存并链接</li>
+</ol>
+<p>各个系统的目标文件格式都不相同：</p>
+<ul>
+<li>Unix系统使用的是a.out格式</li>
+<li>Windows使用可移植可执行（PE）格式</li>
+<li>Mac使用Mach-O格式</li>
+<li>现代x86-64 Linux和Unix系统使用可执行可链接格式(Executable and Linkable Format, ELF)</li>
+</ul>
+<p>汇编阶段会生成可重定位目标文件，一个典型的ELF可重定位目标文件的格式如下图</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/ELF.svg"
+                     
+                >
+
+<ul>
+<li>ELF头以一个16字节的序列开始。描述了生成该文件的系统的字的大小和字节顺序，剩下的部分包含帮助链接器语法分析和解释目标文件的信息，比如ELF头的大小、目标文件的类型、机器类型、节头部表的文件偏移以及节头部表中条目的大小和数量。不同节的位置和大小是由节头部表描述的，其中目标文件中每个节都有一个固定大小的条目。</li>
+<li>.text：已编译程序的机器代码</li>
+<li>.rodata：只读数据，比如printf语句中的格式串和switch语句的跳转表</li>
+<li>.data：已初始化的全局和静态变量，局部变量运行时保存在栈中不在.data和.bss中</li>
+<li>.bss：未初始化的全局和静态变量以及所有被初始化为0的全局或静态变量。在目标文件中这个节不占实际的空间仅仅是一个占位符，未初始化的变量不需要占据任何实际磁盘空间,运行时在内存中分配这些变量</li>
+<li>.symtab：符号表，存放程序中定义和引用的函数和全局变量的信息，和编译器中的符号表不同的是不包含局部变量的条目（可使用STRIP去掉）</li>
+<li>.rel.tex：.text节中位置的列表，当链接器把这个目标文件和其他文件组合时需要修改这些位置。一般而言，任何调用外部函数或者引用全局变量的指令都需要修改，调用本地函数的指令则不需要修改</li>
+<li>.rel.data：被模块引用或定义的所有全局变量的重定位信息，一般而言，任何已初始化的全局变量，如果它的初始值是一个全局变量地址或者外部定义函数的地址，都需要修改</li>
+<li>.debug：调试符号表，其条目是程序中定义的局部变量和类型定义、程序中定义和引用的全局变量以及源文件，只有以-g选项调用编译器驱动程序时才会得到这张表</li>
+<li>.line：原始程序中的行号和.text节中机器指令之间的映射，只有以-g选项调用编译器驱动程序时才会得到这张表</li>
+<li>.strtab：字符串表，包括.symtab和.debug中的符号表以及节头部中的节名字，字符串表就是以null结尾的字符串的序列</li>
+</ul>
+<blockquote>
+<p>可以通过<code>readelf</code>命令来查看ELF文件信息，mac系统需要安装<code>binutils</code>然后使用<code>greadelf</code></p>
+</blockquote>
+<h2 id="四、链接"><a href="#四、链接" class="headerlink" title="四、链接"></a>四、链接</h2><p>链接的实现时机：</p>
+<ul>
+<li>编译时：源代码被编译成机器代码时，链接由静态链接器负责</li>
+<li>加载时：程序被加载到内存时，链接由加载器负责</li>
+<li>运行时：由动态链接器负责</li>
+</ul>
+<p>链接阶段任务是由静态链接器完成的，主要工作是：把一组目标模块（可重定位目标文件）连接成为一个操作系统可以装载和运行的可执行程序。链接器能搜索称为库的特殊文件来处理它的所有引用，库将一组目标模块包含在一个文件中，库由库管理器的程序来创建和维护，链接的命令是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -o hello hello.cpp	# .cpp -&gt; .exe</span><br><span class="line">as -o hello hello.s			# .s -&gt; .exe</span><br></pre></td></tr></table></figure>
+
+<p>为了构造可执行文件，链接器必须完成两个主要任务：</p>
+<ol>
+<li>符号解析：将每个符号（函数、全局变量或静态变量）引用刚好和一个符号定义联系起来</li>
+<li>重定位：编译器和汇编器生成了从地址0开始的代码和数据节，链接器通过把每个符号定义与一个内存位置关联起来，从而重定位这些节，然后修改所有对这些符号的引用使得它们指向这个内存位置。链接器使用汇编器产生的重定位条目的详细指令，不加甄别地执行这样的重定位。</li>
+</ol>
+<h3 id="符号解析"><a href="#符号解析" class="headerlink" title="符号解析"></a>符号解析</h3><p>符号：每个重定位模块m.o都有一个符号表.symtab，符号表由汇编器构造，它包含m定义和引用的符号的信息。在链接器的上下文中有三种不同的符号：</p>
+<ul>
+<li>由模块m定义并能被其他模块引用 的全局符号(本模块的全局变量和普通函数)</li>
+<li>由其他模块定义并被模块m引用的全局符号，也称为外部符号，对应于在其他模块中定义的非静态函数和全局变量(其他模块的全局变量和普通函数并在本模块extern修饰的符号)</li>
+<li>只被m模块定义和引用的局部符号，对应于静态函数和全局变量(本模块的静态变量和静态函数)</li>
+</ul>
+<p>符号解析：符号解析的方法就是将每个引用与它输入的可重定位目标文件的符号表中的一个确定的符号定义关联起来。对于局部符号的解析是比较简单的，编译器只允许每个模块中每个局部符号只有一个定义，当然编译器不是简单的使用函数或者变量名作为符号，而是使用一种<strong>函数签名</strong>(将函数名、参数类型、命名空间等组合的一种编码方式)的方式对名字进行了重整，这也是实现函数重载的基础。而对于全局符号的解析稍微复杂，如果多个模块定义同名的全局符号，编译器会把函数和已初始化的全局变量指定为强符号，而未初始化的全局变量指定为弱符号，对全局符号的解析遵循下面三个原则：</p>
+<ul>
+<li>不允许有多个同名的强符号</li>
+<li>如果有一个强符号和多个弱符号同名，那么选择强符号</li>
+<li>如果有多个弱符号同名，那么从这些弱符号中任意选择一个</li>
+</ul>
+<p>当目标模块需要和静态库(一组目标模块的集合)进行链接时，链接器会维护三个集合：</p>
+<ul>
+<li>集合E：可重定位目标文件集合</li>
+<li>集合U：未解析的符号集合(即引用了但是尚未定义)</li>
+<li>集合D：已解析的符号集合</li>
+</ul>
+<p>链接器会从左到右扫描输入文件，如果文件f是目标文件则把f添加到集合E同时修改集合U和D；如果f是静态库文件，那么链接器就尝试匹配U中未解析的符号是否在静态库文件中的某个模块m中定义了，如果m存在就把m加入到集合E中同时更新U和D，依次扫描直到U和D不再更新。最终如果集合U非空，则说明存在未解析的符号，就会抛出错误<code>Unresolved symbol</code>，否则，就会生成最终的可执行目标文件，具体命令如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ar rcs libvector.a addvec.o multvec.o	#	打包静态库</span><br><span class="line">g++ -static ./libvector.a main.cpp		#	链接静态库</span><br></pre></td></tr></table></figure>
+
+<h3 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a>重定位</h3><p>一旦链接器成功完成了符号解析，此时链接器就知道它的输入目标模块中的代码节和数据节的确切大小，然后就开始重定位操作，重定位操作分两步：</p>
+<ol>
+<li>重定位节和符号定义：将所有相同类型的节合并为同一类型的新的聚合节</li>
+<li>重定位节中的符号引用：修改代码节和数据节中对每个符号的引用，使得它们指向正确的运行时地址，这一步依赖于重定位目标中的重定位条目</li>
+</ol>
+<blockquote>
+<p>当汇编器生成一个目标模块时，它并不知道数据和代码最终存放在内存中的什么位置，所以无论何时汇编器遇到对最终位置未知的目标引用，它就会生成一个重定位条目来告诉链接器在讲目标文件合并成可执行文件时如何修改这个引用。代码的重定位条目放在.rel.text中，已初始化数据的重定位条目放在.rel.data中</p>
+</blockquote>
+<p>###动态链接</p>
+<p>动态链接：当程序加载时动态的完成链接过程，共享库(动态库)实现共享的方式：</p>
+<ul>
+<li>对于一个库只有一个.so文件，所有引用该库的可执行目标文件共享这个，而不是像静态库的内容那样被复制和嵌入到引用它们的可执行的文件中</li>
+<li>在内存中，一个共享库的.text节的一个副本可以被不同的正在运行的进程共享</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -shared -fpic -o libvector.so addvec.cpp multvec.cpp	#	打包共享库</span><br><span class="line">g++ -o prog main.cpp ./libvector.so												#	链接共享库</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">文件类型&#x2F;扩展名</th>
+<th align="center">Windows</th>
+<th align="center">Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">动态库文件</td>
+<td align="center">.dll</td>
+<td align="center">.so</td>
+</tr>
+<tr>
+<td align="center">可重定向目标文件</td>
+<td align="center">.obj</td>
+<td align="center">.o</td>
+</tr>
+<tr>
+<td align="center">静态库文件</td>
+<td align="center">.lib</td>
+<td align="center">.a</td>
+</tr>
+</tbody></table>
+<p>动态加载器通过执行下面的重定位目标完成链接任务：</p>
+<ul>
+<li>重定位a.so的文本和数据到某个内存段</li>
+<li>重定位b.so的文本和数据到另一个内存段</li>
+<li>重定位prog中所有对由a.so和b.so定义的符号的引用</li>
+<li>将控制传递给应用程序，共享库的位置就固定了，并且在程序执行的过程中都不会改变</li>
+</ul>
+<h3 id="可执行目标文件"><a href="#可执行目标文件" class="headerlink" title="可执行目标文件"></a>可执行目标文件</h3><p>可执行目标文件的格式类似于可重定位目标文件的格式，其中.init节定义了一个小函数_init，程序的初始化代码会调用它。可执行文件的连续的片被映射到连续的内存段，程序头部表描述了这种映射关系。</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/EXE.svg"
+                     
+                >
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>程序的编译要经历：预处理生成编译单元 -&gt; 编译(编译+汇编)生成可重定位的目标文件 -&gt; 链接生成可执行目标文件，最终生成的可执行目标文件大致可以分为三部分：代码区、数据区、调试信息。本篇博客只是简单的记录一下程序的编译过程，其中动态链接部分涉及到位置无关代码等内容没有讨论，将来有时间再进行补充。下一篇博客简单说说程序的加载执行过程…</p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/C/">#C++</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/07/C++%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E5%8F%8A%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之程序执行及内存分配</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/07/C++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%89%B9%E6%80%A7/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之面向对象特性</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">RibinCao</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

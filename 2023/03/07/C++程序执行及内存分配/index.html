@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="RibinCao">
+    
+    <title>
+        
+            C++| 基础学习之程序执行及内存分配 |
+        
+        Ribin
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.png","favicon":"/images/logo.png","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Ribin
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                系列
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                个人简历
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">系列</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">个人简历</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">C++| 基础学习之程序执行及内存分配</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-07 14:39:33</span>
+        <span class="mobile">2023-03-07 14:39</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-07 15:07:10</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C/">C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h1 id="二-C-程序执行过程及内存分配"><a href="#二-C-程序执行过程及内存分配" class="headerlink" title="[二]C++程序执行过程及内存分配"></a>[二]C++程序执行过程及内存分配</h1><h2 id="程序的执行过程"><a href="#程序的执行过程" class="headerlink" title="程序的执行过程"></a>程序的执行过程</h2><p>上一篇博客我们已经知道了最终生成的可执行目标文件的格式，当我们在shell终端输入命令<code>./hello</code>启动这个程序的时候：</p>
+<ol>
+<li>shell进程会fork一个子进程，子进程是父进程的一个复制</li>
+<li>子进程通过<code>exevce</code>系统调用启动加载器，加载器删除子进程现有的虚拟内存段，然后创建一个新的虚拟内存并把栈和堆初始化为零</li>
+<li>加载器通过将虚拟地址空间中的页映射到可执行文件<code>./hello</code>的页大小的片，新的虚拟内存中的代码和数据则被初始化为可执行文件的内容</li>
+<li>最后加载器跳转到程序入口点(ctrl.o中定义)<code>_start</code>函数地址，<code>_start</code>函数调用系统启动函数<code>__libc_start_main</code>(libc.o中定义)初始化执行环境，然后调用用户层的main函数</li>
+</ol>
+<p>实际上，加载的过程中是没有任何从磁盘到内存的数据复制，它只是建立一种映射，数据的复制会在程序执行的过程中直到CPU引用一个被映射的虚拟页时才会进行复制，这也就是写时复制。之所以这样是因为linux是使用一种虚拟内存的形式进行内存管理的，如下图每个进程都有自己独立的虚拟地址空间，当CPU执行程序的时候需要引用数据，内存管理单元会将数据对应的虚拟地址通过页表转换为物理地址，然后通过物理地址去实际的内存中寻找数据，如果命中了数据则取数据，否则会去磁盘中把对应的数据替换到内存中，这里不具体讨论替换的策略只是简单介绍虚拟内存的原理，这种虚拟内存的抽象方式相当于把内存作为了磁盘的高速缓存使用</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/虚拟内存.svg"
+                      width="600"
+                >
+
+<h2 id="程序的内存分配"><a href="#程序的内存分配" class="headerlink" title="程序的内存分配"></a>程序的内存分配</h2><img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/Mem.svg"
+                      
+                >
+
+<p>上图是进程虚拟内存的分配空间，我们一般将C++的内存分成几个区：</p>
+<ol>
+<li>堆：由程序员通过new分配和delete释放的存储区</li>
+<li>栈：由系统自动分配和释放的存储区，通常存放局部变量、函数参数</li>
+<li>全局&#x2F;静态区：全局变量和静态变量被分配到同一块内存中，在以前的C语言中，全局变量又分为初始化的和未初始化的，在C++里面没有这个区分了，他们共同占用同一块内存区</li>
+<li>文字常量区：存放文字常量</li>
+<li>程序代码区（只读）：存放代码的存储区</li>
+</ol>
+<p>下面看一个简单的例子</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    C++内存分配:</span></span><br><span class="line"><span class="comment">        1.分区</span></span><br><span class="line"><span class="comment">            - 静态区(静态内存): static 变量和函数、全局变量</span></span><br><span class="line"><span class="comment">            - 栈区: 函数、非 static 局部变量, 由程序自动创建、自动释放</span></span><br><span class="line"><span class="comment">            - 堆(动态内存、内存池): new 和 delete</span></span><br><span class="line"><span class="comment">            - 文字常量区: 常量字符串就是放在这里的, 程序结束后由系统释放</span></span><br><span class="line"><span class="comment">            - 程序代码区: 可执行代码</span></span><br><span class="line"><span class="comment">        2.缓冲区</span></span><br><span class="line"><span class="comment">            - 全缓冲区: 当填满标准I/O缓存后才进行实际I/O操作</span></span><br><span class="line"><span class="comment">            - 行缓冲区: 当在输入和输出中遇到换行符时，执行真正的I/O操作</span></span><br><span class="line"><span class="comment">            - 不带缓冲: 不进行缓冲，标准出错情况stderr是典型代表，这使得出错信息可以直接尽快地显示出来</span></span><br><span class="line"><span class="comment">            - 缓冲区刷新: 在内存空间中预留了一定的存储空间用来缓冲输入或输出的数据, 可以减少磁盘的读写次数</span></span><br><span class="line"><span class="comment">                - 缓冲区满时</span></span><br><span class="line"><span class="comment">                - 执行flush语句</span></span><br><span class="line"><span class="comment">                - 执行endl语句</span></span><br><span class="line"><span class="comment">                - 关闭文件</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> pi;           <span class="comment">//  全局变量，全局区/静态区</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> a)</span></span>;    <span class="comment">//  程序代码区</span></span><br><span class="line"><span class="comment">//	class 和 struct 类似于模板</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line">  <span class="type">int</span> a;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">()</span></span>;       <span class="comment">//  成员函数位于代码区</span></span><br><span class="line">  <span class="comment">// virtual void g(); //  虚函数表指针属于类位于静态区 ｜ 函数位于代码区</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">B</span>&#123;</span><br><span class="line">  <span class="type">int</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">       <span class="type">int</span> a;                 <span class="comment">//  栈区</span></span><br><span class="line">       <span class="type">static</span> <span class="type">int</span> b;          <span class="comment">//  静态变量，全局区/静态区</span></span><br><span class="line">       <span class="type">char</span> *c = <span class="string">&quot;hello&quot;</span>;     <span class="comment">//  指针本身位于栈 | 指向字符串&quot;hello&quot;位于文字常量区 | 编译时期就确定</span></span><br><span class="line">       <span class="type">char</span> s1[] = <span class="string">&quot;hello&quot;</span>;   <span class="comment">//  指针 s1 和指向的数组都在栈区 ｜ 运行的时候赋值</span></span><br><span class="line">       <span class="type">char</span> *e = <span class="keyword">new</span> <span class="type">char</span>[<span class="number">10</span>];<span class="comment">//  指针 e 本身位于栈 | 指针指向的内容位于堆区</span></span><br><span class="line">       A a1;      						<span class="comment">//	a1 位于栈区</span></span><br><span class="line">       A* a2 = <span class="keyword">new</span> <span class="built_in">A</span>();				<span class="comment">//	a2 位于栈区 ｜ 指向的对象位于堆区</span></span><br><span class="line">       B bb;									<span class="comment">//	bb 位于栈区</span></span><br><span class="line">       <span class="built_in">exit</span>(<span class="number">0</span>) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>static字面意思是就是静态，它的本质就是限定访问权限，static的使用有三种情况：</p>
+<ul>
+<li><p>修饰全局变量或者函数：该函数或变量的作用域限定于本文件内部，外部不能访问，比如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> a;</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">fun</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修饰局部变量：变量只初始化一次，数据存放在静态区，比如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="type">static</span> <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">  a++;</span><br><span class="line">  <span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修饰成员变量或者成员函数：变量或者函数只有一份实例，可不通过对象调用直接访问，比如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="type">static</span> <span class="type">int</span> a;</span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">fun</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="内存大小"><a href="#内存大小" class="headerlink" title="内存大小"></a>内存大小</h2><p>我们已经知道程序的内存分配方式，那就进一步了解C++程序中不同数据类型的内存大小。下表展示了在32位和64位系统下基本数据类型的长度(单位：字节)</p>
+<table>
+<thead>
+<tr>
+<th align="center">系统</th>
+<th align="center">bool&#x2F;char</th>
+<th align="center">short</th>
+<th align="center">int</th>
+<th align="center">long</th>
+<th align="center">指针</th>
+<th align="center">long long</th>
+<th align="center">float</th>
+<th align="center">double</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">32位</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center">8</td>
+<td align="center">4</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">64位</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">4</td>
+<td align="center">8</td>
+<td align="center">8</td>
+<td align="center">8</td>
+<td align="center">4</td>
+<td align="center">8</td>
+</tr>
+</tbody></table>
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>指针本质上也是一个变量，而一个变量本身有两个属性：位置(地址)和内容(数据)，而指针的特殊在于它存放的内容是一个地址，通常我们说的指针指向的对象指的就是指针内容里存放的地址所存的数据。比如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> *p = &amp;a;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;address of a: &quot;</span> &lt;&lt; &amp;a &lt;&lt; <span class="string">&quot;, data of a: &quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;address of p: &quot;</span> &lt;&lt; &amp;p &lt;&lt; <span class="string">&quot;, data of p: &quot;</span> &lt;&lt; p &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//	output:</span></span><br><span class="line"><span class="comment">//	address of a: 0x7ffee49305ec, data of a: 1</span></span><br><span class="line"><span class="comment">//	address of p: 0x7ffee49305e0, data of p: 0x7ffee49305ec</span></span><br></pre></td></tr></table></figure>
+
+<p>既然指针是一个变量，那么指针自然有以下几种情况</p>
+<ul>
+<li><p>空指针：指针内容为空地址(NULL)，指针不指向任何对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *nptr;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>野指针：指针指向的对象因为被释放而使得指针指向的内容变的不可知，也就是指针引用了非法内存</p>
+</li>
+<li><p>常量指针：指针指向的对象是一个常量，该对象不能通过指针去修改，但是可以通过别的方式去修改</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> *p;</span><br><span class="line"><span class="type">int</span> <span class="type">const</span> *p;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指针常量：指针本身的内容，也就是存放的地址是一个常量，不能修改</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="type">const</span> p; </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常量常指针：同时具备常量指针和指针常量的特点</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>智能指针：动态内存管理经常会出现两种问题(1)一种是忘记释放内存，会造成内存泄漏(2)尚有指针引用内存的情况下就释放了它，就会产生引用非法内存的指针。智能指针就是为了解决这两个问题，原理是通过封装一个类来实现一个自动释放内存的指针。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line">shared_ptr&lt;string&gt; sp;			<span class="comment">//	shared_ptr 允许多个指针指向同一个对象</span></span><br><span class="line">unique_ptr&lt;list&lt;<span class="type">int</span>&gt;&gt; up;		<span class="comment">//	unique_ptr 独占所指向的对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//	make_shared 函数</span></span><br><span class="line">shared_ptr&lt;string&gt; p4 = <span class="built_in">make_shared</span>&lt;string&gt;(<span class="number">10</span>,<span class="string">&#x27;9&#x27;</span>);</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">shared_ptr</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">  	<span class="comment">//重载</span></span><br><span class="line">  	T&amp; <span class="keyword">operator</span>*() <span class="type">const</span></span><br><span class="line">    &#123;<span class="keyword">return</span> *px;&#125;</span><br><span class="line">  	T&amp; <span class="keyword">operator</span>-&gt;() <span class="type">const</span></span><br><span class="line">    &#123;<span class="keyword">return</span> px;&#125;</span><br><span class="line">  	<span class="comment">//构造函数</span></span><br><span class="line">  	<span class="built_in">shared_ptr</span>(T* p): <span class="built_in">px</span>(p) &#123;&#125;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">  	T* px;</span><br><span class="line">  	<span class="type">long</span>* pn;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="function">shared_ptr&lt;Foo&gt; <span class="title">sp</span><span class="params">(<span class="keyword">new</span> Foo)</span></span>;</span><br><span class="line">  <span class="function">Foo <span class="title">f</span><span class="params">(*sp)</span></span>;</span><br><span class="line">  sp -&gt; <span class="built_in">method</span>(); <span class="comment">//px -&gt; method();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h3><p>在C++中除了基本数据类型以外还有struct、class，struct的内存分配比较特别，因为它存在<strong>字节对齐</strong>，字节对齐的原则如下</p>
+<ol>
+<li>起始位置为成员数据类型所占内存的整数倍，若不足则不足部分用数据将内存填充为该数据类型的整数倍。</li>
+<li>结构体所占总内存为其成员变量中所占空间最大数据 类型的整数倍</li>
+</ol>
+<p>比如如下代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	内存大小: 8</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">s1</span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">    <span class="type">short</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//	内存大小: 12</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">s2</span>&#123;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">short</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123; </span><br><span class="line">    cout&lt;&lt; <span class="string">&quot; s1: &quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(s1)&lt;&lt;<span class="string">&quot;, s2: &quot;</span>&lt;&lt;<span class="built_in">sizeof</span>(s2)&lt;&lt;endl;    </span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>结构体s1和s2在内存中的大小之所以不一样可以用下图理解</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/字节对齐.svg"
+                      
+                >
+
+<blockquote>
+<p>为什么要字节对齐？</p>
+<ul>
+<li>平台原因（移植原因）：不是所有的硬件平台都能访问任意地址上的任意数据，某些硬件平台只能在某些地址处取某些特定类型的数据，否则抛出硬件异常</li>
+<li>硬件原因：经过内存对齐之后，CPU的内存访问速度大大提升。</li>
+</ul>
+</blockquote>
+<p>当然，我们也可以通过<code>__attribute__ ((__packed__))</code>强制不使用字节对齐，比如redis源码里就使用了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">__attribute__</span> ((__packed__)) hisdshdr5 &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> flags; <span class="comment">/* 3 lsb of type, and 5 msb of string length */</span></span><br><span class="line">    <span class="type">char</span> buf[];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="class"><a href="#class" class="headerlink" title="class"></a>class</h3><p>而class在内存中的布局也是遵循字节对齐的原子，相对于结构体要复杂是类会涉及到继承的问题。如下代码简单的描述了这几种情况</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">  <span class="type">static</span> <span class="type">long</span> s;</span><br><span class="line">	<span class="type">long</span> a;</span><br><span class="line">	<span class="type">char</span> b;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">h</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">k</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VBase</span> &#123;</span><br><span class="line">	<span class="type">long</span> a;</span><br><span class="line">	<span class="type">char</span> b;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">f</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">g</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">h</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">k</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> : <span class="keyword">public</span> Base &#123;	<span class="comment">//	24 Byte</span></span><br><span class="line">	<span class="type">long</span> c;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">public</span> VBase &#123;<span class="comment">//	32 Byte</span></span><br><span class="line">	<span class="type">long</span> c;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> : <span class="keyword">public</span> VBase &#123;<span class="comment">//	32 Byte</span></span><br><span class="line">	<span class="type">long</span> c;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">f</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">g</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">h</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> VBase &#123;<span class="comment">//	40 Byte</span></span><br><span class="line">	<span class="type">long</span> c;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">h</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">E</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> VBase &#123;<span class="comment">//	40 Byte</span></span><br><span class="line">	<span class="type">long</span> c;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">f</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">g</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">h</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;普通基类Base大小： &quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(Base) &lt;&lt; <span class="string">&quot;Byte,&quot;</span> &lt;&lt; <span class="string">&quot;虚基类VBase大小：&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(VBase) &lt;&lt; <span class="string">&quot;Byte.&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;[普通继承，父类没有虚函数] &quot;</span> &lt;&lt; <span class="string">&quot;父类:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(Base) &lt;&lt; <span class="string">&quot;Byte, &quot;</span> &lt;&lt; <span class="string">&quot;子类A:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(A) &lt;&lt; <span class="string">&quot;Byte&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;[普通继承，父类含有虚函数，子类没有重写虚函数] &quot;</span> &lt;&lt; <span class="string">&quot;父类:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(VBase) &lt;&lt; <span class="string">&quot;Byte, &quot;</span> &lt;&lt; <span class="string">&quot;子类B:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(B) &lt;&lt; <span class="string">&quot;Byte&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;[普通继承，父类含有虚函数，子类重写虚函数] &quot;</span> &lt;&lt; <span class="string">&quot;父类:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(VBase) &lt;&lt; <span class="string">&quot;Byte, &quot;</span> &lt;&lt; <span class="string">&quot;子类C:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(C) &lt;&lt; <span class="string">&quot;Byte&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;[虚继承，子类没有重写虚函数] &quot;</span> &lt;&lt; <span class="string">&quot;父类:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(VBase) &lt;&lt; <span class="string">&quot;Byte, &quot;</span> &lt;&lt; <span class="string">&quot;子类D:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(D) &lt;&lt; <span class="string">&quot;Byte&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;[虚继承，子类重写虚函数] &quot;</span> &lt;&lt; <span class="string">&quot;父类:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(VBase) &lt;&lt; <span class="string">&quot;Byte, &quot;</span> &lt;&lt; <span class="string">&quot;子类E:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(E) &lt;&lt; <span class="string">&quot;Byte&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以简单总结一下：</p>
+<ul>
+<li>普通继承情况，子类会继承父类的数据</li>
+<li>父类含虚函数的普通继承情况下，无论子类是否重写虚函数，子类继承父类的数据(包含虚函数表指针)</li>
+<li>父类含虚函数的虚继承情况下，无论子类是否重写虚函数，子类继承父类的数据(包含虚函数表指针和虚基类指针)<img  
+                     lazyload
+                     alt="image"
+                     data-src="./img/classmem.svg"
+                     
+                ></li>
+</ul>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/C/">#C++</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/07/C++%E4%B9%8B%E8%AF%BB%E5%92%8C%E5%86%99/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之读和写</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/07/C++%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之程序编译过程</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">RibinCao</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
