@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="RibinCao">
+    
+    <title>
+        
+            python| 实现脚本获取地区天气 |
+        
+        Ribin
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.png","favicon":"/images/logo.png","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Ribin
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                系列
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                个人简历
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">系列</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">个人简历</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">python| 实现脚本获取地区天气</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-08 14:01:13</span>
+        <span class="mobile">2023-03-08 14:01</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-08 14:03:48</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/python/">python</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>用python写了一个脚本去获取指定城市的最近天气, 脚本运行成功会在本地生成一个csv文件, 代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Weather</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, code: <span class="built_in">str</span>, name: <span class="built_in">str</span></span>):</span><br><span class="line">        self._url = <span class="string">&#x27;http://www.weather.com.cn/weather/&#x27;</span> + code + <span class="string">&#x27;.shtml&#x27;</span></span><br><span class="line">        self._text = <span class="string">&quot;&quot;</span></span><br><span class="line">        self.data_all = []</span><br><span class="line">        self.city_name = name</span><br><span class="line">        self.data_cur = <span class="literal">None</span></span><br><span class="line">        self.data_7 = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        self.get_html_text()</span><br><span class="line">        self.get_content()</span><br><span class="line">        self.write_to_csv(<span class="number">14</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_html_text</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;请求获得网页内容&quot;&quot;&quot;</span></span><br><span class="line">        resp = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            resp = requests.get(self._url, timeout=<span class="number">30</span>)</span><br><span class="line">            resp.raise_for_status()</span><br><span class="line">            resp.encoding = resp.apparent_encoding</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;self.city_name&#125;</span> Success&quot;</span>)</span><br><span class="line">            self._text = resp.text</span><br><span class="line">        <span class="keyword">except</span> requests.HTTPError <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(e)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;status_code <span class="subst">&#123;resp.status_code&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> oe:</span><br><span class="line">            <span class="built_in">print</span>(oe)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_content</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;处理得到有用信息保存数据文件&quot;&quot;&quot;</span></span><br><span class="line">        final = []  							      <span class="comment"># 初始化一个列表保存数据</span></span><br><span class="line">        bs = BeautifulSoup(self._text, <span class="string">&quot;html.parser&quot;</span>)  <span class="comment"># 创建BeautifulSoup对象</span></span><br><span class="line">        body = bs.body</span><br><span class="line">        data = body.find(<span class="string">&#x27;div&#x27;</span>, &#123;<span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;7d&#x27;</span>&#125;)         <span class="comment"># 找到div标签且id = 7d</span></span><br><span class="line">        <span class="comment"># 下面爬取当天的数据</span></span><br><span class="line">        data2 = body.find_all(<span class="string">&#x27;div&#x27;</span>, &#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;left-div&#x27;</span>&#125;)</span><br><span class="line">        text = data2[<span class="number">2</span>].find(<span class="string">&#x27;script&#x27;</span>).string</span><br><span class="line">        text = text[text.index(<span class="string">&#x27;=&#x27;</span>) + <span class="number">1</span>:-<span class="number">2</span>]		 <span class="comment"># 移除改var data=将其变为json数据</span></span><br><span class="line">        jd = json.loads(text)</span><br><span class="line">        day_one = jd[<span class="string">&#x27;od&#x27;</span>][<span class="string">&#x27;od2&#x27;</span>]				 <span class="comment"># 找到当天的数据</span></span><br><span class="line">        final_day = []						     <span class="comment"># 存放当天的数据</span></span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> day_one:</span><br><span class="line">            temp = []</span><br><span class="line">            <span class="keyword">if</span> count &lt;= <span class="number">23</span>:</span><br><span class="line">                temp.append(i[<span class="string">&#x27;od21&#x27;</span>])				 <span class="comment"># 添加时间</span></span><br><span class="line">                temp.append(self.city_name + <span class="string">&#x27;市&#x27;</span>)	 <span class="comment"># 添加城市</span></span><br><span class="line">                temp.append(i[<span class="string">&#x27;od22&#x27;</span>])				 <span class="comment"># 添加当前时刻温度</span></span><br><span class="line">                temp.append(i[<span class="string">&#x27;od24&#x27;</span>])				 <span class="comment"># 添加当前时刻风力方向</span></span><br><span class="line">                temp.append(i[<span class="string">&#x27;od25&#x27;</span>])				 <span class="comment"># 添加当前时刻风级</span></span><br><span class="line">                temp.append(i[<span class="string">&#x27;od26&#x27;</span>])				 <span class="comment"># 添加当前时刻降水量</span></span><br><span class="line">                temp.append(i[<span class="string">&#x27;od27&#x27;</span>])				 <span class="comment"># 添加当前时刻相对湿度</span></span><br><span class="line">                temp.append(i[<span class="string">&#x27;od28&#x27;</span>])				 <span class="comment"># 添加当前时刻控制质量</span></span><br><span class="line">                final_day.append(temp)</span><br><span class="line">                self.data_all.append(temp)</span><br><span class="line">            count = count + <span class="number">1</span></span><br><span class="line">        <span class="comment"># 爬取 24h 的数据</span></span><br><span class="line">        ul = data.find(<span class="string">&#x27;ul&#x27;</span>)                     <span class="comment"># 找到所有的 ul 标签</span></span><br><span class="line">        li = ul.find_all(<span class="string">&#x27;li&#x27;</span>)                   <span class="comment"># 找到左右的 li 标签</span></span><br><span class="line">        i = <span class="number">0</span>                                    <span class="comment"># 控制爬取的天数</span></span><br><span class="line">        <span class="keyword">for</span> day <span class="keyword">in</span> li:                           <span class="comment"># 遍历找到的每一个 li</span></span><br><span class="line">            <span class="keyword">if</span> <span class="number">7</span> &gt; i &gt; <span class="number">0</span>:</span><br><span class="line">                temp = []                        <span class="comment"># 临时存放每天的数据</span></span><br><span class="line">                date = day.find(<span class="string">&#x27;h1&#x27;</span>).string     <span class="comment"># 得到日期</span></span><br><span class="line">                date = date[<span class="number">0</span>:date.index(<span class="string">&#x27;日&#x27;</span>)]  <span class="comment"># 取出日期号</span></span><br><span class="line">                temp.append(date)</span><br><span class="line">                inf = day.find_all(<span class="string">&#x27;p&#x27;</span>)          <span class="comment"># 找出 li 下面的 p 标签,提取第一个p标签的值, 即天气</span></span><br><span class="line">                temp.append(inf[<span class="number">0</span>].string)</span><br><span class="line"></span><br><span class="line">                tem_low = inf[<span class="number">1</span>].find(<span class="string">&#x27;i&#x27;</span>).string  	<span class="comment"># 找到最低气温</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> inf[<span class="number">1</span>].find(<span class="string">&#x27;span&#x27;</span>) <span class="keyword">is</span> <span class="literal">None</span>:  	<span class="comment"># 天气预报可能没有最高气温</span></span><br><span class="line">                    tem_high = <span class="literal">None</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    tem_high = inf[<span class="number">1</span>].find(<span class="string">&#x27;span&#x27;</span>).string  <span class="comment"># 找到最高气温</span></span><br><span class="line">                temp.append(tem_low[:-<span class="number">1</span>])</span><br><span class="line">                <span class="keyword">if</span> tem_high[-<span class="number">1</span>] == <span class="string">&#x27;℃&#x27;</span>:</span><br><span class="line">                    temp.append(tem_high[:-<span class="number">1</span>])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    temp.append(tem_high)</span><br><span class="line"></span><br><span class="line">                wind = inf[<span class="number">2</span>].find_all(<span class="string">&#x27;span&#x27;</span>)		<span class="comment"># 找到风向</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> wind:</span><br><span class="line">                    temp.append(j[<span class="string">&#x27;title&#x27;</span>])</span><br><span class="line"></span><br><span class="line">                wind_scale = inf[<span class="number">2</span>].find(<span class="string">&#x27;i&#x27;</span>).string <span class="comment"># 找到风级</span></span><br><span class="line">                index1 = wind_scale.index(<span class="string">&#x27;级&#x27;</span>)</span><br><span class="line">                temp.append(<span class="built_in">int</span>(wind_scale[index1-<span class="number">1</span>:index1]))</span><br><span class="line">                final.append(temp)</span><br><span class="line">            i = i + <span class="number">1</span></span><br><span class="line">        self.data_cur = final_day</span><br><span class="line">        self.data_7 = final</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">write_to_csv</span>(<span class="params">self, day</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;保存为csv文件&quot;&quot;&quot;</span></span><br><span class="line">        file_name = self.city_name + <span class="string">&quot;.csv&quot;</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(file_name, <span class="string">&#x27;w&#x27;</span>, errors=<span class="string">&#x27;ignore&#x27;</span>, newline=<span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">if</span> day == <span class="number">14</span>:</span><br><span class="line">                header = [<span class="string">&#x27;日期&#x27;</span>, <span class="string">&#x27;城市&#x27;</span>, <span class="string">&#x27;天气&#x27;</span>, <span class="string">&#x27;最低气温&#x27;</span>, <span class="string">&#x27;最高气温&#x27;</span>, <span class="string">&#x27;风向1&#x27;</span>, <span class="string">&#x27;风向2&#x27;</span>, <span class="string">&#x27;风级&#x27;</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                header = [<span class="string">&#x27;小时&#x27;</span>, <span class="string">&#x27;城市&#x27;</span>, <span class="string">&#x27;温度&#x27;</span>, <span class="string">&#x27;风力方向&#x27;</span>, <span class="string">&#x27;风级&#x27;</span>, <span class="string">&#x27;降水量&#x27;</span>, <span class="string">&#x27;相对湿度&#x27;</span>, <span class="string">&#x27;空气质量&#x27;</span>]</span><br><span class="line">            f_csv = csv.writer(f)</span><br><span class="line">            f_csv.writerow(header)</span><br><span class="line">            f_csv.writerows(self.data_all)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    city_dict = &#123;<span class="string">&quot;南昌&quot;</span>: <span class="string">&quot;101240101&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;九江&quot;</span>: <span class="string">&quot;101240201&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;上饶&quot;</span>: <span class="string">&quot;101240301&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;抚州&quot;</span>: <span class="string">&quot;101240401&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;宜春&quot;</span>: <span class="string">&quot;101240501&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;吉安&quot;</span>: <span class="string">&quot;101240601&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;赣州&quot;</span>: <span class="string">&quot;101240701&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;景德镇&quot;</span>: <span class="string">&quot;101240801&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;萍乡&quot;</span>: <span class="string">&quot;101240901&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;新余&quot;</span>: <span class="string">&quot;101241001&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;鹰潭&quot;</span>: <span class="string">&quot;101241101&quot;</span>, &#125;</span><br><span class="line">    <span class="keyword">for</span> city_name, city_code <span class="keyword">in</span> city_dict.items():</span><br><span class="line">        <span class="keyword">if</span> city_name == <span class="string">&quot;景德镇&quot;</span>:</span><br><span class="line">            w = Weather(city_code, city_name)</span><br><span class="line">            w.run()</span><br></pre></td></tr></table></figure>
+
+<p>生成的csv如图<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/weather.png"
+                     
+                ></p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/python/">#python</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/08/unity-%E5%AE%9E%E7%8E%B0%E7%89%A9%E4%BD%93%E7%9A%84%E6%BB%9A%E5%8A%A8%E6%95%88%E6%9E%9C/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">unity| 实现物体的滚动效果</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/08/vim-nvimdots%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">vim| nvimdots的使用和配置</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">RibinCao</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="RibinCao">
+    
+    <title>
+        
+            unity| 实现物体的转动组合 |
+        
+        Ribin
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.png","favicon":"/images/logo.png","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Ribin
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                系列
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                个人简历
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">系列</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">个人简历</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">unity| 实现物体的转动组合</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-08 12:05:07</span>
+        <span class="mobile">2023-03-08 12:05</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-08 14:04:44</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/unity/">unity</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>策划需要实现一个道具旋转的功能,这个功能如果单纯在unity去实现本身并不是很难,比如有DOTween就可以,但是项目技术架构调整之后,物体的位置数据需要在服务端进行计算,然而服务端还有很多unity相关的基建没有提供支持,比如物理碰撞之类的.<br>所以为了实现需要的效果就需要自己去实现很多位置变化,这里策划的需求主要需要满足以下几点:</p>
+<ol>
+<li>物体的旋转轴支持配置,目前有三种分别是xyz三个轴</li>
+<li>物体旋转到指定的角度后需要停止等待指定的时间</li>
+<li>物体在旋转到停止的时候需要抖动一下模拟物理效果</li>
+<li>效果参考超级马里奥</li>
+</ol>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/rotate_img.png"
+                     
+                >
+
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>整个房子转动主要可以分为两部分，</p>
+<ol>
+<li>一部分是房子的转动部分，需要支持的配置为房子的转动轴(x|y|z)、转动速度<br>物体绕三个轴的转动目前在逻辑层的实现可以通过调用Transform的Rotate方法去实现<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">entity.transform.Rotate(<span class="keyword">new</span> Vector3(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>), angel, Space.World); <span class="comment">// 绕x轴旋转</span></span><br><span class="line">entity.transform.Rotate(<span class="keyword">new</span> Vector3(<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>), angel, Space.World); <span class="comment">// 绕y轴旋转</span></span><br><span class="line">entity.transform.Rotate(<span class="keyword">new</span> Vector3(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>), angel, Space.World); <span class="comment">// 绕z轴旋转</span></span><br></pre></td></tr></table></figure>
+旋转速度speed可以通过配置的方式平均到每个tick去计算旋转角angel</li>
+<li>另一部分是房子转动状态的切换，房子的转动都是以90度为一个单元进行状态的切换<br>物体的旋转一般都是一个循环，旋转状态可以有三种：正转90度、停止、反转90度，然后按照需求去组合，最终会是一个循环链表，可以在地图重建的时候把这个循环链表一次性构建好用一个list去存储，之后就是按照链表循环去调用不同状态对应的旋转动作。</li>
+<li>需要注意的是，每一次旋转停顿会有一个来回的扰动，这个扰动也可以单独抽出来做成一个函数用在每个状态结尾的时候执行，这个扰动可以通过让物体快速的来回旋转1度实现，通过调整度数和速度理论上可以达到效果<br>大概的状态流转如下，具体需要根据需求进行组合调整<img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/rotate_uml.png"
+                     
+                ></li>
+</ol>
+<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><p>因为在家里的电脑unity跑起来比较费劲,就用python实现了一个伪代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">List</span></span><br><span class="line"></span><br><span class="line">DELTA_TIME = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">const = &#123;</span><br><span class="line">    <span class="string">&quot;house&quot;</span>: &#123;<span class="string">&quot;stop_time&quot;</span>: <span class="number">2</span>, <span class="string">&quot;shake_angel&quot;</span>: <span class="number">1</span>, <span class="string">&quot;angel&quot;</span>: <span class="number">90</span>, <span class="string">&quot;cycle_states&quot;</span>: [<span class="number">1</span>, <span class="number">0</span>]&#125;,</span><br><span class="line">    <span class="string">&quot;red&quot;</span>: &#123;<span class="string">&quot;stop_time&quot;</span>: <span class="number">4</span>, <span class="string">&quot;shake_angel&quot;</span>: <span class="number">0</span>, <span class="string">&quot;angel&quot;</span>: <span class="number">180</span>, <span class="string">&quot;cycle_states&quot;</span>: [<span class="number">1</span>, <span class="number">0</span>]&#125;,</span><br><span class="line">    <span class="string">&quot;blue&quot;</span>: &#123;<span class="string">&quot;stop_time&quot;</span>: <span class="number">4</span>, <span class="string">&quot;shake_angel&quot;</span>: <span class="number">0</span>, <span class="string">&quot;angel&quot;</span>: <span class="number">180</span>, <span class="string">&quot;cycle_states&quot;</span>: [<span class="number">0</span>, <span class="number">1</span>]&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Item</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, item_id: <span class="built_in">str</span>, speed: <span class="built_in">int</span>, axis: <span class="built_in">int</span></span>):</span><br><span class="line">        self.item_id: <span class="built_in">str</span> = item_id</span><br><span class="line">        self.speed: <span class="built_in">int</span> = speed</span><br><span class="line">        self.axis: <span class="built_in">int</span> = axis</span><br><span class="line"></span><br><span class="line">        self.cur_rotate: <span class="built_in">int</span> = <span class="number">0</span></span><br><span class="line">        self.angel: <span class="built_in">int</span> = <span class="number">90</span></span><br><span class="line">        self.stop_time: <span class="built_in">int</span> = <span class="number">2</span>  <span class="comment"># second</span></span><br><span class="line">        self.cycle_states: <span class="type">List</span>[<span class="built_in">int</span>] = []</span><br><span class="line">        self.cur_state_index: <span class="built_in">int</span> = <span class="number">0</span></span><br><span class="line">        self.cur_stop_time: <span class="built_in">int</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        self.shake_angel: <span class="built_in">int</span> = <span class="number">1</span>  <span class="comment">#</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">rebuild</span>(<span class="params">self</span>):</span><br><span class="line">        config = const.get(self.item_id)</span><br><span class="line">        self.angel: <span class="built_in">int</span> = config.get(<span class="string">&quot;angel&quot;</span>, <span class="number">90</span>)</span><br><span class="line">        self.stop_time: <span class="built_in">int</span> = config.get(<span class="string">&quot;stop_time&quot;</span>, <span class="number">2</span>)</span><br><span class="line">        self.shake_angel: <span class="built_in">int</span> = config.get(<span class="string">&quot;shake_angel&quot;</span>, <span class="number">0</span>)</span><br><span class="line">        self.cycle_states: <span class="type">List</span>[<span class="built_in">int</span>] = config.get(<span class="string">&quot;cycle_states&quot;</span>, [])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">positive_rotate</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 正向旋转</span></span><br><span class="line">        tick_angel = (self.angel * DELTA_TIME / self.speed)</span><br><span class="line">        self.cur_rotate += tick_angel</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.cur_rotate % self.angel == <span class="number">0</span>:</span><br><span class="line">            self.cur_state_index = (self.cur_state_index + <span class="number">1</span>) % <span class="built_in">len</span>(self.cycle_states)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;positive rotate <span class="subst">&#123;self.item_id&#125;</span> <span class="subst">&#123;self.cur_rotate&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">negative_rotate</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 反向旋转</span></span><br><span class="line">        tick_angel = (self.angel * DELTA_TIME / self.speed)</span><br><span class="line">        self.cur_rotate -= tick_angel</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.cur_rotate % self.angel == <span class="number">0</span>:</span><br><span class="line">            self.cur_state_index = (self.cur_state_index + <span class="number">1</span>) % <span class="built_in">len</span>(self.cycle_states)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;negative rotate <span class="subst">&#123;self.item_id&#125;</span> <span class="subst">&#123;self.cur_rotate&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">stop</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 停止</span></span><br><span class="line">        self.cur_stop_time += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.cur_stop_time == self.stop_time:</span><br><span class="line">            self.cur_state_index = (self.cur_state_index + <span class="number">1</span>) % <span class="built_in">len</span>(self.cycle_states)</span><br><span class="line">            self.cur_stop_time = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;stop <span class="subst">&#123;self.item_id&#125;</span> <span class="subst">&#123;self.cur_rotate&#125;</span> <span class="subst">&#123;self.cur_stop_time&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">shake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 扰动</span></span><br><span class="line">        <span class="keyword">if</span> self.shake_angel == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self</span>):</span><br><span class="line">        state = self.cycle_states[self.cur_state_index]</span><br><span class="line"></span><br><span class="line">        self.shake()</span><br><span class="line">        <span class="keyword">if</span> state == <span class="number">1</span>:</span><br><span class="line">            self.positive_rotate()</span><br><span class="line">        <span class="keyword">elif</span> state == -<span class="number">1</span>:</span><br><span class="line">            self.negative_rotate()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.stop()</span><br><span class="line">   </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_test2</span>():</span><br><span class="line">    r = Item(<span class="string">&quot;red&quot;</span>, <span class="number">4</span>, <span class="number">0</span>) <span class="comment"># 红色地板</span></span><br><span class="line">    r.rebuild() <span class="comment"># 场景重建</span></span><br><span class="line">    </span><br><span class="line">    b = Item(<span class="string">&quot;blue&quot;</span>, <span class="number">4</span>, <span class="number">0</span>) <span class="comment"># 蓝色地板</span></span><br><span class="line">    b.rebuild()</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        r.update()</span><br><span class="line">        b.update()</span><br><span class="line">        <span class="built_in">print</span>()</span><br><span class="line">        time.sleep(DELTA_TIME) <span class="comment"># 帧率</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="C-实现"><a href="#C-实现" class="headerlink" title="C#实现"></a>C#实现</h2><p>在公司里基于项目的ECS架构测试了一下,大概的测试代码如下,从表现来看达到了想要的效果</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="built_in">float</span> DELTA = (<span class="number">1000</span> / NetworkDefine.UPDATE_DELTATIME);  <span class="comment">// 1s中多少帧</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="built_in">float</span> ANGEL = <span class="number">180f</span>;       <span class="comment">//  每次停止前需要旋转的角度</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="built_in">float</span> SPEED = <span class="number">2</span>;          <span class="comment">// 旋转速度 2秒转完 ANGEL</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="built_in">int</span> STOP_TIME_TICK = <span class="number">1</span> * (<span class="built_in">int</span>)DELTA;  <span class="comment">// 停下的时候等待时间为 1s</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="built_in">int</span> AXIS = <span class="number">2</span>;     <span class="comment">// 绕轴 0-x,1-y,2-z</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span> curStopTick = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> curAngel = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">private</span> List&lt;<span class="built_in">int</span>&gt; states = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;() &#123; <span class="number">1</span>, <span class="number">999</span>, <span class="number">0</span>, <span class="number">999</span> &#125;;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span> curStateIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="built_in">int</span> MAX_SHAKE_TIMES = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span> curShakeIndex = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> shakeAngel = <span class="number">1.33f</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Vector3 <span class="title">GetAxis</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (AXIS == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Vector3(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (AXIS == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Shake</span>(<span class="params">GameLogicEntity entity</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> angel = (ANGEL / (SPEED * DELTA * <span class="number">5</span>));  <span class="comment">// 5是调整系数</span></span><br><span class="line">    <span class="keyword">if</span> (curShakeIndex % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        entity.transform.Rotate(GetAxis(), angel, Space.World);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        entity.transform.Rotate(GetAxis(), -angel, Space.World);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    curShakeIndex++;</span><br><span class="line">    <span class="keyword">if</span> (curShakeIndex &gt;= MAX_SHAKE_TIMES)</span><br><span class="line">    &#123;</span><br><span class="line">        curShakeIndex = <span class="number">0</span>;</span><br><span class="line">        curStateIndex = (curStateIndex + <span class="number">1</span>) % states.Count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Positive</span>(<span class="params">GameLogicEntity entity</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> angel = (ANGEL / (SPEED * DELTA));</span><br><span class="line">    curAngel += angel;</span><br><span class="line">    entity.transform.Rotate(GetAxis(), angel, Space.World);</span><br><span class="line">    <span class="keyword">if</span> ((<span class="built_in">int</span>)curAngel % ANGEL &lt;= <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        curStateIndex = (curStateIndex + <span class="number">1</span>) % states.Count;</span><br><span class="line">        curAngel %= ANGEL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Negative</span>(<span class="params">GameLogicEntity entity</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> angel = (ANGEL / (SPEED * DELTA));</span><br><span class="line">    curAngel += angel;</span><br><span class="line">    entity.transform.Rotate(GetAxis(), -angel, Space.World);</span><br><span class="line">    <span class="keyword">if</span> ((<span class="built_in">int</span>)curAngel % ANGEL &lt;= <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        curStateIndex = (curStateIndex + <span class="number">1</span>) % states.Count;</span><br><span class="line">        curAngel %= ANGEL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Stop</span>(<span class="params">GameLogicEntity entity</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    curStopTick++;</span><br><span class="line">    <span class="keyword">if</span> (curStopTick == STOP_TIME_TICK)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> nextIndex = (curStateIndex + <span class="number">1</span>) % states.Count;</span><br><span class="line">        curStateIndex = nextIndex;</span><br><span class="line">        curStopTick = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> entity <span class="keyword">in</span> <span class="keyword">this</span>.slidePipeGroup)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (entity.slidePipeLogic.mState == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> state = states[curStateIndex];</span><br><span class="line">        <span class="keyword">if</span> (state == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Positive(entity);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (state == <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Negative(entity);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(state == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Stop(entity);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            Shake(entity);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>公司的项目技术架构是基于ECS开发的,这段代码如果要放到unity里去运行还是需要转换一下的,但是整体思路就是把物体的旋转变化用状态机去实现</li>
+<li>物体的扰动通过来回旋转一个小角度可以实现</li>
+<li>很多时候封装好的组件可以实现我们想要的效果,好处是足够专业,不太方便的是不够灵活,工作中有时间的话,尤其是没有轮子用的时候还是要去了解一些组件的实现用原理尝试着去造一下,也许效果没有那么专业,但至少在造的过程中知道可能出现的问题以及相对应的解决办法,对自己也是一种提升.</li>
+</ol>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/unity/">#unity</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/08/vim-nvimdots%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">vim| nvimdots的使用和配置</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%A4%9A%E6%80%81/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C++| 基础学习之多态</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">RibinCao</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
