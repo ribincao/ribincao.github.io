@@ -22,7 +22,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.png","favicon":"/images/logo.png","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.png","favicon":"/images/logo.png","avatar":"/images/avatar.png","font_size":null,"font_family":"STKaiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":false,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -51,7 +51,7 @@
 
         <div class="page-main-content-top">
             
-<header class="header-wrapper transparent-1">
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
@@ -81,7 +81,7 @@
                             <a class=""
                                href="/tags"
                             >
-                                标签
+                                分类
                             </a>
                         </li>
                     
@@ -129,7 +129,7 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">标签</a>
+                       href="/tags">分类</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
@@ -165,6 +165,52 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2023/03/07/C++%E4%B9%8B%E8%AF%BB%E5%92%8C%E5%86%99/">
+                        C++| 基础学习之读和写
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        C++里的读和写文件描述符linux里万物皆文件，在windows通常称为句柄
+open123456789101112131415#include &lt;fcntl.h&gt;//	某些非 POSIX 规范的 UNIX 系统//	#include ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/C/">C++</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a class="read-more" href="/2023/03/07/C++%E4%B9%8B%E8%AF%BB%E5%92%8C%E5%86%99/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2023/03/07/C++%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E5%8F%8A%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">
                         C++| 基础学习之程序执行及内存分配
                     </a>
@@ -183,8 +229,8 @@ shell进程会fork一个子进程，子进程是父进程的一个复制
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 15:07:10 GMT+0800">
-                2023-03-07
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
             </span>
         </span>
         
@@ -230,8 +276,8 @@ shell进程会fork一个子进程，子进程是父进程的一个复制
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 15:07:48 GMT+0800">
-                2023-03-07
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
             </span>
         </span>
         
@@ -260,58 +306,6 @@ shell进程会fork一个子进程，子进程是父进程的一个复制
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/03/07/C++%E4%B9%8B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-                        C++| 基础学习之网络编程
-                    </a>
-                </h3>
-
-                <div class="home-article-content keep-markdown-body">
-                    
-                        C++网络编程计算机网络基础OSI七层模型
-
-
-HTTP协议方法
-
-GET — 获取资源
-HEAD — 获取报文首部。和 GET 方法类似，但是不返回报文实体主体部分。主要用于确认 URL 的有效性以及资源更新的日期时间等。
-POST — 传输实体主...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span>
-            <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 15:04:44 GMT+0800">
-                2023-03-07
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/C/">C++</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a class="read-more" href="/2023/03/07/C++%E4%B9%8B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
                     <a href="/2023/03/07/C++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%89%B9%E6%80%A7/">
                         C++| 基础学习之面向对象特性
                     </a>
@@ -329,8 +323,8 @@ POST — 传输实体主...
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 15:22:24 GMT+0800">
-                2023-03-07
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
             </span>
         </span>
         
@@ -374,8 +368,8 @@ POST — 传输实体主...
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 15:23:11 GMT+0800">
-                2023-03-07
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
             </span>
         </span>
         
@@ -420,8 +414,8 @@ POST — 传输实体主...
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 15:23:11 GMT+0800">
-                2023-03-07
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
             </span>
         </span>
         
@@ -465,8 +459,8 @@ POST — 传输实体主...
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 15:23:56 GMT+0800">
-                2023-03-07
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
             </span>
         </span>
         
@@ -511,8 +505,8 @@ POST — 传输实体主...
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 15:26:10 GMT+0800">
-                2023-03-07
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
             </span>
         </span>
         
@@ -556,8 +550,8 @@ POST — 传输实体主...
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 14:38:27 GMT+0800">
-                2023-03-07
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
             </span>
         </span>
         
@@ -601,8 +595,8 @@ POST — 传输实体主...
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Tue Mar 07 2023 14:34:56 GMT+0800">
-                2023-03-07
+            <span class="home-article-date" data-updated="Sat Mar 11 2023 18:06:53 GMT+0800">
+                2023-03-11
             </span>
         </span>
         
