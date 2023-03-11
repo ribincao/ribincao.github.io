@@ -9,7 +9,7 @@
     
     <title>
         
-            kubernetes| 查看pod日志 |
+            aws| ubuntu安装基本环境 |
         
         Ribin
     </title>
@@ -164,7 +164,7 @@
         <div class="article-content-container">
 
             <div class="article-title">
-                <span class="title-hover-animation">kubernetes| 查看pod日志</span>
+                <span class="title-hover-animation">aws| ubuntu安装基本环境</span>
             </div>
 
             
@@ -184,13 +184,13 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2023-03-01 15:30:53</span>
-        <span class="mobile">2023-03-01 15:30</span>
+        <span class="pc">2023-03-11 17:52:50</span>
+        <span class="mobile">2023-03-11 17:52</span>
     </span>
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-03-11 17:42:13</span>
+        <span class="pc">2023-03-11 17:58:25</span>
     </span>
     
     
@@ -200,7 +200,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/kubernetes/">kubernetes</a>&nbsp;
+                        <a href="/tags/aws/">aws</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/ubuntu/">ubuntu</a>&nbsp;
                     </li>
                 
             </ul>
@@ -221,10 +225,10 @@
             <div class="article-content keep-markdown-body">
                 
 
-                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前在线上出现一个奇怪的问题,容器总是莫名奇妙的崩溃找不到原因.为了排查问题需要去查询日志,loghub上的日志时序看着很奇怪,不太方便查看上下文去排查.所以就想着去开一个pod动态看日志直到pod崩溃就比较方便了.</p>
-<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>本地动态查看pod日志需要先切到对应的vpc,先查看pod信息获取podid以及对应的容器id</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o wide</span><br><span class="line"></span><br><span class="line">kubectl logs &lt;pod_id&gt; -c &lt;container_id&gt;</span><br><span class="line">kubectl logs --follow &lt;pod_id&gt; -c &lt;container_id&gt;</span><br></pre></td></tr></table></figure>
-<p>当然也可以加上<code>-n</code>命令去带上namespace</p>
+                <p>今天在aws上租了一台ubuntu v22的服务器,在服务器上装自己需要的软件时踩了一些坑,不过最终都安装好了自己的一些基本开发环境,一些基本的安装命令大概如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">install python</span></span><br><span class="line">sudo add-apt-repository ppa:deadsnakes/ppa</span><br><span class="line">sudo apt update·</span><br><span class="line">sudo apt install python3.11</span><br><span class="line">python3 --version</span><br><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1</span><br><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 2</span><br><span class="line">sudo update-alternatives --config python3</span><br><span class="line">python3 --version</span><br><span class="line">sudo apt install python3-pip</span><br><span class="line">pip3 --version</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">install protobuf</span></span><br><span class="line">pip3 install google-cloud</span><br><span class="line">pip3 install google-cloud-vision</span><br><span class="line">sudo apt install protobuf-compiler</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">install golang</span></span><br><span class="line">sudo add-apt-repository ppa:longsleep/golang-backports</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install golang-1.17·</span><br><span class="line">sudo snap install go  --classic</span><br><span class="line">go version</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">install docker</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br><span class="line">sudo apt install apt-transport-https curl</span><br><span class="line">curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add</span><br><span class="line">echo &quot;deb https://apt.kubernetes.io/ kubernetes-xenial main&quot; &gt;&gt; ~/kubernetes.list</span><br><span class="line">sudo mv ~/kubernetes.list /etc/apt/sources.list.d</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install kubelet</span><br><span class="line">sudo apt install kubeadm</span><br><span class="line">sudo apt install kubectl</span><br><span class="line">sudo apt-get install -y kubernetes-cni</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">install nodejs &amp; npm</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br><span class="line">sudo npm install -g hexo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>另外git改成了用ssh登陆，方式如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C &quot;njucaolibin@163.com&quot; # 生成我的公钥和私钥,在~/.ssh目录里,把公钥复制到github上就行了</span><br><span class="line">git clone xxx  # 采用ssh的方式去clone仓库</span><br></pre></td></tr></table></figure>
 
             </div>
 
@@ -234,7 +238,11 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/kubernetes/">#kubernetes</a>&nbsp;
+                            <a href="/tags/aws/">#aws</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/ubuntu/">#ubuntu</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -243,29 +251,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                               rel="prev"
-                               href="/2023/03/02/python-LRU%E7%9A%84%E5%AE%9E%E7%8E%B0/"
-                            >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                                <span class="title flex-center">
-                                <span class="post-nav-title-item">python| LRU的实现</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                                rel="next"
-                               href="/2023/03/01/tool-umlPlant/"
+                               href="/2023/03/09/js-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84webrtc/"
                             >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">发现一个很不错的vscode插件工具plantUML</span>
+                                <span class="post-nav-title-item">js| 实现一个简单的webrtc</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                                 <span class="right arrow-icon flex-center">

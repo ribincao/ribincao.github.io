@@ -9,7 +9,7 @@
     
     <title>
         
-            kubernetes| 查看pod日志 |
+            标签: ubuntu |
         
         Ribin
     </title>
@@ -80,7 +80,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class=""
+                            <a class="active"
                                href="/tags"
                             >
                                 分类
@@ -130,7 +130,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class=""
+                    <a class="active"
                        href="/tags">分类</a>
                 </li>
             
@@ -160,127 +160,42 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-
-            <div class="article-title">
-                <span class="title-hover-animation">kubernetes| 查看pod日志</span>
-            </div>
-
+    <div class="tag-container">
+        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;ubuntu
+        </div>
+        <div class="tag-post-list">
             
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/avatar.png">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">RibinCao</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            
-<div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        
-            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
-        
-        <span class="pc">2023-03-01 15:30:53</span>
-        <span class="mobile">2023-03-01 15:30</span>
-    </span>
+<div class="archive-list-container">
     
-        <span class="article-update-date article-meta-item">
-        <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-03-11 17:42:13</span>
-    </span>
-    
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
+        <section class="archive-item">
+            <div class="archive-item-header">
+                <span class="archive-year">2023</span>
+                <span class="archive-year-post-count">[1]</span>
+            </div>
+            <ul class="article-list">
                 
-                    <li>
-                        <a href="/tags/kubernetes/">kubernetes</a>&nbsp;
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2023/03/11/aws-ubuntu%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83/"
+                        >aws| ubuntu安装基本环境</a>
+                        <span class="article-date">03-11</span>
                     </li>
                 
             </ul>
-        </span>
-    
-
-    
-    
-    
+        </section>
     
 </div>
 
-                        </div>
-                    </div>
-                </div>
-            
-
-            <div class="article-content keep-markdown-body">
-                
-
-                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前在线上出现一个奇怪的问题,容器总是莫名奇妙的崩溃找不到原因.为了排查问题需要去查询日志,loghub上的日志时序看着很奇怪,不太方便查看上下文去排查.所以就想着去开一个pod动态看日志直到pod崩溃就比较方便了.</p>
-<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>本地动态查看pod日志需要先切到对应的vpc,先查看pod信息获取podid以及对应的容器id</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o wide</span><br><span class="line"></span><br><span class="line">kubectl logs &lt;pod_id&gt; -c &lt;container_id&gt;</span><br><span class="line">kubectl logs --follow &lt;pod_id&gt; -c &lt;container_id&gt;</span><br></pre></td></tr></table></figure>
-<p>当然也可以加上<code>-n</code>命令去带上namespace</p>
-
-            </div>
-
-            
-
-            
-                <ul class="post-tags-box">
-                    
-                        <li class="tag-item">
-                            <a href="/tags/kubernetes/">#kubernetes</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                               rel="prev"
-                               href="/2023/03/02/python-LRU%E7%9A%84%E5%AE%9E%E7%8E%B0/"
-                            >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                                <span class="title flex-center">
-                                <span class="post-nav-title-item">python| LRU的实现</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                               rel="next"
-                               href="/2023/03/01/tool-umlPlant/"
-                            >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">发现一个很不错的vscode插件工具plantUML</span>
-                                <span class="post-nav-item">下一篇</span>
-                            </span>
-                                <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-            
         </div>
+    </div>
 
-        
+    <div class="tag-paginator">
+        <div class="paginator">
+    
+
+    
+</div>
+
     </div>
 </div>
 
@@ -317,19 +232,6 @@
         </div>
     </div>
 
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-
-        <!-- go comment -->
-        
-    </ul>
-</div>
-
-        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -429,10 +331,6 @@
 
 
 <div class="post-scripts pjax">
-    
-        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
-        
-        
     
 </div>
 
