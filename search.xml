@@ -1786,6 +1786,20 @@
       </tags>
   </entry>
   <entry>
+    <title>linux| ubuntu修改默认终端</title>
+    <url>/2023/03/13/linux-ubuntu%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E7%BB%88%E7%AB%AF/</url>
+    <content><![CDATA[<p>在远程ubuntu上开发想修改默认终端可以使用一下命令查看现有的shell</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /etc/shells</span><br></pre></td></tr></table></figure>
+<p>然后用如下命令指定默认终端,比如zsh</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+<p>然后退出终端重新登录,可以使用如下命令退出</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">logout</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql| 添加新用户</title>
     <url>/2023/03/02/mysql-%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%94%A8%E6%88%B7/</url>
     <content><![CDATA[<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--	1. 用户名为ribincao ，&#x27;%&#x27;表示所有 ip 都可访问，&#x27;123456&#x27;为密码</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;ribincao&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
