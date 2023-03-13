@@ -190,7 +190,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-03-13 07:53:54</span>
+        <span class="pc">2023-03-13 11:34:25</span>
     </span>
     
     
@@ -231,6 +231,16 @@
 <h2 id="使用oh-my-zsh"><a href="#使用oh-my-zsh" class="headerlink" title="使用oh-my-zsh"></a>使用oh-my-zsh</h2><p>我这里想修改使用oh-my-zsh,所以我执行命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /usr/bin/zsh</span><br><span class="line">sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</span><br></pre></td></tr></table></figure>
 <p>退出之后重新登录就可以来</p>
+<h3 id="添加命令高亮"><a href="#添加命令高亮" class="headerlink" title="添加命令高亮"></a>添加命令高亮</h3><ol>
+<li><p>安装 Zsh-syntax-highlighting 插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑 Zsh 的配置文件 ~&#x2F;.zshrc，在其中添加以下行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>保存配置文件，并执行以下命令使配置生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure></li>
+</ol>
 
             </div>
 
