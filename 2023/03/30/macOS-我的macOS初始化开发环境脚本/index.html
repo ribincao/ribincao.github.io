@@ -9,7 +9,7 @@
     
     <title>
         
-            分类 |
+            macOS| 我的macOS初始化开发环境脚本 |
         
         Ribin
     </title>
@@ -80,7 +80,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/tags"
                             >
                                 分类
@@ -130,7 +130,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/tags">分类</a>
                 </li>
             
@@ -159,15 +159,114 @@
             <div class="main-content">
 
                 
-                    
-    <div class="fade-in-down-animation">
-        <div class="tagcloud-container">
-            <div class="tagcloud-content">
-                <a href="/tags/C/" style="font-size: 1.6rem;">C++</a> <a href="/tags/RPC/" style="font-size: 1rem;">RPC</a> <a href="/tags/aws/" style="font-size: 1rem;">aws</a> <a href="/tags/bug/" style="font-size: 1rem;">bug</a> <a href="/tags/golang/" style="font-size: 1rem;">golang</a> <a href="/tags/javascript/" style="font-size: 1rem;">javascript</a> <a href="/tags/kubernetes/" style="font-size: 1.2rem;">kubernetes</a> <a href="/tags/latex/" style="font-size: 1rem;">latex</a> <a href="/tags/linux/" style="font-size: 1rem;">linux</a> <a href="/tags/macOS/" style="font-size: 1rem;">macOS</a> <a href="/tags/mysql/" style="font-size: 1.2rem;">mysql</a> <a href="/tags/python/" style="font-size: 1.4rem;">python</a> <a href="/tags/ubuntu/" style="font-size: 1rem;">ubuntu</a> <a href="/tags/unity/" style="font-size: 1.2rem;">unity</a> <a href="/tags/vim/" style="font-size: 1.2rem;">vim</a> <a href="/tags/webrtc/" style="font-size: 1rem;">webrtc</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1rem;">分布式</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 1rem;">区块链</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1rem;">学习笔记</a> <a href="/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/" style="font-size: 1rem;">性能分析</a> <a href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" style="font-size: 1rem;">性能调优</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1rem;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1rem;">数据结构</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.2rem;">算法</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 1rem;">网络编程</a>
-            </div>
-        </div>
-    </div>
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
+            <div class="article-title">
+                <span class="title-hover-animation">macOS| 我的macOS初始化开发环境脚本</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-03-30 10:10:39</span>
+        <span class="mobile">2023-03-30 10:10</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-03-30 10:12:32</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/macOS/">macOS</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>更新macos设备需要重新初始化开发环境,自己先记录一下自己需要的东西,等切换新的设备直接一键操作.</p>
+<p>脚本:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;1. install oh-my-zsh&quot;</span><br><span class="line">sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;2. install homebrew&quot;</span><br><span class="line">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;3. install wezTerm&quot;</span><br><span class="line">brew install --cask wezterm-nightly</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;4. install golang&quot;</span><br><span class="line">brew install go</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;5.1 install python3.11&quot;</span><br><span class="line">brew install python@3.11</span><br><span class="line">echo &quot;5.2 set pip mirror&quot;</span><br><span class="line">pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">pip3 config set install.trusted-host mirrors.aliyun.com</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;6. install nodejs&quot;</span><br><span class="line">brew install node</span><br><span class="line">echo </span><br><span class="line"></span><br><span class="line">echo &quot;7. install shell-tool(exa)&quot;</span><br><span class="line">brew install exa</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;8. install nvimdots&quot;</span><br><span class="line">if command -v curl &gt;/dev/null 2&gt;&amp;1; then</span><br><span class="line">    bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)&quot;</span><br><span class="line">else</span><br><span class="line">    bash -c &quot;$(wget -O- https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;9. insatll kubectl&quot;</span><br><span class="line">curl -LO &quot;https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl&quot;</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;all done. remember set .zshrc&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/macOS/">#macOS</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/13/python-%E6%80%8E%E4%B9%88%E5%88%B6%E4%BD%9Cpython%E5%8C%85/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">python| 怎么制作python包</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
 
 
                 
@@ -202,6 +301,19 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -301,6 +413,10 @@
 
 
 <div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
     
 </div>
 
