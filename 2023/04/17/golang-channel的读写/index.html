@@ -9,7 +9,7 @@
     
     <title>
         
-            标签: C++ |
+            golang| channel的读写 |
         
         Ribin
     </title>
@@ -80,7 +80,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/tags"
                             >
                                 分类
@@ -130,7 +130,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/tags">分类</a>
                 </li>
             
@@ -160,88 +160,140 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;C++
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2023</span>
-                <span class="archive-year-post-count">[7]</span>
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">golang| channel的读写</span>
             </div>
-            <ul class="article-list">
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">RibinCao</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-04-17 14:04:11</span>
+        <span class="mobile">2023-04-17 14:04</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-04-17 14:16:52</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
                 
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%86%85%E5%AD%98%E6%A8%A1%E5%BC%8F/"
-                        >C++| 基础学习之内存模式</a>
-                        <span class="article-date">03-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/03/07/C%E6%A0%87%E5%87%86%E5%BA%93%E6%80%BB%E7%BB%93/"
-                        >C++| 基础学习之标准库总结</a>
-                        <span class="article-date">03-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"
-                        >C++| 基础学习之函数指针</a>
-                        <span class="article-date">03-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/03/07/I-O%E5%A4%8D%E7%94%A8/"
-                        >C++| 基础学习之IO多路复用</a>
-                        <span class="article-date">03-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/"
-                        >C++| 基础学习之析构函数</a>
-                        <span class="article-date">03-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%BB%A7%E6%89%BF/"
-                        >C++| 基础学习之继承</a>
-                        <span class="article-date">03-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/03/07/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"
-                        >C++| 基础学习之构造函数</a>
-                        <span class="article-date">03-07</span>
+                    <li>
+                        <a href="/tags/golang/">golang</a>&nbsp;
                     </li>
                 
             </ul>
-        </section>
+        </span>
+    
+
+    
+    
+    
     
 </div>
 
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h2 id="未初始化的channel"><a href="#未初始化的channel" class="headerlink" title="未初始化的channel"></a>未初始化的channel</h2><p>读写微初始化的chan都会阻塞<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/gowritechan.png"
+                     
+                ><br><img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/goreadchan.png"
+                     
+                ></p>
+<h3 id="对于读的情况"><a href="#对于读的情况" class="headerlink" title="对于读的情况"></a>对于读的情况</h3><ul>
+<li>未初始化的 chan 此时是等于 nil，当它不能阻塞的情况下，直接返回 false，表示读 chan 失败</li>
+<li>当 chan 能阻塞的情况下，则直接阻塞 gopark(nil, nil, waitReasonChanReceiveNilChan, traceEvGoStop, 2), 然后调用 throw(s string) 抛出错误，其中 waitReasonChanReceiveNilChan 就是刚刚提到的报错 “chan receive (nil chan)”<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在 src/runtime/chan.go中</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">chanrecv</span><span class="params">(c *hchan, ep unsafe.Pointer, block <span class="type">bool</span>)</span></span> (selected, received <span class="type">bool</span>) &#123;</span><br><span class="line">    <span class="comment">//省略逻辑...</span></span><br><span class="line">    <span class="keyword">if</span> c == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> !block &#123;</span><br><span class="line">          <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        gopark(<span class="literal">nil</span>, <span class="literal">nil</span>, waitReasonChanReceiveNilChan, traceEvGoStop, <span class="number">2</span>)</span><br><span class="line">        throw(<span class="string">&quot;unreachable&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="对于写的情况"><a href="#对于写的情况" class="headerlink" title="对于写的情况"></a>对于写的情况</h3><ul>
+<li>未初始化的 chan 此时是等于 nil，当它不能阻塞的情况下，直接返回 false，表示写 chan 失败</li>
+<li>当 chan 能阻塞的情况下，则直接阻塞 gopark(nil, nil, waitReasonChanSendNilChan, traceEvGoStop, 2), 然后调用 throw(s string) 抛出错误，其中 waitReasonChanSendNilChan 就是刚刚提到的报错 “chan send (nil chan)”</li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在 src/runtime/chan.go中</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">chansend</span><span class="params">(c *hchan, ep unsafe.Pointer, block <span class="type">bool</span>, callerpc <span class="type">uintptr</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> c == <span class="literal">nil</span> &#123;</span><br><span class="line">      <span class="comment">// 不能阻塞，直接返回 false，表示未发送成功</span></span><br><span class="line">      <span class="keyword">if</span> !block &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">      gopark(<span class="literal">nil</span>, <span class="literal">nil</span>, waitReasonChanSendNilChan, traceEvGoStop, <span class="number">2</span>)</span><br><span class="line">      throw(<span class="string">&quot;unreachable&quot;</span>)</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// ... </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="已经关闭的channel"><a href="#已经关闭的channel" class="headerlink" title="已经关闭的channel"></a>已经关闭的channel</h2><ul>
+<li>读已经关闭的 chan 能一直读到东西，但是读到的内容根据通道内关闭前是否有元素而不同。<br>– 如果 chan 关闭前，buffer 内有元素还未读 , 会正确读到 chan 内的值，且返回的第二个 bool 值（是否读成功）为 true。<br>– 如果 chan 关闭前，buffer 内有元素已经被读完，chan 内无值，接下来所有接收的值都会非阻塞直接成功，返回 channel 元素的零值，但是第二个 bool 值一直为 false。</li>
+<li>写已经关闭的 chan 会 panic</li>
+</ul>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/gowriteclose.png"
+                     
+                >
+
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/golang/">#golang</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/04/17/golang-json%E5%8C%85tag%E7%9B%B8%E5%85%B3%E4%BA%8B%E9%A1%B9/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">golang| json包tag相关事项</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
         </div>
-    </div>
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    
-        <a class="prev btn"
-           href="/tags/C/"
-        >上一页</a>
-    
-
-    
-</div>
-
+        
     </div>
 </div>
 
@@ -278,6 +330,19 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -377,6 +442,10 @@
 
 
 <div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+        
     
 </div>
 

@@ -165,6 +165,54 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2023/04/17/golang-channel%E7%9A%84%E8%AF%BB%E5%86%99/">
+                        golang| channel的读写
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        未初始化的channel读写微初始化的chan都会阻塞
+对于读的情况
+未初始化的 chan 此时是等于 nil，当它不能阻塞的情况下，直接返回 false，表示读 chan 失败
+当 chan 能阻塞的情况下，则直接阻塞 gopark(nil, ni...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Mon Apr 17 2023 14:16:52 GMT+0800">
+                2023-04-17
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/golang/">golang</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a class="read-more" href="/2023/04/17/golang-channel%E7%9A%84%E8%AF%BB%E5%86%99/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2023/04/17/golang-json%E5%8C%85tag%E7%9B%B8%E5%85%B3%E4%BA%8B%E9%A1%B9/">
                         golang| json包tag相关事项
                     </a>
@@ -597,57 +645,6 @@
     </div>
 
     <a class="read-more" href="/2023/03/13/python-fast-api%E5%AE%9E%E7%8E%B0web%E6%9C%8D%E5%8A%A1%E5%99%A8demo/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/03/11/aws-ubuntu%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83/">
-                        aws| ubuntu安装基本环境
-                    </a>
-                </h3>
-
-                <div class="home-article-content keep-markdown-body">
-                    
-                        今天在aws上租了一台ubuntu v22的服务器,在服务器上装自己需要的软件时踩了一些坑,不过最终都安装好了自己的一些基本开发环境,一些基本的安装命令大概如下
-12345678910111213141516171819202122232425262...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span>
-            <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Mon Apr 17 2023 10:20:17 GMT+0800">
-                2023-04-17
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/aws/">aws</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/ubuntu/">ubuntu</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a class="read-more" href="/2023/03/11/aws-ubuntu%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
