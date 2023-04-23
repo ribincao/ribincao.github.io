@@ -221,7 +221,7 @@ nil切片和空切片指向的地址不一样。nil空切片引用数组指针�
 
                 <div class="home-article-content keep-markdown-body">
                     
-                        未初始化的channel读写微初始化的chan都会阻塞
+                        未初始化的channel读写未初始化的chan都会阻塞
 对于读的情况
 未初始化的 chan 此时是等于 nil，当它不能阻塞的情况下，直接返回 false，表示读 chan 失败
 当 chan 能阻塞的情况下，则直接阻塞 gopark(nil, ni...
@@ -232,8 +232,8 @@ nil切片和空切片指向的地址不一样。nil空切片引用数组指针�
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Mon Apr 17 2023 14:16:52 GMT+0800">
-                2023-04-17
+            <span class="home-article-date" data-updated="Sun Apr 23 2023 11:52:22 GMT+0800">
+                2023-04-23
             </span>
         </span>
         
