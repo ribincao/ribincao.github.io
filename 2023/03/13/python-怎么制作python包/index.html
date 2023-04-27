@@ -190,7 +190,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-04-17 10:20:17</span>
+        <span class="pc">2023-04-27 14:25:32</span>
     </span>
     
     
@@ -239,7 +239,14 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> myproject <span class="keyword">import</span> add</span><br><span class="line"><span class="built_in">print</span>(add.add(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>输出结果为3.</p>
 </li>
+<li><p>上传到PyPI</p>
+</li>
 </ol>
+<ul>
+<li>首先到PyPi官网注册一个账号并完成邮箱认证</li>
+<li>确认本地已经安装twine,否则<code>pip3 install twine</code></li>
+<li>执行命令<code>python3 -m twine upload dist/*</code>, 上传过程中会让你输入注册的账号密码,上传成功后会提示你包的地址,打开网址有提示安装包的命令.</li>
+</ul>
 
             </div>
 
